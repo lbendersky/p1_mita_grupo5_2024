@@ -1,3 +1,6 @@
+############################################################STOCK############################################################
+
+
 def organizar_stock(stock_des):
 
     #pre: recibe matriz de stock desorganizada
@@ -12,6 +15,7 @@ def organizar_stock(stock_des):
 
     return stock_o
 
+
 def crear_stock(stock):
 
     #pre: recibe matriz de stock
@@ -20,19 +24,28 @@ def crear_stock(stock):
     flag = 0
 
     while flag == 0:
-        nombre = input("Ingrese el nombre del producto: ")
-        cantidad = int(input("Ingrese la cantidad del producto: "))
+        desicion = int(input("Ingrese 1 si desea continuar, 2 si desea frenar el proceso"))
+        if desicion == 1:
+            nombre = input("Ingrese el nombre del producto: ")
+            cantidad = int(input("Ingrese la cantidad del producto: "))
 
-        if nombre.isalpha == True and cantidad.isnumeric() == True:
-            stock.append([])
+            if nombre.isalpha == True and cantidad.isnumeric() == True:
+                stock.append([])
 
-            stock[len(stock) - 1][0] = stock[0][0] + 1
-            stock[len(stock) - 1][1] = nombre
-            stock[len(stock) - 1][2] = cantidad
+                stock[len(stock) - 1][0] = stock[0][0] + 1
+                stock[len(stock) - 1][1] = nombre
+                stock[len(stock) - 1][2] = cantidad
 
-            stock_org = organizar_stock(stock)
+                stock_org = organizar_stock(stock)
 
-            return stock_org
+                flag = 1
+                return stock_org
+        else:
+            return
+        
+
+###########################################################CLIENTES###########################################################
+
         
 def organizar_clientes(clientes_des):
 
@@ -47,6 +60,7 @@ def organizar_clientes(clientes_des):
     clientes_o = sorted(clientes_r, key=lambda x: (-x[0], x[2]))
 
     return clientes_o
+
 
 def crear_clientes(clientes):
 
@@ -72,6 +86,9 @@ def crear_clientes(clientes):
 
             return clientes_org
         
+
+##########################################################VENTAS##########################################################
+
 
 def organizar_ventas(ventas_des):
 
@@ -136,7 +153,37 @@ def crear_ventas(stock, clientes, ventas):
             return ventas_org
 
 
+#################################################################LEER#################################################################
 
 
-def leer():
-    return
+def leer(matriz, stock=0, clientes=0, ventas=0):
+
+    #pre: Ingresa la matriz y a cual pertenece (ej, stock=1)
+    #pos: Regresa 1 si mostro el resultado y 0 si no hay ningun parametro en uno
+
+    if stock == 1:
+        print(f"{'Id' :>4}{'Nombre' :^10}{'Cantidad' :<4}")
+
+        print("-" * 20)
+
+        for id, nombre, cantidad in matriz:
+            print(f"{id :>4}{nombre :^10}{cantidad :<4}")
+    elif clientes == 1:
+        print(f"{'Id' :>4}{'Nombre' :^10}{'Telefono' :^10}{'Correo' :<4}")
+
+        print("-" * 30)
+
+        for id, nombre, telefono, correo in matriz:
+            print(f"{id :>4}{nombre :^10}{telefono :^10}{correo :<4}")
+    elif ventas == 1:
+        print(f"{'Id de la venta' :>4}{'Id del producto' :^10}{'Id de la persona' :^10}{'Nombre de la persona' :^10}{'Cantidad' :^10}{'Fecha' :<4}")
+
+        print("-" * 70)
+
+        for id_ven, id_prod, id_per, nombre, cantidad, fecha in matriz:
+            print(f"{id_ven :>4}{id_prod :^10}{id_per :^10}{nombre :^10}{cantidad :^10}{fecha :<4}")
+    else:
+        print("Formato no valido")
+        return 0
+    
+    return 1
