@@ -26,5 +26,3 @@ for i in range (len(matriz_stock)):
 for j in range (1, len(matriz_stock)):
     for i in range (1,len(matriz_stock[0])):
         matriz_stock[j][i] = 0
-
-
