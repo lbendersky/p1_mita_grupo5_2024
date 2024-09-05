@@ -187,3 +187,199 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
         return 0
     
     return 1
+############################################################################################################################
+
+def actualizarcliente(cliente):
+    print("Tenga en cuenta lo siguiente:")
+    print("1- ID")
+    print("2- Datos del Cliente")
+    n=int(input("Ingrese el dato a actualizar: "))
+    if n==1:
+        flag=0
+        band=0
+        x=-1
+        while band==0 and x<len(cliente)-1:
+            x+=1
+            if cliente[x][0]==n:
+                band=1
+            while flag==0:
+                if band==1:
+                    cliente[x][0]=int(input("Ingrese el ID del cliente por el que desea cambiarlo"))
+                    return cliente
+                else:
+                    print("No se encontró el ID")
+                    print("Reingrese el ID a buscar")
+                    flag==1
+    elif n==2:
+        flag=0
+        pos=int(input("Ingrese el ID del cliente que desea actualizar"))
+        band=0
+        x=-1
+        while band==0 and x<len(cliente)-1:
+            x+=1
+        while flag==0:
+            if cliente[x][0]==pos:
+                band=1
+        if band==0:
+            print("No se encontró el ID")
+        else:
+            print("Tenga en cuenta lo siguiente: ")
+            print("1- Nombre y Apellido")
+            print("2- Mail")
+            print("3- Telefono")
+            opciones=int(input("Ingrese el valor a cambiar: "))
+
+            if opciones==1:
+                cliente[x][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
+                return cliente
+            elif opciones==2:
+                cliente[x][2]=int(input("Ingrese el mail actualizado del cliente: "))
+                return cliente
+            elif opciones==3:
+                cliente[x][3]=int(input("Ingrese el telefono actualizado del cliente"))
+                return cliente
+            else:
+                print("El número ingresado es incorrecto")
+                flag==0
+        
+def actualizarstock(stock):
+    print("Tenga en cuenta lo siguiente:")
+    print("1- ID")
+    print("2- Datos del Objeto")
+    n=int(input("Ingrese el dato a actualizar: "))
+    if n==1:
+        flag=0
+        band=0
+        x=-1
+        while band==0 and x<len(stock)-1:
+            x+=1
+            if stock[x][0]==n:
+                band=1
+            while flag==0:
+                if band==1:
+                    stock[x][0]=int(input("Ingrese el ID del stock por el que desea cambiarlo"))
+                    return stock
+                else:
+                    print("No se encontró el ID")
+                    print("Reingrese el ID a buscar")
+                    flag==1
+    elif n==2:
+        flag=0
+        pos=int(input("Ingrese el ID del stock que desea actualizar"))
+        band=0
+        x=-1
+        while band==0 and x<len(stock)-1:
+            x+=1
+        while flag==0:
+            if stock[x][0]==pos:
+                band=1
+        if band==0:
+            print("No se encontró el ID")
+    else:
+        print("Tenga en cuenta lo siguiente: ")
+        print("1- Nombre")
+        print("2- Cantidad")
+        print("3- Precio de Compra")
+        print("4- Precio de Venta")
+        opciones=int(input("Ingrese el valor a cambiar: "))
+
+        if opciones==1:
+            stock[x][1]=int(input("Ingrese el nombre de el objeto: "))
+            return stock
+        elif opciones==2:
+            stock[x][2]=int(input("Ingrese la cantidad de Objetos que dispone actualmente: "))
+            return stock
+        elif opciones==3:
+            stock[x][3]=int(input("Ingrese el Precio de Compra del Objeto"))
+            return stock
+        elif opciones==4:
+            stock[x][4]=int(input("Ingrese el Precio de Venta del Objeto"))
+        else:
+            print("El número ingresado es incorrecto")
+            flag==0
+
+def actualizarventas(ventas):
+    print("Tenga en cuenta lo siguiente:")
+    print("1- ID de Comprador")
+    print("2- ID de Objeto")
+    print("3- Información de la Venta")
+    n=int(input("Ingrese el dato a actualizar: "))
+    if n==1:
+        flag=0
+        band=0
+        x=-1
+        while band==0 and x<len(ventas)-1:
+            x+=1
+            if ventas[x][0]==n:
+                band=1
+            while flag==0:
+                if band==1:
+                    ventas[x][0]=int(input("Ingrese el ID de venta por el que desea cambiarlo"))
+                    return ventas
+                else:
+                    print("No se encontró el ID")
+                    print("Reingrese el ID a buscar")
+                    flag==1
+    elif n==2:
+        flag=0
+        band=0
+        x=-1
+        while band==0 and x<len(ventas)-1:
+            x+=1
+            if ventas[x][0]==n:
+                band=1
+            while flag==0:
+                if band==1:
+                    ventas[x][0]=int(input("Ingrese el ID de venta por el que desea cambiarlo"))
+                    return ventas
+                else:
+                    print("No se encontró el ID")
+                    print("Reingrese el ID a buscar")
+                    flag==1
+    else:
+        flag=0
+        pos=int(input("Ingrese el ID de la venta que desea actualizar"))
+        band=0
+        x=-1
+        while band==0 and x<len(ventas)-1:
+            x+=1
+        while flag==0:
+            if ventas[x][0]==pos:
+                band=1
+        if band==0:
+            print("No se encontró el ID")
+        else:
+            print("Tenga en cuenta lo siguiente: ")
+            print("1- Cantidad")
+            print("2- Valor")
+            print("3- Fecha")
+            opciones=int(input("Ingrese el valor a cambiar: "))
+
+            if opciones==1:
+                ventas[x][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
+                return ventas
+            elif opciones==2:
+                ventas[x][2]=int(input("Ingrese el mail actualizado del stock: "))
+                return ventas
+            elif opciones==3:
+                x1=int(input("Ingrese el día a cambiar: "))
+                x2= int(input("Ingrese el mes a cambiar: "))
+                x3= int(input("Ingrese el año a cambiar: "))
+                return ventas
+            else:
+                print("El número ingresado es incorrecto")
+                flag==0
+
+def destruir(a):
+    band=0
+    x=-1
+
+    while band==0 and x<len(a)-1:
+        pos = int(input("Ingrese el ID de cliente que desea eliminar: "))
+
+        x+=1
+        if a[x][0]==pos and pos.isnumeric()==True:
+            a.pop(x)
+            return a
+        else: 
+            print("No se encontró el ID del cliente")
