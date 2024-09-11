@@ -1,4 +1,4 @@
-def vender(ventas):
+def ventas_menu(ventas):
     
     band=0
     cont=0
@@ -54,5 +54,3 @@ def vender(ventas):
             cont+=1
             
     return ventas
-    
-print(vender([]))

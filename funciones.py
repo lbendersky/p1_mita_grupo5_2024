@@ -16,34 +16,20 @@ def organizar_stock(stock_des):
     return stock_o
 
 
-def crear_stock(stock):
+def crear_stock(stock, nombre, cantidad):
 
-    #pre: recibe matriz de stock
-    #pos: devuelve la matriz con una nueva fila creada y organizada
+    #pre: recibe matriz de stock, nombre del producto y cantidad del mismo
+    #pos: devuelve la matriz con una nueva fila creada y organizada y tres columnas: id|nombre|cantidad
 
-    flag = 0
+    stock.append([])
 
-    while flag == 0:
-        desicion = int(input("Ingrese 1 si desea continuar, 2 si desea frenar el proceso"))
-        if desicion == 1:
-            nombre = input("Ingrese el nombre del producto: ")
-            cantidad = int(input("Ingrese la cantidad del producto: "))
+    stock[len(stock) - 1].append(len(stock))
+    stock[len(stock) - 1].append(nombre)
+    stock[len(stock) - 1].append(cantidad)
 
-            if nombre.isalpha == True and cantidad.isnumeric() == True:
-                stock.append([])
-
-                stock[len(stock) - 1][0] = stock[0][0] + 1
-                stock[len(stock) - 1][1] = nombre
-                stock[len(stock) - 1][2] = cantidad
-
-                stock_org = organizar_stock(stock)
-
-                flag = 1
-                return stock_org
-        else:
-            return
+    return 
+ 
         
-
 ###########################################################CLIENTES###########################################################
 
         
@@ -62,29 +48,21 @@ def organizar_clientes(clientes_des):
     return clientes_o
 
 
-def crear_clientes(clientes):
+def crear_clientes(clientes, nombre, telefono, correo):
 
-    #pre: recibe matriz de clientes
-    #pos: devuelve la matriz con una nueva fila creada y organizada
+    #pre: recibe matriz de clientes, nombre de la persona, telefono y correo
+    #pos: devuelve la matriz con una nueva fila creada y organizada con cuatro columnas: id|nombre|telefono|correo
 
-    flag = 0
+    clientes.append([])
 
-    while flag == 0:
-        nombre = input("Ingrese el nombre de la persona: ")
-        cantidad = int(input("Ingrese numero telefonico del cliente:"))
-        correo = str(input("Ingrese correo electronico del cliente: "))
+    clientes[len(clientes) - 1][0] = clientes[0][0] + 1
+    clientes[len(clientes) - 1][1] = nombre
+    clientes[len(clientes) - 1][2] = telefono
+    clientes[len(clientes) - 1][3] = correo
 
-        if nombre.isalpha == True and cantidad.isnumeric() == True and correo.isalpha() == True:
-            clientes.append([])
+    clientes_org = organizar_clientes(clientes)
 
-            clientes[len(clientes) - 1][0] = clientes[0][0] + 1
-            clientes[len(clientes) - 1][1] = nombre
-            clientes[len(clientes) - 1][2] = cantidad
-            clientes[len(clientes) - 1][3] = correo
-
-            clientes_org = organizar_clientes(clientes)
-
-            return clientes_org
+    return clientes_org
         
 
 ##########################################################VENTAS##########################################################
@@ -100,57 +78,47 @@ def organizar_ventas(ventas_des):
     for i in range(len(ventas_r)):
         ventas_r[i][1] = ventas_r[i][2].capitalize()
 
-    ventas_o = sorted(ventas_r, key=lambda x: (-x[4], x[3], x[2]))
+    ventas_o = sorted(ventas_r, key=lambda x: (-x[5], x[4], x[0]))
 
     return ventas_o
 
 
-def crear_ventas(stock, clientes, ventas):
+def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
 
-    #pre: recibe matriz de ventas
-    #pos: devuelve la matriz con una nueva fila creada y organizada
+    #pre: recibe matriz de ventas, nombre del producto, correo del cliente, cantidad del producto y fecha de la venta
+    #pos: devuelve la matriz con una nueva fila creada y organizada con seis columnas: id|id del item|id del cliente|nombre del mismo|cantidad vendida|fecha 
+ 
+    ventas.append([])
 
-    flag = 0
+    #Buscar id mas grande al no organizarlo por id
+    grande = 0
+    for i in range(len(ventas)):
+        if ventas[i][0] > grande:
+            grande = ventas[i][0]
 
-    while flag == 0:
-        nombre = int(input("Ingrese el nombre del producto vendido: "))
-        correo = str(input("Ingrese casilla de correo del cliente"))
-        cantidad = int(input("Ingrese la cantidad del producto vendido: "))
-        fecha = int(input("Ingrese fecha en la que se realizo la venta: "))
+    ventas[len(ventas) - 1][0] = grande + 1
 
+    #Encontrar el id con el nombre del producto
+    x = 0
+    for name in stock[x][1]:
+        x += 1
+        if name == nombre.capitalize():
+            ventas[len(ventas) - 1][1] = stock[x][0]
 
-        if nombre.isalpha == True and cantidad.isnumeric() == True and correo.isalpha() == True and fecha.isnumeric() == True:
-            ventas.append([])
+    #Encontrar el id y nombre con la casilla de correo
+    x = 0
+    for mail in clientes[x][3]:
+        x += 1
+        if mail == correo:
+            ventas[len(ventas) - 1][2] = clientes[x][0]
+            ventas[len(ventas) - 1][3] = clientes[x][1]
 
-            #Buscar id mas grande al no organizarlo por id
-            grande = 0
-            for i in range(len(ventas)):
-                if ventas[i][0] > grande:
-                    grande = ventas[i][0]
+    ventas[len(ventas) - 1][4] = cantidad
+    ventas[len(ventas) - 1][5] = fecha
 
-            ventas[len(ventas) - 1][0] = grande + 1
+    ventas_org = organizar_ventas(ventas)
 
-            #Encontrar el id con el nombre del producto
-            x = 0
-            for name in stock[x][1]:
-                x += 1
-                if name == nombre.capitalize():
-                    ventas[len(ventas) - 1][1] = stock[x][0]
-
-            #Encontrar el id y nombre con la casilla de correo
-            x = 0
-            for mail in clientes[x][3]:
-                x += 1
-                if mail == correo:
-                    ventas[len(ventas) - 1][2] = clientes[x][0]
-                    ventas[len(ventas) - 1][3] = clientes[x][1]
-
-            ventas[len(ventas) - 1][4] = cantidad
-            ventas[len(ventas) - 1][5] = fecha
-
-            ventas_org = organizar_ventas(ventas)
-
-            return ventas_org
+    return ventas_org
 
 
 #################################################################LEER#################################################################
@@ -162,6 +130,8 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
     #pos: Regresa 1 si mostro el resultado y 0 si no hay ningun parametro en uno
 
     if stock == 1:
+        matriz = organizar_stock(matriz)
+        
         print(f"{'Id' :>4}{'Nombre' :^10}{'Cantidad' :<4}")
 
         print("-" * 20)
@@ -242,58 +212,31 @@ def actualizarcliente(cliente):
                 print("El número ingresado es incorrecto")
                 flag==0
         
-def actualizarstock(stock):
-    print("Tenga en cuenta lo siguiente:")
-    print("1- ID")
-    print("2- Datos del Objeto")
-    n=int(input("Ingrese el dato a actualizar: "))
-    if n==1:
-        flag=0
-        band=0
-        x=-1
-        while band==0 and x<len(stock)-1:
-            x+=1
-            if stock[x][0]==n:
-                band=1
-            while flag==0:
-                if band==1:
-                    stock[x][0]=int(input("Ingrese el ID del stock por el que desea cambiarlo"))
-                    return stock
-                else:
-                    print("No se encontró el ID")
-                    print("Reingrese el ID a buscar")
-                    flag==1
-    elif n==2:
-        flag=0
-        pos=int(input("Ingrese el ID del stock que desea actualizar"))
-        band=0
-        x=-1
-        while band==0 and x<len(stock)-1:
-            x+=1
-        while flag==0:
-            if stock[x][0]==pos:
-                band=1
-        if band==0:
-            print("No se encontró el ID")
+def actualizarstock(stock, pos, opciones, objeto):
+    flag=0
+    band=0
+    x=-1
+    while band==0 and x<len(stock)-1:
+        x+=1
+    while flag==0:
+        if stock[x][0]==pos:
+            band=1
+    if band==0:
+        print("No se encontró el ID")
     else:
-        print("Tenga en cuenta lo siguiente: ")
-        print("1- Nombre")
-        print("2- Cantidad")
-        print("3- Precio de Compra")
-        print("4- Precio de Venta")
-        opciones=int(input("Ingrese el valor a cambiar: "))
 
         if opciones==1:
-            stock[x][1]=int(input("Ingrese el nombre de el objeto: "))
-            return stock
+            stock[x][1]=objeto
+            return 
         elif opciones==2:
-            stock[x][2]=int(input("Ingrese la cantidad de Objetos que dispone actualmente: "))
-            return stock
+            stock[x][2]=objeto
+            return 
         elif opciones==3:
-            stock[x][3]=int(input("Ingrese el Precio de Compra del Objeto"))
-            return stock
+            stock[x][3]=objeto
+            return 
         elif opciones==4:
-            stock[x][4]=int(input("Ingrese el Precio de Venta del Objeto"))
+            stock[x][4]=objeto
+            return 
         else:
             print("El número ingresado es incorrecto")
             flag==0
