@@ -27,7 +27,9 @@ def crear_stock(stock, nombre, cantidad):
     stock[len(stock) - 1].append(nombre)
     stock[len(stock) - 1].append(cantidad)
 
-    return 
+    stock_org = organizar_stock(stock)
+
+    return stock_org
  
         
 ###########################################################CLIENTES###########################################################
@@ -154,9 +156,9 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
             print(f"{id_ven :>4}{id_prod :^10}{id_per :^10}{nombre :^10}{cantidad :^10}{fecha :<4}")
     else:
         print("Formato no valido")
-        return 0
+        return 
     
-    return 1
+    return 
 ############################################################################################################################
 
 def actualizarcliente(cliente):
@@ -213,33 +215,24 @@ def actualizarcliente(cliente):
                 flag==0
         
 def actualizarstock(stock, pos, opciones, objeto):
-    flag=0
     band=0
     x=-1
     while band==0 and x<len(stock)-1:
         x+=1
-    while flag==0:
         if stock[x][0]==pos:
             band=1
+
     if band==0:
         print("No se encontró el ID")
+        return
     else:
-
         if opciones==1:
             stock[x][1]=objeto
-            return 
+            return stock
         elif opciones==2:
             stock[x][2]=objeto
-            return 
-        elif opciones==3:
-            stock[x][3]=objeto
-            return 
-        elif opciones==4:
-            stock[x][4]=objeto
-            return 
-        else:
-            print("El número ingresado es incorrecto")
-            flag==0
+            return stock
+        
 
 def actualizarventas(ventas):
     print("Tenga en cuenta lo siguiente:")
@@ -313,13 +306,11 @@ def actualizarventas(ventas):
                 print("El número ingresado es incorrecto")
                 flag==0
 
-def destruir(a):
+def destruir(a, pos):
     band=0
     x=-1
 
     while band==0 and x<len(a)-1:
-        pos = int(input("Ingrese el ID de cliente que desea eliminar: "))
-
         x+=1
         if a[x][0]==pos and pos.isnumeric()==True:
             a.pop(x)
