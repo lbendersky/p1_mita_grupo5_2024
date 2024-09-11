@@ -106,7 +106,8 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
         x += 1
         if name == nombre.capitalize():
             ventas[len(ventas) - 1][1] = stock[x][0]
-
+        else:
+            return 1
     #Encontrar el id y nombre con la casilla de correo
     x = 0
     for mail in clientes[x][3]:
@@ -114,7 +115,8 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
         if mail == correo:
             ventas[len(ventas) - 1][2] = clientes[x][0]
             ventas[len(ventas) - 1][3] = clientes[x][1]
-
+        else:
+            return 1
     ventas[len(ventas) - 1][4] = cantidad
     ventas[len(ventas) - 1][5] = fecha
 
@@ -162,58 +164,37 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
 ############################################################################################################################
 
 def actualizarcliente(cliente):
-    print("Tenga en cuenta lo siguiente:")
-    print("1- ID")
-    print("2- Datos del Cliente")
-    n=int(input("Ingrese el dato a actualizar: "))
-    if n==1:
-        flag=0
-        band=0
-        x=-1
-        while band==0 and x<len(cliente)-1:
-            x+=1
-            if cliente[x][0]==n:
-                band=1
-            while flag==0:
-                if band==1:
-                    cliente[x][0]=int(input("Ingrese el ID del cliente por el que desea cambiarlo"))
-                    return cliente
-                else:
-                    print("No se encontró el ID")
-                    print("Reingrese el ID a buscar")
-                    flag==1
-    elif n==2:
-        flag=0
-        pos=int(input("Ingrese el ID del cliente que desea actualizar"))
-        band=0
-        x=-1
-        while band==0 and x<len(cliente)-1:
-            x+=1
-        while flag==0:
-            if cliente[x][0]==pos:
-                band=1
-        if band==0:
-            print("No se encontró el ID")
-        else:
-            print("Tenga en cuenta lo siguiente: ")
-            print("1- Nombre y Apellido")
-            print("2- Mail")
-            print("3- Telefono")
-            opciones=int(input("Ingrese el valor a cambiar: "))
+    flag=0
+    pos=int(input("Ingrese el ID del cliente que desea actualizar"))
+    band=0
+    x=-1
+    while band==0 and x<len(cliente)-1:
+        x+=1
+    while flag==0:
+        if cliente[x][0]==pos:
+            band=1
+    if band==0:
+        print("No se encontró el ID")
+    else:
+        print("Tenga en cuenta lo siguiente: ")
+        print("1- Nombre y Apellido")
+        print("2- Mail")
+        print("3- Telefono")
+        opciones=int(input("Ingrese el valor a cambiar: "))
 
-            if opciones==1:
-                cliente[x][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
-                return cliente
-            elif opciones==2:
-                cliente[x][2]=int(input("Ingrese el mail actualizado del cliente: "))
-                return cliente
-            elif opciones==3:
-                cliente[x][3]=int(input("Ingrese el telefono actualizado del cliente"))
-                return cliente
-            else:
-                print("El número ingresado es incorrecto")
-                flag==0
-        
+        if opciones==1:
+            cliente[x][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
+            return cliente
+        elif opciones==2:
+            cliente[x][2]=int(input("Ingrese el mail actualizado del cliente: "))
+            return cliente
+        elif opciones==3:
+            cliente[x][3]=int(input("Ingrese el telefono actualizado del cliente"))
+            return cliente
+        else:
+            print("El número ingresado es incorrecto")
+            flag==0
+    
 def actualizarstock(stock, pos, opciones, objeto):
     band=0
     x=-1
