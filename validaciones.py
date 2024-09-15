@@ -99,4 +99,6 @@ def vidmatriz(matriz, id):
     for fila in matriz:
         if fila[0]==id:
             return True
-    return False
+        else:
+            print("El id no se encuentra en la matriz")
+            return False
