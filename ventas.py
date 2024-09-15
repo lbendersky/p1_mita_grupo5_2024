@@ -1,6 +1,11 @@
 from funciones import crear_ventas, leer, actualizarventas, destruir, organizar_ventas
+<<<<<<< HEAD
 from matriz_stock import matriz_stock
 from cliente import matriz_cliente
+=======
+import matriz_stock
+import cliente
+>>>>>>> bca920e8f3dcf23fcad2f0f8b3ffe27d3e85e583
 from validaciones import vfecha, vcorreo, vnumero, vtexto
 matriz_ventas=[]
 def ventas_menu(matriz_ventas):

@@ -27,7 +27,9 @@ def crear_stock(stock, nombre, cantidad):
     stock[len(stock) - 1].append(nombre)
     stock[len(stock) - 1].append(cantidad)
 
-    return 
+    stock_org = organizar_stock(stock)
+
+    return stock_org
  
         
 ###########################################################CLIENTES###########################################################
@@ -156,9 +158,9 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
             print(f"{id_ven :>4}{id_prod :^10}{id_per :^10}{nombre :^10}{cantidad :^10}{fecha :<4}")
     else:
         print("Formato no valido")
-        return 0
+        return 
     
-    return 1
+    return 
 ############################################################################################################################
 
 def actualizarcliente(cliente):
@@ -194,67 +196,102 @@ def actualizarcliente(cliente):
             flag==0
     
 def actualizarstock(stock, pos, opciones, objeto):
-    flag=0
     band=0
     x=-1
     while band==0 and x<len(stock)-1:
         x+=1
-        while flag==0:
-            if stock[x][0]==pos:
-                band=1
-    if band==0:
-        print("No se encontró el ID")
-    else:
-
-        if opciones==1:
-            stock[x][1]=objeto
-            return 
-        elif opciones==2:
-            stock[x][2]=objeto
-            return 
-        elif opciones==3:
-            stock[x][3]=objeto
-            return 
-        elif opciones==4:
-            stock[x][4]=objeto
-            return 
-        else:
-            print("El número ingresado es incorrecto")
-            flag==0
-
-def actualizarventas(ventas,pos,opcion,datoacambiar):
-    flag = 0
-    band= 0
-    x=-1
-    
-    while band==0 and x<len(ventas)-1:
-        x+=1
-        if ventas[x][0]==pos:
+        if stock[x][0]==pos:
             band=1
 
     if band==0:
         print("No se encontró el ID")
-        return 1
+        return
     else:
-        if opcion==1:
-            ventas[x][1]=datoacambiar
-            return
-        elif opcion==2:
-            ventas[x][2]=datoacambiar
-            return
-        elif opcion==3:
-            ventas[x][3]=datoacambiar
-            return
-        elif opcion==4:
-            ventas[x][4]=datoacambiar
-            return
-def destruir(a):
+        if opciones==1:
+            stock[x][1]=objeto
+            return stock
+        elif opciones==2:
+            stock[x][2]=objeto
+            return stock
+        
+
+def actualizarventas(ventas):
+    print("Tenga en cuenta lo siguiente:")
+    print("1- ID de Comprador")
+    print("2- ID de Objeto")
+    print("3- Información de la Venta")
+    n=int(input("Ingrese el dato a actualizar: "))
+    if n==1:
+        flag=0
+        band=0
+        x=-1
+        while band==0 and x<len(ventas)-1:
+            x+=1
+            if ventas[x][0]==n:
+                band=1
+            while flag==0:
+                if band==1:
+                    ventas[x][0]=int(input("Ingrese el ID de venta por el que desea cambiarlo"))
+                    return ventas
+                else:
+                    print("No se encontró el ID")
+                    print("Reingrese el ID a buscar")
+                    flag==1
+    elif n==2:
+        flag=0
+        band=0
+        x=-1
+        while band==0 and x<len(ventas)-1:
+            x+=1
+            if ventas[x][0]==n:
+                band=1
+            while flag==0:
+                if band==1:
+                    ventas[x][0]=int(input("Ingrese el ID de venta por el que desea cambiarlo"))
+                    return ventas
+                else:
+                    print("No se encontró el ID")
+                    print("Reingrese el ID a buscar")
+                    flag==1
+    else:
+        flag=0
+        pos=int(input("Ingrese el ID de la venta que desea actualizar"))
+        band=0
+        x=-1
+        while band==0 and x<len(ventas)-1:
+            x+=1
+        while flag==0:
+            if ventas[x][0]==pos:
+                band=1
+        if band==0:
+            print("No se encontró el ID")
+        else:
+            print("Tenga en cuenta lo siguiente: ")
+            print("1- Cantidad")
+            print("2- Valor")
+            print("3- Fecha")
+            opciones=int(input("Ingrese el valor a cambiar: "))
+
+            if opciones==1:
+                ventas[x][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
+                return ventas
+            elif opciones==2:
+                ventas[x][2]=int(input("Ingrese el mail actualizado del stock: "))
+                return ventas
+            elif opciones==3:
+                x1=int(input("Ingrese el día a cambiar: "))
+                x2= int(input("Ingrese el mes a cambiar: "))
+                x3= int(input("Ingrese el año a cambiar: "))
+                return ventas
+            else:
+                print("El número ingresado es incorrecto")
+                flag==0
+
+def destruir(a, pos):
     band=0
     x=-1
 
     while band==0 and x<len(a)-1:
-        pos = int(input("Ingrese el ID de cliente que desea eliminar: "))
-
         x+=1
         if a[x][0]==pos and pos.isnumeric()==True:
             a.pop(x)
