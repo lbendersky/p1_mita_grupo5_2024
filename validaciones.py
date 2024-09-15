@@ -1,17 +1,14 @@
 import re
 from datetime import datetime
 
+#Funciones de validacion:
 #Texto (vtexto)
 #Nombre y apellido (vnombre) (Capitalizarlo)
 #Numero (vnumero)
 #Correo (vcorreo)
 #Fecha (vfecha)
 #Telefono (vtelefono)
-#Si el id que ingreso esta en cada matriz:
-    #vidclientes matriz_clientes
-    #vidstock matriz_stock
-    #vidventas matriz_ventas
-#Seleccion de matriz (vsmatriz)
+#Si el id que ingreso esta en cada matriz (vidmatriz)
 
 def vtexto(texto):
     
@@ -98,15 +95,8 @@ def vtelefono(telefono):
         print("Ingrese el numero de telefono en el formato adecuado")   
         return 
     
-#def vidclientes(idclientes):
-    
-    
-"""while True:
-    
-    if vtelefono(input("telefono: ")):
-        print("Correcto")
-        break"""
-
-
-#vtexto(input("Input: "))   
-#print(vcorreo(input("Ingresar correo (formato nombre@correo.com): ")))
+def vidmatriz(matriz, id):
+    for fila in matriz:
+        if fila[0]==id:
+            return True
+    return False
