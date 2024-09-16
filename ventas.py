@@ -43,7 +43,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                     print("4- Fecha")
 
                     opcion=input("Ingrese una opción: ")
-                    if opcion.isnumeric():
+                    if validaciones.vnumero(opcion):
                         if opcion==1:
                             datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
                             if validaciones.vtexto(datoacambiar):
@@ -53,7 +53,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                                     ventas_menu(matriz_ventas)
                         elif opcion==2:
                             datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
-                            if datoacambiar.isnumeric():
+                            if validaciones.vnumero(datoacambiar):
                                 x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
                                 if x!=1:
                                     a+=1
@@ -74,8 +74,8 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                                     ventas_menu(matriz_ventas)
                         else:
                             print("El número ingresado es incorrecto")
-                              
             elif num==4:
+                print(matriz_ventas)
                 funciones.destruir(matriz_ventas)
                 ventas_menu(matriz_ventas)
             else:
