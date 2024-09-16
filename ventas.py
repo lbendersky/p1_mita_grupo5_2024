@@ -1,6 +1,4 @@
 import funciones
-
-import cliente
 import validaciones
 
 def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
@@ -33,7 +31,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
         a=0
         while a==0:
             funciones.leer(matriz_ventas)
-            pos=int(input("Ingrese el ID del stock que desea actualizar"))
+            pos=int(input("Ingrese el ID del stock que desea actualizar: "))
 
             print("Tenga en cuenta lo siguiente: ")
             print("1- Nombre del Producto")
@@ -42,38 +40,38 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
             print("4- Fecha")
 
             opcion=input("Ingrese una opción: ")
-
-            if opcion==1:
-                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
-                if validaciones.vtexto(datoacambiar):
-                    x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
-                    if x!=1:
-                        a+=1
-                        ventas_menu(matriz_ventas)
-            elif opcion==2:
-                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
-                if datoacambiar.isnumeric():
-                    x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
-                    if x!=1:
-                        a+=1
-                        ventas_menu(matriz_ventas)
-            elif opcion==3:
-                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
-                if validaciones.vcorreo(datoacambiar):
-                    x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
-                    if x!=1:
-                        a+=1
-                        ventas_menu(matriz_ventas)
-            elif opcion==4:
-                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
-                if validaciones.vfecha(datoacambiar):
-                    x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
-                    if x!=1:
-                        a+=1
-                        ventas_menu(matriz_ventas)
-            else:
-                print("El número ingresado es incorrecto")
-                    
+            if opcion.isnumeric():
+                if opcion==1:
+                    datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
+                    if validaciones.vtexto(datoacambiar):
+                        x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
+                        if x!=1:
+                            a+=1
+                            ventas_menu(matriz_ventas)
+                elif opcion==2:
+                    datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
+                    if datoacambiar.isnumeric():
+                        x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
+                        if x!=1:
+                            a+=1
+                            ventas_menu(matriz_ventas)
+                elif opcion==3:
+                    datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
+                    if validaciones.vcorreo(datoacambiar):
+                        x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
+                        if x!=1:
+                            a+=1
+                            ventas_menu(matriz_ventas)
+                elif opcion==4:
+                    datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
+                    if validaciones.vfecha(datoacambiar):
+                        x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
+                        if x!=1:
+                            a+=1
+                            ventas_menu(matriz_ventas)
+                else:
+                    print("El número ingresado es incorrecto")
+                        
     elif num==4:
         funciones.destruir(matriz_ventas)
         ventas_menu(matriz_ventas)
