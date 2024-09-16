@@ -164,29 +164,30 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
     return 
 ############################################################################################################################
 
-def actualizarcliente(matriz_clientes,pos,opciones,datoacambiar):
-  #pre: recibe la matriz cliente, el id del cliente, opcion del parametro a cambiar y objeto es por lo que lo va a cambiar
+def actualizarcliente(matriz_clientes,pos,opciones,objeto):
+    #pre: recibe la matriz cliente, el id del cliente, opcion del parametro a cambiar y objeto es por lo que lo va a cambiar
     #pos: devuelve la matriz con el valor especificado cambiado
 
     flag=0
     band=0
-    x=-1s)-1:
+    x=-1
+    while band==0 and x<len(matriz_clientes)-1:
         x+=1
         while flag==0:
-            if cliente[x][0]==pos:
+            if matriz_clientes[x][0]==pos:
                 band=1
     if band==0:
         print("No se encontró el ID")
     else:
         if opciones==1:
-            cliente[x][1]=objeto
-            return cliente
+            matriz_clientes[x][1]=objeto
+            return matriz_clientes
         elif opciones==2:
-            cliente[x][2]=objeto
-            return cliente
+            matriz_clientes[x][2]=objeto
+            return matriz_clientes
         elif opciones==3:
-            cliente[x][3]=objeto
-            return cliente
+            matriz_clientes[x][3]=objeto
+            return matriz_clientes
         else:
             print("El número ingresado es incorrecto")
             flag==0
