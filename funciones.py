@@ -168,14 +168,13 @@ def actualizarcliente(matriz_clientes,pos,opciones,objeto):
     #pre: recibe la matriz cliente, el id del cliente, opcion del parametro a cambiar y objeto es por lo que lo va a cambiar
     #pos: devuelve la matriz con el valor especificado cambiado
 
-    flag=0
+    
     band=0
     x=-1
     while band==0 and x<len(matriz_clientes)-1:
         x+=1
-        while flag==0:
-            if matriz_clientes[x][0]==pos:
-                band=1
+        if matriz_clientes[x][0]==pos:
+            band+=1
     if band==0:
         print("No se encontró el ID")
     else:
@@ -190,8 +189,7 @@ def actualizarcliente(matriz_clientes,pos,opciones,objeto):
             return matriz_clientes
         else:
             print("El número ingresado es incorrecto")
-            flag==0
-    
+            return
 def actualizarstock(stock, pos, opciones, objeto):
     #pre: Ingresa la matriz de stock, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
     #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.
