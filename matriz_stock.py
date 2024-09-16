@@ -1,39 +1,100 @@
 from funciones import crear_stock, leer, actualizarstock, destruir
+import validaciones
 
 
 def stock_menu(matriz_stock):
-    num = int(input("seleccione una opcion: 1 crear, 2 leer, 3 actualizar, 4 eliminar, 5 volver al principio: "))
+    
+    num = input("seleccione una opcion: 1 crear, 2 leer, 3 actualizar, 4 eliminar, 5 volver al principio: ")
+    
+    if validaciones.vnumero(num):
 
-    if num == 1:
-        prod = input("Nombre del producto: ")
-        cant = int(input("Cantidad del producto: "))
-        matriz_stock = crear_stock(matriz_stock, prod, cant)
-        stock_menu(matriz_stock)
-    elif num == 2:
-        leer(matriz_stock, stock=1)
-        stock_menu(matriz_stock)
-    elif num == 3:
-        pos=int(input("Ingrese el ID del stock que desea actualizar"))
+        num=int(num)
+        if num == 1:
+            
+            band=0
+            
+            while band==0:
+                prod = input("Nombre del producto: ")
+                if validaciones.vtexto(prod)==True:
+                    band=1
+                    
+            band=0   
+            while band==0:
+                cant = (input("Cantidad del producto: "))
+                if validaciones.vnumero(cant):
+                    cant=int(cant)
+                    band=1
+                    
+            matriz_stock = crear_stock(matriz_stock, prod, cant)
+            stock_menu(matriz_stock)
+            
+        elif num == 2:
+            leer(matriz_stock, stock=1)
+            stock_menu(matriz_stock)
+            
+        elif num == 3:
+            
+            band=0
+            while band==0:
+                pos=(input("Ingrese el ID del stock que desea actualizar: "))
+                if validaciones.vnumero(pos):
+                    pos=int(pos)
+                    if validaciones.vidmatriz(matriz_stock,pos):
+                        band=1
 
-        print("Tenga en cuenta lo siguiente: ")
-        print("1- Nombre")
-        print("2- Cantidad")
+            band=0
+            while band==0:
+                
+                print("Tenga en cuenta lo siguiente: ")
+                print("1- Nombre")
+                print("2- Cantidad")
 
-        opciones=int(input("Ingrese el valor a cambiar: "))
+                
+                while band==0:
+                    opciones=(input("Ingrese el valor a cambiar: "))
+                    if validaciones.vnumero(opciones) and opciones=="1" or opciones=="2":
+                        opciones=int(opciones)
+                        band=1
+                    else:
+                        print("El numero ingresado es incorrecto")
 
-        if opciones==1:
-            objeto = input("Ingrese nombre del producto: ")
-        elif opciones==2:
-            objeto = int(input("Ingrese cantidad del producto: "))
+                if opciones==1:
+                    
+                    band=0
+                    while band==0:
+                        objeto = input("Ingrese nombre del producto: ")
+                        if validaciones.vtexto(objeto):
+                            band=1
+                            
+                elif opciones==2:
+                    
+                    band=0
+                    while band==0:
+                        objeto = (input("Ingrese cantidad del producto: "))
+                        if validaciones.vnumero(objeto):
+                            objeto=int(objeto)
+                            band=1
+                    
+                else:
+                    print("El número ingresado es incorrecto")
+
+            matriz_stock = actualizarstock(matriz_stock, pos, opciones, objeto)
+            stock_menu(matriz_stock)
+            
+        elif num == 4:
+            
+            band=0
+            while band==0:
+                pos = (input("Ingrese el ID del producto que desea eliminar: "))
+                if validaciones.vnumero(pos):
+                    if validaciones.vidmatriz(matriz_stock,pos):
+                        band=1
+
+            destruir(matriz_stock, pos)
+            matriz_stock = stock_menu(matriz_stock)
         else:
-            print("El número ingresado es incorrecto")
-
-        matriz_stock = actualizarstock(matriz_stock, pos, opciones, objeto)
-        stock_menu(matriz_stock)
-    elif num == 4:
-        pos = int(input("Ingrese el ID del producto que desea eliminar: "))
-
-        destruir(matriz_stock, pos)
-        matriz_stock = stock_menu(matriz_stock)
+            stock_menu(matriz_stock)
     else:
-        return
+        stock_menu(matriz_stock)
+        
+#
