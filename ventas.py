@@ -1,9 +1,9 @@
 import funciones
-import main
+
 import cliente
 import validaciones
 
-def ventas_menu(matriz_ventas):
+def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
     print("Tenga en cuenta lo siguiente:")
     print("1- Crear")
     print("2- Leer")
@@ -21,7 +21,7 @@ def ventas_menu(matriz_ventas):
             if validaciones.vnumero(cantidad):
                 fecha=input("Ingrese la fecha con formato DD-MM-AAAA: ")
                 if validaciones.vfecha(fecha):
-                    x=funciones.crear_ventas(main.matriz_stock,main.matriz_cliente,matriz_ventas,producto,correo,fecha)
+                    x=funciones.crear_ventas(matriz_stock,cliente.matriz_clientes,matriz_ventas,producto,correo,fecha)
                     ventas_menu(matriz_ventas)
 
                     if x==1:

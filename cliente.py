@@ -1,39 +1,44 @@
+from funciones import crear_clientes, leer, destruir, actualizarcliente
 
-from funciones import crear_clientes, leer, actualizarcliente, destruir
-
-matriz_clientes=[]
-
-def clientes_menu():
+def clientes_menu(matriz_clientes):
     num = int(input("seleccione una opcion: 1 crear, 2 leer, 3 actualizar, 4 eliminar, 5 volver al principio: "))
 
     if num == 1:
-        nomb = input("Nombre del cliente: ")
-        tel = int(input("Ingrese el número del cliente: "))
-        corr = input("Ingrese el correo electronico: ")
-        
-        crear_clientes(matriz_clientes, nomb, tel, corr)
+        nom = input("Nombre del cliente: ")
+        tel = int(input("Teléfono del cliente: "))
+        cor= input("Ingrese correo del cliente: ")
+        crear_clientes(matriz_clientes, nom, tel, cor)
         clientes_menu()
     elif num == 2:
         leer(matriz_clientes, stock=1)
         clientes_menu()
     elif num == 3:
-        pos=int(input("Ingrese el ID del stock que desea actualizar"))
+        pos=int(input("Ingrese el ID del cliente que desea actualizar"))
 
         print("Tenga en cuenta lo siguiente: ")
         print("1- Nombre")
-        print("2- Cantidad")
-        print("3- Precio de Compra")
-        print("4- Precio de Venta")
+        print("2- Teléfono")
+        print("3- Correo")
 
         opciones=int(input("Ingrese el valor a cambiar: "))
-        objeto=int(input("Ingrese el valor por el que lo va a cambiar"))
-
+        #Verificacion: si se ingresa 4 tiene que pedirme ingresar otro valor (arreglar)
+        if opciones==1:
+            matriz_clientes[pos][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
+            return matriz_clientes
+        elif opciones==2:
+            matriz_clientes[pos][2]=int(input("Ingrese el mail actualizado del cliente: "))
+            return matriz_clientes
+        elif opciones==3:
+            matriz_clientes[pos][3]=int(input("Ingrese el telefono actualizado del cliente"))
+            return matriz_clientes
+        else:
+            print("El número ingresado es incorrecto")
+            flag==0
+    
         actualizarcliente(matriz_clientes, pos, opciones, objeto)
         clientes_menu()
     elif num == 4:
-        pos = int(input("Ingrese el ID de cliente que desea eliminar: "))
-
-        destruir(matriz_clientes, pos)
+        destruir(matriz_clientes)
         clientes_menu()
     else:
         return
