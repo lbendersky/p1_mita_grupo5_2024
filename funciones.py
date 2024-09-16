@@ -105,7 +105,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     for name in stock[x][1]:
         x += 1
         if name == nombre.capitalize():
-            ventas[len(ventas) - 1][1] = stock[x][0]
+            ventas[len(ventas) - 1].append(stock[x][0])
         else:
             return 1
     #Encontrar el id y nombre con la casilla de correo
