@@ -14,7 +14,7 @@ def __main__():
     elif qmatriz == 2:
         clientes_menu(matriz_clientes)
     elif qmatriz == 3:
-        ventas_menu(matriz_ventas,matriz_stock,matriz_clientes)
+        ventas_menu(matriz_ventas,matriz_clientes,matriz_stock)
     elif qmatriz == 4:
         return
     else:
