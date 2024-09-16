@@ -23,6 +23,7 @@ def __main__():
         elif qmatriz == 4:
             return
         else:
+            print("Ingrese un numero correcto")
             __main__()
         __main__()
     else:

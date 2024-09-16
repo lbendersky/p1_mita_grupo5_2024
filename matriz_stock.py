@@ -92,7 +92,11 @@ def stock_menu(matriz_stock):
 
             destruir(matriz_stock, pos)
             matriz_stock = stock_menu(matriz_stock)
+        elif num == 5:
+            
+            return
         else:
+            print("Ingrese un numero correcto")
             stock_menu(matriz_stock)
     else:
         stock_menu(matriz_stock)
