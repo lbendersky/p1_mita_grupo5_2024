@@ -101,4 +101,4 @@ def stock_menu(matriz_stock):
     else:
         stock_menu(matriz_stock)
         
-#
+##
