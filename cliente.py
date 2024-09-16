@@ -33,7 +33,7 @@ def clientes_menu(matriz_clientes):
             return matriz_clientes
         else:
             print("El número ingresado es incorrecto")
-            flag==0
+            flag=0
     
         actualizarcliente(matriz_clientes, pos, opciones, objeto)
         clientes_menu()

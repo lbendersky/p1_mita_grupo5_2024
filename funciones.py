@@ -1,3 +1,4 @@
+import validaciones
 ############################################################STOCK############################################################
 
 
@@ -57,10 +58,10 @@ def crear_clientes(clientes, nombre, telefono, correo):
 
     clientes.append([])
 
-    clientes[len(clientes) - 1][0] = len(clientes)
-    clientes[len(clientes) - 1][1] = nombre
-    clientes[len(clientes) - 1][2] = telefono
-    clientes[len(clientes) - 1][3] = correo
+    clientes[len(clientes) - 1].append(len(clientes))
+    clientes[len(clientes) - 1].append(nombre)
+    clientes[len(clientes) - 1].append(telefono)
+    clientes[len(clientes) - 1].append(correo)
 
     clientes_org = organizar_clientes(clientes)
 
@@ -163,39 +164,37 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
     return 
 ############################################################################################################################
 
-def actualizarcliente(cliente):
+def actualizarcliente(matriz_clientes,pos,opciones,objeto):
+    #pre: recibe la matriz cliente, el id del cliente, opcion del parametro a cambiar y objeto es por lo que lo va a cambiar
+    #pos: devuelve la matriz con el valor especificado cambiado
+
     flag=0
-    pos=int(input("Ingrese el ID del cliente que desea actualizar"))
     band=0
     x=-1
-    while band==0 and x<len(cliente)-1:
+    while band==0 and x<len(matriz_clientes)-1:
         x+=1
-    while flag==0:
-        if cliente[x][0]==pos:
-            band=1
+        while flag==0:
+            if matriz_clientes[x][0]==pos:
+                band=1
     if band==0:
         print("No se encontró el ID")
     else:
-        print("Tenga en cuenta lo siguiente: ")
-        print("1- Nombre y Apellido")
-        print("2- Mail")
-        print("3- Telefono")
-        opciones=int(input("Ingrese el valor a cambiar: "))
-
         if opciones==1:
-            cliente[x][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
-            return cliente
+            matriz_clientes[x][1]=objeto
+            return matriz_clientes
         elif opciones==2:
-            cliente[x][2]=int(input("Ingrese el mail actualizado del cliente: "))
-            return cliente
+            matriz_clientes[x][2]=objeto
+            return matriz_clientes
         elif opciones==3:
-            cliente[x][3]=int(input("Ingrese el telefono actualizado del cliente"))
-            return cliente
+            matriz_clientes[x][3]=objeto
+            return matriz_clientes
         else:
             print("El número ingresado es incorrecto")
             flag==0
     
 def actualizarstock(stock, pos, opciones, objeto):
+    #pre: Ingresa la matriz de stock, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
+    #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.
     band=0
     x=-1
     while band==0 and x<len(stock)-1:
@@ -215,86 +214,42 @@ def actualizarstock(stock, pos, opciones, objeto):
             return stock
         
 
-def actualizarventas(ventas):
-    print("Tenga en cuenta lo siguiente:")
-    print("1- ID de Comprador")
-    print("2- ID de Objeto")
-    print("3- Información de la Venta")
-    n=int(input("Ingrese el dato a actualizar: "))
-    if n==1:
-        flag=0
-        band=0
-        x=-1
-        while band==0 and x<len(ventas)-1:
-            x+=1
-            if ventas[x][0]==n:
-                band=1
-            while flag==0:
-                if band==1:
-                    ventas[x][0]=int(input("Ingrese el ID de venta por el que desea cambiarlo"))
-                    return ventas
-                else:
-                    print("No se encontró el ID")
-                    print("Reingrese el ID a buscar")
-                    flag==1
-    elif n==2:
-        flag=0
-        band=0
-        x=-1
-        while band==0 and x<len(ventas)-1:
-            x+=1
-            if ventas[x][0]==n:
-                band=1
-            while flag==0:
-                if band==1:
-                    ventas[x][0]=int(input("Ingrese el ID de venta por el que desea cambiarlo"))
-                    return ventas
-                else:
-                    print("No se encontró el ID")
-                    print("Reingrese el ID a buscar")
-                    flag==1
+def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):
+    #pre: Ingresa la matriz de ventas, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
+    #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.
+    band=0
+    x=-1
+    while band==0 and x<len(matriz_ventas,pos,opcion,datoacambiar):
+       x+=1
+       if matriz_ventas[x][1]==0:
+           band=1
+    if band==0:
+        print("No se encontró el ID")
+        return
     else:
-        flag=0
-        pos=int(input("Ingrese el ID de la venta que desea actualizar"))
-        band=0
-        x=-1
-        while band==0 and x<len(ventas)-1:
-            x+=1
-        while flag==0:
-            if ventas[x][0]==pos:
-                band=1
-        if band==0:
-            print("No se encontró el ID")
-        else:
-            print("Tenga en cuenta lo siguiente: ")
-            print("1- Cantidad")
-            print("2- Valor")
-            print("3- Fecha")
-            opciones=int(input("Ingrese el valor a cambiar: "))
-
-            if opciones==1:
-                ventas[x][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
-                return ventas
-            elif opciones==2:
-                ventas[x][2]=int(input("Ingrese el mail actualizado del stock: "))
-                return ventas
-            elif opciones==3:
-                x1=int(input("Ingrese el día a cambiar: "))
-                x2= int(input("Ingrese el mes a cambiar: "))
-                x3= int(input("Ingrese el año a cambiar: "))
-                return ventas
-            else:
-                print("El número ingresado es incorrecto")
-                flag==0
+        if opcion==1:
+            matriz_ventas[x][1]==datoacambiar
+            return matriz_ventas
+        if opcion==2:
+            matriz_ventas[x][2]==datoacambiar
+            return matriz_ventas
+        if opcion==3:
+            matriz_ventas[x][3]==datoacambiar
+            return matriz_ventas
+        if opcion==4:
+            matriz_ventas[x][4]==datoacambiar
+            return matriz_ventas
 
 def destruir(a, pos):
+    #pre: Entra la matriz deseada y ID a buscar
+    #pos: Se devuelve la matriz con el ID deseado borrado.
     band=0
     x=-1
 
     while band==0 and x<len(a)-1:
         x+=1
-        if a[x][0]==pos and pos.isnumeric()==True:
+        if a[x][0]==pos and validaciones.vnumero(pos)==True:
             a.pop(x)
             return a
-        else: 
+        else:
             print("No se encontró el ID del cliente")
