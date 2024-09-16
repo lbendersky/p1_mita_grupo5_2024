@@ -91,35 +91,45 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     #pre: recibe matriz de ventas, nombre del producto, correo del cliente, cantidad del producto y fecha de la venta
     #pos: devuelve la matriz con una nueva fila creada y organizada con seis columnas: id|id del item|id del cliente|nombre del mismo|cantidad vendida|fecha 
  
-    ventas.append([])
+    
 
     #Buscar id mas grande al no organizarlo por id
-    grande = 0
-    for i in range(len(ventas)):
-        if ventas[i][0] > grande:
-            grande = ventas[i][0]
-
+    if ventas:
+        ventas.append([]) 
+        grande = max(venta[0] for venta in ventas)
+        
+    else:
+        ventas.append([])
+        grande=0
     ventas[len(ventas) - 1].append(grande + 1)
 
     #Encontrar el id con el nombre del producto
-    x = 0
-    for name in stock[x][1]:
-        x += 1
-        if name == nombre.capitalize():
+    for i in range(len(stock)):
+        names_list=stock[i][1]
+        if nombre in names_list:
+            for j in range(len(ventas)):
+                if ventas[j][0]==stock[i][0]:
+                    ventas[j].append[i][0]
+                    return
             ventas[len(ventas) - 1].append(stock[x][0])
+            return
         else:
             return 1
     #Encontrar el id y nombre con la casilla de correo
-    x = 0
-    for mail in clientes[x][3]:
-        x += 1
-        if mail == correo:
-            ventas[len(ventas) - 1].append(clientes[x][0])
-            ventas[len(ventas) - 1].append(clientes[x][1])
-        else:
-            return 1
-    ventas[len(ventas) - 1].append(cantidad)
-    ventas[len(ventas) - 1].append(fecha)
+    encontrado=False
+    for x in range(len(clientes)):
+        mails=clientes[x][3]
+        if correo in mails:
+            if len(ventas)==0 or ventas[-1][0]!=clientes[x][0]:
+                ventas.append([clientes[x][0],clientes[x][1]])
+            ventas[len(ventas) - 1].append(cantidad)
+            ventas[len(ventas) - 1].append(fecha)
+            encontrado=True
+            return
+        
+    if not encontrado:
+        return 1
+    
 
     ventas_org = organizar_ventas(ventas)
 
@@ -168,13 +178,12 @@ def actualizarcliente(matriz_clientes,pos,opciones,objeto):
     #pre: recibe la matriz cliente, el id del cliente, opcion del parametro a cambiar y objeto es por lo que lo va a cambiar
     #pos: devuelve la matriz con el valor especificado cambiado
 
-    
     band=0
     x=-1
     while band==0 and x<len(matriz_clientes)-1:
         x+=1
         if matriz_clientes[x][0]==pos:
-            band+=1
+            band=1
     if band==0:
         print("No se encontró el ID")
     else:
@@ -189,7 +198,8 @@ def actualizarcliente(matriz_clientes,pos,opciones,objeto):
             return matriz_clientes
         else:
             print("El número ingresado es incorrecto")
-            return
+            return 
+    
 def actualizarstock(stock, pos, opciones, objeto):
     #pre: Ingresa la matriz de stock, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
     #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.

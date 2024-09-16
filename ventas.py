@@ -11,18 +11,19 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
         print("4- Borrar archivo")
         print("Ingrese cualquier otro número para salir")
 
-        num=int(input("Ingrese lo que desea hacer: "))
-        if num.isnumeric():
+        num=input("Ingrese lo que desea hacer: ")
+        if validaciones.vnumero(num):
+            num=int(num)
             if num==1:
                 correo=input("Ingrese el correo del Usuario: ")
                 if validaciones.vcorreo(correo):
                     producto=input("Ingrese el nombre del objeto: ")
-                    producto.capitalize()
+                    producto=validaciones.vtexto(producto)
                     cantidad=input("Ingrese la cantidad vendida: ")
                     if validaciones.vnumero(cantidad):
-                        fecha=input("Ingrese la fecha con formato DD-MM-AAAA: ")
+                        fecha=input("Ingrese la fecha con formato DD/MM/AAAA: ")
                         if validaciones.vfecha(fecha):
-                            x=funciones.crear_ventas(matriz_stock,matriz_clientes,matriz_ventas,producto,correo,fecha)
+                            x=funciones.crear_ventas(matriz_stock,matriz_clientes,matriz_ventas,producto,cantidad,fecha)
                             ventas_menu(matriz_ventas)
 
                             if x==1:
