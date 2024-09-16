@@ -163,15 +163,17 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
     return 
 ############################################################################################################################
 
-def actualizarcliente(cliente):
+def actualizarcliente(matriz_clientes,pos,opciones):
+
+    #pre: Recibe la matriz, la ID y la opción elegida.
+    #pos: Devuelve la selección del ID elegido ahora actualizado con la información deseada.
     flag=0
-    pos=int(input("Ingrese el ID del cliente que desea actualizar"))
     band=0
     x=-1
-    while band==0 and x<len(cliente)-1:
+    while band==0 and x<len(matriz_clientes)-1:
         x+=1
     while flag==0:
-        if cliente[x][0]==pos:
+        if matriz_clientes[x][0]==pos:
             band=1
     if band==0:
         print("No se encontró el ID")
@@ -183,14 +185,14 @@ def actualizarcliente(cliente):
         opciones=int(input("Ingrese el valor a cambiar: "))
 
         if opciones==1:
-            cliente[x][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
-            return cliente
+            matriz_clientes[x][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
+            return matriz_clientes
         elif opciones==2:
-            cliente[x][2]=int(input("Ingrese el mail actualizado del cliente: "))
-            return cliente
+            matriz_clientes[x][2]=int(input("Ingrese el mail actualizado del cliente: "))
+            return matriz_clientes
         elif opciones==3:
-            cliente[x][3]=int(input("Ingrese el telefono actualizado del cliente"))
-            return cliente
+            matriz_clientes[x][3]=int(input("Ingrese el telefono actualizado del cliente"))
+            return matriz_clientes
         else:
             print("El número ingresado es incorrecto")
             flag==0
@@ -215,77 +217,29 @@ def actualizarstock(stock, pos, opciones, objeto):
             return stock
         
 
-def actualizarventas(ventas):
-    print("Tenga en cuenta lo siguiente:")
-    print("1- ID de Comprador")
-    print("2- ID de Objeto")
-    print("3- Información de la Venta")
-    n=int(input("Ingrese el dato a actualizar: "))
-    if n==1:
-        flag=0
-        band=0
-        x=-1
-        while band==0 and x<len(ventas)-1:
-            x+=1
-            if ventas[x][0]==n:
-                band=1
-            while flag==0:
-                if band==1:
-                    ventas[x][0]=int(input("Ingrese el ID de venta por el que desea cambiarlo"))
-                    return ventas
-                else:
-                    print("No se encontró el ID")
-                    print("Reingrese el ID a buscar")
-                    flag==1
-    elif n==2:
-        flag=0
-        band=0
-        x=-1
-        while band==0 and x<len(ventas)-1:
-            x+=1
-            if ventas[x][0]==n:
-                band=1
-            while flag==0:
-                if band==1:
-                    ventas[x][0]=int(input("Ingrese el ID de venta por el que desea cambiarlo"))
-                    return ventas
-                else:
-                    print("No se encontró el ID")
-                    print("Reingrese el ID a buscar")
-                    flag==1
+def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):
+    band=0
+    x=-1
+    while band==0 and x<len(matriz_ventas,pos,opcion,datoacambiar):
+       x+=1
+       if matriz_ventas[x][1]==0:
+           band=1
+    if band==0:
+        print("No se encontró el ID")
+        return
     else:
-        flag=0
-        pos=int(input("Ingrese el ID de la venta que desea actualizar"))
-        band=0
-        x=-1
-        while band==0 and x<len(ventas)-1:
-            x+=1
-        while flag==0:
-            if ventas[x][0]==pos:
-                band=1
-        if band==0:
-            print("No se encontró el ID")
-        else:
-            print("Tenga en cuenta lo siguiente: ")
-            print("1- Cantidad")
-            print("2- Valor")
-            print("3- Fecha")
-            opciones=int(input("Ingrese el valor a cambiar: "))
-
-            if opciones==1:
-                ventas[x][1]=int(input("Ingrese el Nombre y Apellido actualizado: "))
-                return ventas
-            elif opciones==2:
-                ventas[x][2]=int(input("Ingrese el mail actualizado del stock: "))
-                return ventas
-            elif opciones==3:
-                x1=int(input("Ingrese el día a cambiar: "))
-                x2= int(input("Ingrese el mes a cambiar: "))
-                x3= int(input("Ingrese el año a cambiar: "))
-                return ventas
-            else:
-                print("El número ingresado es incorrecto")
-                flag==0
+        if opcion==1:
+            matriz_ventas[x][1]==datoacambiar
+            return matriz_ventas
+        if opcion==2:
+            matriz_ventas[x][2]==datoacambiar
+            return matriz_ventas
+        if opcion==3:
+            matriz_ventas[x][3]==datoacambiar
+            return matriz_ventas
+        if opcion==4:
+            matriz_ventas[x][4]==datoacambiar
+            return matriz_ventas
 
 def destruir(a, pos):
     band=0
