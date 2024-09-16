@@ -58,10 +58,10 @@ def crear_clientes(clientes, nombre, telefono, correo):
 
     clientes.append([])
 
-    clientes[len(clientes) - 1][0] = len(clientes)
-    clientes[len(clientes) - 1][1] = nombre
-    clientes[len(clientes) - 1][2] = telefono
-    clientes[len(clientes) - 1][3] = correo
+    clientes[len(clientes) - 1].append(len(clientes))
+    clientes[len(clientes) - 1].append(nombre)
+    clientes[len(clientes) - 1].append(telefono)
+    clientes[len(clientes) - 1].append(correo)
 
     clientes_org = organizar_clientes(clientes)
 
