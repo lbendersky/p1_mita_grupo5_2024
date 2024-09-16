@@ -98,7 +98,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
         if ventas[i][0] > grande:
             grande = ventas[i][0]
 
-    ventas[len(ventas) - 1][0] = grande + 1
+    ventas[len(ventas) - 1].append(grande + 1)
 
     #Encontrar el id con el nombre del producto
     x = 0
@@ -113,12 +113,12 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     for mail in clientes[x][3]:
         x += 1
         if mail == correo:
-            ventas[len(ventas) - 1][2] = clientes[x][0]
-            ventas[len(ventas) - 1][3] = clientes[x][1]
+            ventas[len(ventas) - 1].append(clientes[x][0])
+            ventas[len(ventas) - 1].append(clientes[x][1])
         else:
             return 1
-    ventas[len(ventas) - 1][4] = cantidad
-    ventas[len(ventas) - 1][5] = fecha
+    ventas[len(ventas) - 1].append(cantidad)
+    ventas[len(ventas) - 1].append(fecha)
 
     ventas_org = organizar_ventas(ventas)
 
