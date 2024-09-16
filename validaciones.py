@@ -37,10 +37,10 @@ def vnumero(numero):
     patron= r'\d+'
     
     if re.match(patron,numero):
-        return numero.replace(" ", "")
+        return True
     else:
         print("Solo se permite ingresar numeros")   
-        return 
+        return False 
     
 def vcorreo(correo):
     
@@ -92,7 +92,7 @@ def vtelefono(telefono):
     if re.match(patron,telefono):
         return telefono
     else:
-        print("Ingrese el numero de telefono en el formato adecuado")   
+        print("Ingrese el numero de telefono en el formato adecuado.")   
         return 
     
 def vidmatriz(matriz, id):
@@ -100,7 +100,7 @@ def vidmatriz(matriz, id):
         if fila[0]==id:
             return True
         else:
-            print("El id no se encuentra en la matriz")
+            print("El id no se encuentra en la matriz.")
             return False
         
 #
