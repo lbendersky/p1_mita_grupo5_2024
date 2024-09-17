@@ -18,19 +18,17 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                 correo=input("Ingrese el correo del Usuario: ")
                 if validaciones.vcorreo(correo):
                     producto=input("Ingrese el nombre del objeto: ")
-                    producto=validaciones.vtexto(producto)
                     cantidad=input("Ingrese la cantidad vendida: ")
                     if validaciones.vnumero(cantidad):
-                        fecha=input("Ingrese la fecha con formato DD/MM/AAAA: ")
-                        if validaciones.vfecha(fecha):
-                            x=funciones.crear_ventas(matriz_stock,matriz_clientes,matriz_ventas,producto,cantidad,fecha)
-                            ventas_menu(matriz_ventas)
+                        fechas=input("Ingrese la fecha con formato DD/MM/AAAA: ")
+                        if validaciones.vfecha(fechas):
+                            x=funciones.crear_ventas(matriz_stock,matriz_clientes,matriz_ventas,producto,correo,cantidad,fechas)
+                            
 
                             if x==1:
                                 print("El correo o el nombre del producto estan mal escritos")
             elif num==2:
                 funciones.leer(matriz_ventas, ventas=1)
-                ventas_menu(matriz_ventas)
             elif num==3:
                 a=0
                 while a==0:
@@ -51,33 +49,28 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                                 x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
                                 if x!=1:
                                     a+=1
-                                    ventas_menu(matriz_ventas)
                         elif opcion==2:
                             datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
                             if validaciones.vnumero(datoacambiar):
                                 x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
                                 if x!=1:
                                     a+=1
-                                    ventas_menu(matriz_ventas)
                         elif opcion==3:
                             datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
                             if validaciones.vcorreo(datoacambiar):
                                 x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
                                 if x!=1:
                                     a+=1
-                                    ventas_menu(matriz_ventas)
                         elif opcion==4:
                             datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
                             if validaciones.vfecha(datoacambiar):
                                 x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
                                 if x!=1:
                                     a+=1
-                                    ventas_menu(matriz_ventas)
                         else:
                             print("El número ingresado es incorrecto")
             elif num==4:
                 print(matriz_ventas)
                 funciones.destruir(matriz_ventas)
-                ventas_menu(matriz_ventas)
             else:
                 return
