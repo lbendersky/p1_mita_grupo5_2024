@@ -63,7 +63,7 @@ def vfecha(fecha):
     dia, mes, año = map(int, fecha.split("/"))
 
     fecha_valida = True
-    if mes in [4, 6, 9, 11] and dia > 30: 
+    if mes in [2, 4, 6, 9, 11] and dia > 30: 
         fecha_valida = False
     elif dia > 31: 
         fecha_valida = False
