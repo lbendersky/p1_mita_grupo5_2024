@@ -33,14 +33,12 @@ def vnombre(nombre):
             return 
         
 def vnumero(numero):
-    
-    patron= r'\d+'
-    
-    if re.match(patron,numero):
+    if str(numero).isdigit():
         return True
     else:
-        print("Solo se permite ingresar numeros")   
-        return False 
+        print("Solo se permite ingresar números.")
+        return False
+
     
 def vcorreo(correo):
     
@@ -98,9 +96,8 @@ def vtelefono(telefono):
 def vidmatriz(matriz, id):
     for fila in matriz:
         if fila[0]==id:
-            return True
-        else:
-            print("El id no se encuentra en la matriz.")
-            return False
+            return True  
+    print("El id no se encuentra en la matriz.")
+    return False
         
 #
