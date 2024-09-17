@@ -125,7 +125,7 @@ def organizar_ventas(ventas_des):
     #pre: recibe matriz de ventas desorganizada
     #pos: devuelve la matriz organizada por id descendiente
 
-    ventas_r = [[id, id_it, id_per, nombre[:6], cantidad, fecha] for id, id_it, id_per, nombre, cantidad, fecha in ventas_des]
+    ventas_r = [[id, id_it, id_per, nombreprod[:6], nombre[:6], cantidad, fecha] for id, id_it, id_per, nombreprod, nombre, cantidad, fecha in ventas_des]
 
     for i in range(len(ventas_r)):
         ventas_r[i][1] = ventas_r[i][2]
@@ -158,6 +158,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
             nombrelis=stock[i][1]
             if nombre in nombrelis:
                 idencon=stock[i][0]
+                nombprod=stock[i][1]
         if idencon==0:
             return 1
 
@@ -175,6 +176,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     
     ventas[len(ventas)-1].append(idencon)
     ventas[len(ventas)-1].append(idclienencon)
+    ventas[len(ventas)-1].append(nombprod)
     ventas[len(ventas)-1].append(nomb)
     ventas[len(ventas)-1].append(cantidad)
     ventas[len(ventas)-1].append(fecha)
@@ -198,16 +200,16 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):
         return
     else:
         if opcion==1:
-            matriz_ventas[x][1]==datoacambiar
+            matriz_ventas[x][3]=datoacambiar
             return matriz_ventas
         if opcion==2:
-            matriz_ventas[x][2]==datoacambiar
+            matriz_ventas[x][4]=datoacambiar
             return matriz_ventas
         if opcion==3:
-            matriz_ventas[x][3]==datoacambiar
+            matriz_ventas[x][5]=datoacambiar
             return matriz_ventas
         if opcion==4:
-            matriz_ventas[x][4]==datoacambiar
+            matriz_ventas[x][6]=datoacambiar
             return matriz_ventas
 
 
@@ -236,12 +238,12 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
         for id, nombre, telefono, correo in matriz:
             print(f"{id :>4}{nombre :^20}{telefono :^20}{correo :<10}")
     elif ventas == 1:
-        print(f"{'Id venta' :>4}{'Id producto' :^15}{'Id persona' :^15}{'Nombre persona' :^15}{'Cantidad' :^15}{'Fecha' :^6}")
+        print(f"{'Id venta' :>4}{'Id producto' :^15}{'Id persona' :^15}{'Nombre producto' :^15}{'Nombre persona' :^15}{'Cantidad' :^15}{'Fecha' :^6}")
 
         print("-" * 85)
 
-        for id_ven, id_prod, id_per, nombre, cantidad, fecha in matriz:
-            print(f"{id_ven :>4}{id_prod :^15}{id_per :^15}{nombre :^15}{cantidad :^15}{fecha :^6}")
+        for id_ven, id_prod, id_per,nombreprod,nombre, cantidad, fecha in matriz:
+            print(f"{id_ven :>4}{id_prod :^15}{id_per :^15}{nombreprod :^15}{nombre :^15}{cantidad :^15}{fecha :^6}")
     else:
         print("Formato no valido")
         return 

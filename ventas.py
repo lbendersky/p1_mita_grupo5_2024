@@ -16,7 +16,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                     if validaciones.vcorreo(correo):
                         band=1
                         
-                producto=input("Ingrese el nombre del objeto: ").capitalize()
+                producto=input("Ingrese el nombre del objeto: ")
                 
                 band=0
                 while band==0:
@@ -47,7 +47,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                         pos=input("Ingrese el ID que desea actualizar: ")
                         if validaciones.vnumero(pos):
                             pos=int(pos)
-                            if validaciones.vidmatriz(matriz_clientes,pos):
+                            if validaciones.vidmatriz(matriz_ventas,pos):
                                 band=1
                                 
                     band=0
@@ -65,7 +65,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                                 datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
                                 if validaciones.vtexto(datoacambiar):
                                     band+=1
-                        if opcion==2:
+                        elif opcion==2:
                             band=0
                             while band==0:
                                 datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
