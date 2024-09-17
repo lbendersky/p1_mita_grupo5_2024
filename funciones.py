@@ -253,5 +253,5 @@ def destruir(a, pos):
     for x in range(len(a)):
         if a[x][0] == pos:
             a.pop(x)
-            return pos
+            return a
     return False

@@ -29,70 +29,82 @@ def stock_menu(matriz_stock):
             stock_menu(matriz_stock)
             
         elif num == 2:
-            leer(matriz_stock, stock=1)
-            stock_menu(matriz_stock)
+            if validaciones.vmatrizvacia(matriz_stock):
+                leer(matriz_stock, stock=1)
+                stock_menu(matriz_stock)
+            else:
+                stock_menu(matriz_stock)
             
         elif num == 3:
             
-            band=0
-            while band==0:
-                pos=(input("Ingrese el ID del stock que desea actualizar: "))
-                if validaciones.vnumero(pos):
-                    pos=int(pos)
-                    if validaciones.vidmatriz(matriz_stock,pos):
-                        band=1
-
-            band=0
-            while band==0:
-                
-                print("Tenga en cuenta lo siguiente: ")
-                print("1- Nombre")
-                print("2- Cantidad")
-
-                
+            if validaciones.vmatrizvacia(matriz_stock):
+            
+                band=0
                 while band==0:
-                    opciones=(input("Ingrese el valor a cambiar: "))
-                    if validaciones.vnumero(opciones) and opciones=="1" or opciones=="2":
-                        opciones=int(opciones)
-                        band=1
+                    pos=(input("Ingrese el ID del stock que desea actualizar: "))
+                    if validaciones.vnumero(pos):
+                        pos=int(pos)
+                        if validaciones.vidmatriz(matriz_stock,pos):
+                            band=1
+
+                band=0
+                while band==0:
+                    
+                    print("Tenga en cuenta lo siguiente: ")
+                    print("1- Nombre")
+                    print("2- Cantidad")
+
+                    
+                    while band==0:
+                        opciones=(input("Ingrese el valor a cambiar: "))
+                        if validaciones.vnumero(opciones) and opciones=="1" or opciones=="2":
+                            opciones=int(opciones)
+                            band=1
+                        else:
+                            print("El numero ingresado es incorrecto")
+
+                    if opciones==1:
+                        
+                        band=0
+                        while band==0:
+                            objeto = input("Ingrese nombre del producto: ")
+                            if validaciones.vtexto(objeto):
+                                band=1
+                                
+                    elif opciones==2:
+                        
+                        band=0
+                        while band==0:
+                            objeto = (input("Ingrese cantidad del producto: "))
+                            if validaciones.vnumero(objeto):
+                                objeto=int(objeto)
+                                band=1
+                        
                     else:
-                        print("El numero ingresado es incorrecto")
+                        print("El número ingresado es incorrecto")
 
-                if opciones==1:
-                    
-                    band=0
-                    while band==0:
-                        objeto = input("Ingrese nombre del producto: ")
-                        if validaciones.vtexto(objeto):
-                            band=1
-                            
-                elif opciones==2:
-                    
-                    band=0
-                    while band==0:
-                        objeto = (input("Ingrese cantidad del producto: "))
-                        if validaciones.vnumero(objeto):
-                            objeto=int(objeto)
-                            band=1
-                    
-                else:
-                    print("El número ingresado es incorrecto")
-
-            matriz_stock = actualizarstock(matriz_stock, pos, opciones, objeto)
-            stock_menu(matriz_stock)
+                matriz_stock = actualizarstock(matriz_stock, pos, opciones, objeto)
+                stock_menu(matriz_stock)
+            else:
+                stock_menu(matriz_stock)
             
         elif num == 4:
             
-            band=0
-            while band==0:
-                pos = (input("Ingrese el ID del producto que desea eliminar: "))
-                if validaciones.vnumero(pos):
-                    pos=int(pos)
-                    if validaciones.vidmatriz(matriz_stock,pos):
-                        band=1
+            if validaciones.vmatrizvacia(matriz_stock):
+            
+                band=0
+                while band==0:
+                    pos = (input("Ingrese el ID del producto que desea eliminar: "))
+                    if validaciones.vnumero(pos):
+                        pos=int(pos)
+                        if validaciones.vidmatriz(matriz_stock,pos):
+                            band=1
 
-            destruir(matriz_stock, pos)
-            matriz_stock = stock_menu(matriz_stock)
+                destruir(matriz_stock, pos)
+                matriz_stock = stock_menu(matriz_stock)
+            else:
+                stock_menu(matriz_stock)
+                
         elif num == 5:
             
             return
@@ -101,5 +113,3 @@ def stock_menu(matriz_stock):
             stock_menu(matriz_stock)
     else:
         stock_menu(matriz_stock)
-        
-##

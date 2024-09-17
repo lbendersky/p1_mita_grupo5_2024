@@ -100,4 +100,15 @@ def vidmatriz(matriz, id):
     print("El id no se encuentra en la matriz.")
     return False
         
-#
+def vmatrizvacia(matriz):
+    
+    if not matriz:
+        print("La matriz está vacía")
+        return False
+
+    for fila in matriz:
+        if fila:  
+            return True
+    print("La matriz está vacía")
+    return False
+
