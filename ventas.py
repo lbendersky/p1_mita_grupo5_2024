@@ -52,29 +52,34 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                                 
                     band=0
                     while band==0:
-                        print("Tenga en cuenta lo siguiente: \n1- Nombre del comprador \n2- Cantidad vendida \n3- Fecha")
+                        print("Tenga en cuenta lo siguiente: \n1- Nombre del Producto\n2- Nombre del comprador \n3- Cantidad vendida \n4- Fecha")
 
                         while band==0:
                             opcion=input("Ingrese una opción: ")
                             if validaciones.vnumero(opcion):
                                 opcion=int(opcion)
                                 band=1
-                                
                         if opcion==1:
                             band=0
                             while band==0:
                                 datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
-                                if validaciones.vcorreo(datoacambiar):
+                                if validaciones.vtexto(datoacambiar):
+                                    band+=1
+                        if opcion==2:
+                            band=0
+                            while band==0:
+                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
+                                if validaciones.vtexto(datoacambiar):
                                     band+=1
                                     
-                        elif opcion==2:
+                        elif opcion==3:
                             band=0
                             while band==0:
                                 datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
                                 if validaciones.vnumero(datoacambiar):
                                     band+=1
                                     
-                        elif opcion==3:
+                        elif opcion==4:
                             band=0
                             while band==0:
                                 datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
