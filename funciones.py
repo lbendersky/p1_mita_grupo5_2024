@@ -248,15 +248,10 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):
             return matriz_ventas
 
 def destruir(a, pos):
-    #pre: Entra la matriz deseada y ID a buscar
-    #pos: Se devuelve la matriz con el ID deseado borrado.
-    band=0
-    x=-1
-
-    while band==0 and x<len(a)-1:
-        x+=1
-        if a[x][0]==pos and validaciones.vnumero(pos)==True:
+    # pre: Entra la matriz deseada y el ID a buscar
+    # pos: Se devuelve la matriz con el ID deseado borrado si se encuentra.
+    for x in range(len(a)):
+        if a[x][0] == pos:
             a.pop(x)
-            return a
-        else:
-            print("No se encontró el ID del cliente")
+            return pos
+    return False

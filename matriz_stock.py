@@ -87,6 +87,7 @@ def stock_menu(matriz_stock):
             while band==0:
                 pos = (input("Ingrese el ID del producto que desea eliminar: "))
                 if validaciones.vnumero(pos):
+                    pos=int(pos)
                     if validaciones.vidmatriz(matriz_stock,pos):
                         band=1
 
