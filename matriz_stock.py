@@ -48,7 +48,7 @@ def stock_menu(matriz_stock):
                         
                         while band==0:
                             opciones=(input("Ingrese el valor a cambiar: "))
-                            if validaciones.vnumero(opciones) and opciones=="1" or opciones=="2":
+                            if validaciones.vnumero(opciones) and opciones in ("1","2"):
                                 opciones=int(opciones)
                                 band=1
                             else:

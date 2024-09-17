@@ -43,8 +43,8 @@ def organizar_clientes(clientes_des):
 
     clientes_r = [[id, nombre[:6], telefono, correo] for id, nombre, telefono, correo in clientes_des]
 
-    for i in range(len(clientes_r)):
-        clientes_r[i][1] = clientes_r[i][1].capitalize()
+    """for i in range(len(clientes_r)):
+        clientes_r[i][1] = clientes_r[i][1].title()""" #No hace falta, ya se hace en validaciones
 
     clientes_o = sorted(clientes_r, key=lambda x: (-x[0], x[2]))
 
@@ -153,12 +153,12 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
         for id, nombre, cantidad in matriz:
             print(f"{id :>4}{nombre :^10}{cantidad :<4}")
     elif clientes == 1:
-        print(f"{'Id' :>4}{'Nombre' :^10}{'Telefono' :^10}{'Correo' :<4}")
+        print(f"{'Id' :>4}{'Nombre' :^20}{'Telefono' :^20}{'Correo' :^10}")
 
-        print("-" * 30)
+        print("-" * 60)
 
         for id, nombre, telefono, correo in matriz:
-            print(f"{id :>4}{nombre :^10}{telefono :^10}{correo :<4}")
+            print(f"{id :>4}{nombre :^20}{telefono :^20}{correo :<10}")
     elif ventas == 1:
         print(f"{'Id de la venta' :>4}{'Id del producto' :^10}{'Id de la persona' :^10}{'Nombre de la persona' :^10}{'Cantidad' :^10}{'Fecha' :<4}")
 

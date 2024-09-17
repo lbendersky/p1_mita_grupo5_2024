@@ -27,7 +27,7 @@ def vnombre(nombre):
     else:
         palabras=nombre.split()
         if len(palabras)==2:
-            return " ".join(palabras.strip().title() for palabras in palabras) #Capitaliza el texto en formato title
+            return " ".join(palabras.strip().title()[:6] for palabras in palabras) #Capitaliza el texto en formato title
         else:
             print("Ingrese nombre y apellido de forma adecuada")
             return 
