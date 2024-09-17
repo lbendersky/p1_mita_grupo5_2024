@@ -28,48 +28,58 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
             elif num==2:
                 funciones.leer(matriz_ventas, ventas=1)
             elif num==3:
-                a=0
-                while a==0:
-                    pos=input("Ingrese el ID del stock que desea actualizar: ")
+                band=0
+                while band==0:
+                    pos=input("Ingrese el ID que desea actualizar: ")
+                    if validaciones.vnumero(pos):
+                        pos=int(pos)
+                        if validaciones.vidmatriz(matriz_clientes,pos):
+                            band=1
+                band=0
+                while band==0:
                     print("Tenga en cuenta lo siguiente: ")
-                    print("1- Nombre del Producto")
+                    print("1- Nombre del Comprador")
                     print("2- Cantidad Vendida")
-                    print("3- Correo del cliente")
-                    print("4- Fecha")
-
-                    opcion=input("Ingrese una opción: ")
-                    if validaciones.vnumero(opcion):
-                        opcion=int(opcion)
-                        if opcion==1:
+                    print("3- Fecha")
+                    while band==0:
+                        opcion=input("Ingrese una opción: ")
+                        if validaciones.vnumero(opcion):
+                            opcion=int(opcion)
+                            band=1
+                        else:
+                            print("No ingresado numero.")
+                    if opcion==1:
+                        band=0
+                        while band==0:
                             datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
                             if validaciones.vtexto(datoacambiar):
-                                x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
-                                if x!=1:
-                                    a+=1
-                        elif opcion==2:
+                                band+=1
+                    elif opcion==2:
+                        band=0
+                        while band==0:
                             datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
                             if validaciones.vnumero(datoacambiar):
-                                x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
-                                if x!=1:
-                                    a+=1
-                        elif opcion==3:
-                            datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
-                            if validaciones.vcorreo(datoacambiar):
-                                x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
-                                if x!=1:
-                                    a+=1
-                        elif opcion==4:
+                                band+=1
+                    elif opcion==3:
+                        band=0
+                        while band==0:
                             datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
                             if validaciones.vfecha(datoacambiar):
-                                x=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
-                                if x!=1:
-                                    a+=1
-                        elif opcion==5:
-                            a+=1
-                        else:
-                            print("El número ingresado es incorrecto")
-            elif num==4:
-                print(matriz_ventas)
-                funciones.destruir(matriz_ventas)
+                                band=1
+                    elif opcion==5:
+                        band=1
+                    else:
+                        print("El número ingresado es incorrecto")
+                matriz_ventas=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
+                ventas_menu(matriz_ventas,matriz_clientes,matriz_stock)
+            elif num==4: 
+                band=0
+                while band==0:
+                    pos=input("Ingrese el ID que desea eliminar: ")
+                    if validaciones.vnumero(pos):
+                        if validaciones.vidmatriz(matriz_clientes,pos):
+                            band=1
+                funciones.destruir(matriz_ventas,pos)
+                matriz_clientes=ventas_menu(matriz_ventas,matriz_clientes,matriz_stock)
             else:
                 return
