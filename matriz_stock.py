@@ -12,12 +12,7 @@ def stock_menu(matriz_stock):
             num=int(num)
             if num == 1:
                 
-                band=0
-                
-                while band==0:
-                    prod = input("Nombre del producto: ")
-                    if validaciones.vtexto(prod)==True:
-                        band=1
+                prod = input("Nombre del producto: ")
                         
                 band=0   
                 while band==0:
