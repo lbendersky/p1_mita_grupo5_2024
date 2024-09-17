@@ -79,9 +79,9 @@ def organizar_ventas(ventas_des):
     ventas_r = [[id, id_it, id_per, nombre[:6], cantidad, fecha] for id, id_it, id_per, nombre, cantidad, fecha in ventas_des]
 
     for i in range(len(ventas_r)):
-        ventas_r[i][1] = ventas_r[i][2].capitalize()
+        ventas_r[i][1] = ventas_r[i][2]
 
-    ventas_o = sorted(ventas_r, key=lambda x: (-x[5], x[4], x[0]))
+    ventas_o = sorted(ventas_r, key=lambda x: (-x[0], x[4], x[1]))
 
     return ventas_o
 
@@ -95,41 +95,40 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
 
     #Buscar id mas grande al no organizarlo por id
     if ventas:
-        ventas.append([]) 
         grande = max(venta[0] for venta in ventas)
         
     else:
-        ventas.append([])
         grande=0
-    ventas[len(ventas) - 1].append(grande + 1)
+    nuevoid=grande+1
+    ventas.append([nuevoid])
 
+    idencon=0
     #Encontrar el id con el nombre del producto
-    for i in range(len(stock)):
-        names_list=stock[i][1]
-        if nombre in names_list:
-            for j in range(len(ventas)):
-                if ventas[j][0]==stock[i][0]:
-                    ventas[j].append[i][0]
-                    return
-            ventas[len(ventas) - 1].append(stock[x][0])
-            return
-        else:
-            return 1
+    while idencon==0:
+        for i in range(len(stock)):
+            nombrelis=stock[i][1]
+            if nombre in nombrelis:
+                idencon=stock[i][0]
+    if idencon==0:
+        return 1
+
     #Encontrar el id y nombre con la casilla de correo
-    encontrado=False
-    for x in range(len(clientes)):
-        mails=clientes[x][3]
-        if correo in mails:
-            if len(ventas)==0 or ventas[-1][0]!=clientes[x][0]:
-                ventas.append([clientes[x][0],clientes[x][1]])
-            ventas[len(ventas) - 1].append(cantidad)
-            ventas[len(ventas) - 1].append(fecha)
-            encontrado=True
-            return
-        
-    if not encontrado:
+    
+    idclienencon=0
+    while idclienencon==0:
+        for x in range(len(clientes)):
+            mails=clientes[x][3]
+            if correo in mails:
+                idclienencon=clientes[x][0]
+                nomb=clientes[x][1]
+    if idclienencon==0:
         return 1
     
+    ventas[len(ventas)-1].append(idencon)
+    ventas[len(ventas)-1].append(idclienencon)
+    ventas[len(ventas)-1].append(nomb)
+    ventas[len(ventas)-1].append(cantidad)
+    ventas[len(ventas)-1].append(fecha)
 
     ventas_org = organizar_ventas(ventas)
 
@@ -227,9 +226,9 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):
     #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.
     band=0
     x=-1
-    while band==0 and x<len(matriz_ventas,pos,opcion,datoacambiar):
+    while band==0 and x<len(matriz_ventas)-1:
        x+=1
-       if matriz_ventas[x][1]==0:
+       if matriz_ventas[x][0]==pos:
            band=1
     if band==0:
         print("No se encontró el ID")
