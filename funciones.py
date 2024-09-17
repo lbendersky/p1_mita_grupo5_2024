@@ -7,7 +7,7 @@ def organizar_stock(stock_des):
     #pre: recibe matriz de stock desorganizada
     #pos: devuelve la matriz organizada por id descendiente
 
-    stock_r = [[id, nombre[:6], cantidad] for id, nombre, cantidad in stock_des]
+    stock_r = [[id, nombre, cantidad] for id, nombre, cantidad in stock_des]
 
     for i in range(len(stock_r)):
         stock_r[i][1] = stock_r[i][1].capitalize()
@@ -63,7 +63,7 @@ def organizar_clientes(clientes_des):
     #pre: recibe matriz de clientes desorganizada
     #pos: devuelve la matriz organizada por id descendiente
 
-    clientes_r = [[id, nombre[:6], telefono, correo] for id, nombre, telefono, correo in clientes_des]
+    clientes_r = [[id, nombre[:9], telefono, correo] for id, nombre, telefono, correo in clientes_des]
 
     """for i in range(len(clientes_r)):
         clientes_r[i][1] = clientes_r[i][1].title()""" #No hace falta, ya se hace en validaciones
@@ -224,26 +224,26 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
     if stock == 1:
         matriz = organizar_stock(matriz)
         
-        print(f"{'Id' :>4}{'Nombre' :^10}{'Cantidad' :<4}")
+        print(f"{'Id' :<5}{'Nombre' :<30}{'Cantidad'}")
 
-        print("-" * 20)
+        print("-" * 45)
 
         for id, nombre, cantidad in matriz:
-            print(f"{id :>4}{nombre :^10}{cantidad :<4}")
+            print(f"{id :<5}{nombre :<30}{cantidad}")
     elif clientes == 1:
-        print(f"{'Id' :>4}{'Nombre' :^20}{'Telefono' :^20}{'Correo' :<10}")
+        print(f"{'Id' :<5}{'Nombre' :<20}{'Telefono' :<20}{'Correo'}")
 
         print("-" * 60)
 
         for id, nombre, telefono, correo in matriz:
-            print(f"{id :>4}{nombre :^20}{telefono :^20}{correo :<10}")
+            print(f"{id :<5}{nombre :<20}{telefono :<20}{correo}")
     elif ventas == 1:
-        print(f"{'Id venta' :>4}{'Id producto' :^15}{'Id persona' :^15}{'Nombre producto' :^15}{'Nombre persona' :^15}{'Cantidad' :^15}{'Fecha' :^6}")
+        print(f"{'Id venta' :<10}{'Id producto' :<13}{'Id persona' :<12}{'Nombre producto' :<30}{'Nombre persona' :<30}{'Cantidad' :<10}{'Fecha'}")
 
-        print("-" * 85)
+        print("-" * 120)
 
         for id_ven, id_prod, id_per,nombreprod,nombre, cantidad, fecha in matriz:
-            print(f"{id_ven :>4}{id_prod :^15}{id_per :^15}{nombreprod :^15}{nombre :^15}{cantidad :^15}{fecha :^6}")
+            print(f"{id_ven :<10}{id_prod :<13}{id_per :<12}{nombreprod :<30}{nombre :<30}{cantidad :<10}{fecha :<6}")
     else:
         print("Formato no valido")
         return 
