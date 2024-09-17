@@ -31,7 +31,29 @@ def crear_stock(stock, nombre, cantidad):
     stock_org = organizar_stock(stock)
 
     return stock_org
- 
+
+
+def actualizarstock(stock, pos, opciones, objeto):
+    #pre: Ingresa la matriz de stock, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
+    #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.
+    band=0
+    x=-1
+    while band==0 and x<len(stock)-1:
+        x+=1
+        if stock[x][0]==pos:
+            band=1
+
+    if band==0:
+        print("No se encontró el ID")
+        return
+    else:
+        if opciones==1:
+            stock[x][1]=objeto
+            return stock
+        elif opciones==2:
+            stock[x][2]=objeto
+            return stock
+        
         
 ###########################################################CLIENTES###########################################################
 
@@ -67,6 +89,33 @@ def crear_clientes(clientes, nombre, telefono, correo):
 
     return clientes_org
         
+
+def actualizarcliente(matriz_clientes,pos,opciones,objeto):
+    #pre: recibe la matriz cliente, el id del cliente, opcion del parametro a cambiar y objeto es por lo que lo va a cambiar
+    #pos: devuelve la matriz con el valor especificado cambiado
+
+    band=0
+    x=-1
+    while band==0 and x<len(matriz_clientes)-1:
+        x+=1
+        if matriz_clientes[x][0]==pos:
+            band=1
+    if band==0:
+        print("No se encontró el ID")
+    else:
+        if opciones==1:
+            matriz_clientes[x][1]=objeto
+            return matriz_clientes
+        elif opciones==2:
+            matriz_clientes[x][2]=objeto
+            return matriz_clientes
+        elif opciones==3:
+            matriz_clientes[x][3]=objeto
+            return matriz_clientes
+        else:
+            print("El número ingresado es incorrecto")
+            return 
+
 
 ##########################################################VENTAS##########################################################
 
@@ -109,8 +158,8 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
             nombrelis=stock[i][1]
             if nombre in nombrelis:
                 idencon=stock[i][0]
-    if idencon==0:
-        return 1
+        if idencon==0:
+            return 1
 
     #Encontrar el id y nombre con la casilla de correo
     
@@ -134,92 +183,6 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
 
     return ventas_org
 
-
-#################################################################LEER#################################################################
-
-
-def leer(matriz, stock=0, clientes=0, ventas=0):
-
-    #pre: Ingresa la matriz y a cual pertenece (ej, stock=1)
-    #pos: Regresa 1 si mostro el resultado y 0 si no hay ningun parametro en uno
-
-    if stock == 1:
-        matriz = organizar_stock(matriz)
-        
-        print(f"{'Id' :>4}{'Nombre' :^10}{'Cantidad' :<4}")
-
-        print("-" * 20)
-
-        for id, nombre, cantidad in matriz:
-            print(f"{id :>4}{nombre :^10}{cantidad :<4}")
-    elif clientes == 1:
-        print(f"{'Id' :>4}{'Nombre' :^20}{'Telefono' :^20}{'Correo' :^10}")
-
-        print("-" * 60)
-
-        for id, nombre, telefono, correo in matriz:
-            print(f"{id :>4}{nombre :^20}{telefono :^20}{correo :<10}")
-    elif ventas == 1:
-        print(f"{'Id de la venta' :>4}{'Id del producto' :^10}{'Id de la persona' :^10}{'Nombre de la persona' :^10}{'Cantidad' :^10}{'Fecha' :<4}")
-
-        print("-" * 70)
-
-        for id_ven, id_prod, id_per, nombre, cantidad, fecha in matriz:
-            print(f"{id_ven :>4}{id_prod :^10}{id_per :^10}{nombre :^10}{cantidad :^10}{fecha :<4}")
-    else:
-        print("Formato no valido")
-        return 
-    
-    return 
-############################################################################################################################
-
-def actualizarcliente(matriz_clientes,pos,opciones,objeto):
-    #pre: recibe la matriz cliente, el id del cliente, opcion del parametro a cambiar y objeto es por lo que lo va a cambiar
-    #pos: devuelve la matriz con el valor especificado cambiado
-
-    band=0
-    x=-1
-    while band==0 and x<len(matriz_clientes)-1:
-        x+=1
-        if matriz_clientes[x][0]==pos:
-            band=1
-    if band==0:
-        print("No se encontró el ID")
-    else:
-        if opciones==1:
-            matriz_clientes[x][1]=objeto
-            return matriz_clientes
-        elif opciones==2:
-            matriz_clientes[x][2]=objeto
-            return matriz_clientes
-        elif opciones==3:
-            matriz_clientes[x][3]=objeto
-            return matriz_clientes
-        else:
-            print("El número ingresado es incorrecto")
-            return 
-    
-def actualizarstock(stock, pos, opciones, objeto):
-    #pre: Ingresa la matriz de stock, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
-    #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.
-    band=0
-    x=-1
-    while band==0 and x<len(stock)-1:
-        x+=1
-        if stock[x][0]==pos:
-            band=1
-
-    if band==0:
-        print("No se encontró el ID")
-        return
-    else:
-        if opciones==1:
-            stock[x][1]=objeto
-            return stock
-        elif opciones==2:
-            stock[x][2]=objeto
-            return stock
-        
 
 def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):
     #pre: Ingresa la matriz de ventas, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
@@ -246,6 +209,47 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):
         if opcion==4:
             matriz_ventas[x][4]==datoacambiar
             return matriz_ventas
+
+
+#################################################################LEER#################################################################
+
+
+def leer(matriz, stock=0, clientes=0, ventas=0):
+
+    #pre: Ingresa la matriz y a cual pertenece (ej, stock=1)
+    #pos: Regresa 1 si mostro el resultado y 0 si no hay ningun parametro en uno
+
+    if stock == 1:
+        matriz = organizar_stock(matriz)
+        
+        print(f"{'Id' :>4}{'Nombre' :^10}{'Cantidad' :<4}")
+
+        print("-" * 20)
+
+        for id, nombre, cantidad in matriz:
+            print(f"{id :>4}{nombre :^10}{cantidad :<4}")
+    elif clientes == 1:
+        print(f"{'Id' :>4}{'Nombre' :^20}{'Telefono' :^20}{'Correo' :<10}")
+
+        print("-" * 60)
+
+        for id, nombre, telefono, correo in matriz:
+            print(f"{id :>4}{nombre :^20}{telefono :^20}{correo :<10}")
+    elif ventas == 1:
+        print(f"{'Id venta' :>4}{'Id producto' :^15}{'Id persona' :^15}{'Nombre persona' :^15}{'Cantidad' :^15}{'Fecha' :^6}")
+
+        print("-" * 85)
+
+        for id_ven, id_prod, id_per, nombre, cantidad, fecha in matriz:
+            print(f"{id_ven :>4}{id_prod :^15}{id_per :^15}{nombre :^15}{cantidad :^15}{fecha :^6}")
+    else:
+        print("Formato no valido")
+        return 
+    return 
+
+
+#####################################################Destruir############################################################################
+
 
 def destruir(a, pos):
     # pre: Entra la matriz deseada y el ID a buscar

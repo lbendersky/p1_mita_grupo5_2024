@@ -4,7 +4,7 @@ import validaciones
 def clientes_menu(matriz_clientes):
         flag=0
         while flag==0:
-            num = (input("Seleccione una opcion: 1 crear, 2 leer, 3 actualizar, 4 eliminar, 5 volver al principio: "))
+            num=input("Tenga en cuenta lo siguiente:\n1- Crear \n2- Leer \n3- Actualizar \n4- Borrar archivo \n5- Volver al menu \n\nIngrese lo que desea hacer: ")
             
             if validaciones.vnumero(num):
                 
@@ -51,10 +51,7 @@ def clientes_menu(matriz_clientes):
                         band=0
                         while band==0: 
                                     
-                            print("Tenga en cuenta lo siguiente: ")
-                            print("1- Nombre y apellido.")
-                            print("2- Teléfono.")
-                            print("3- Correo.")
+                            print("Tenga en cuenta lo siguiente: \n1- Nombre y apellido \n2- Telefono \n3- Correo")
 
                             while band==0:
                                 opciones=input("Ingrese el valor a cambiar: ")
@@ -112,5 +109,4 @@ def clientes_menu(matriz_clientes):
                     flag=1
                     return
                 else:
-                    print("Ingrese un numero correcto")
-            
+                    print("\nIngrese un numero correcto\n")
