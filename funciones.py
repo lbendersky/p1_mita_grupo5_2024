@@ -7,7 +7,7 @@ def organizar_stock(stock_des):
     #pre: recibe matriz de stock desorganizada
     #pos: devuelve la matriz organizada por id descendiente
 
-    stock_r = [[id, nombre[:6], cantidad] for id, nombre, cantidad in stock_des]
+    stock_r = [[id, nombre, cantidad] for id, nombre, cantidad in stock_des]
 
     for i in range(len(stock_r)):
         stock_r[i][1] = stock_r[i][1].capitalize()
@@ -63,7 +63,7 @@ def organizar_clientes(clientes_des):
     #pre: recibe matriz de clientes desorganizada
     #pos: devuelve la matriz organizada por id descendiente
 
-    clientes_r = [[id, nombre[:6], telefono, correo] for id, nombre, telefono, correo in clientes_des]
+    clientes_r = [[id, nombre[:9], telefono, correo] for id, nombre, telefono, correo in clientes_des]
 
     """for i in range(len(clientes_r)):
         clientes_r[i][1] = clientes_r[i][1].title()""" #No hace falta, ya se hace en validaciones
@@ -202,19 +202,19 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
     if stock == 1:
         matriz = organizar_stock(matriz)
         
-        print(f"{'Id' :>4}{'Nombre' :^10}{'Cantidad' :<4}")
+        print(f"{'Id' :<5}{'Nombre' :<30}{'Cantidad'}")
 
-        print("-" * 20)
+        print("-" * 45)
 
         for id, nombre, cantidad in matriz:
-            print(f"{id :>4}{nombre :^10}{cantidad :<4}")
+            print(f"{id :<5}{nombre :<30}{cantidad}")
     elif clientes == 1:
-        print(f"{'Id' :>4}{'Nombre' :^20}{'Telefono' :^20}{'Correo' :<10}")
+        print(f"{'Id' :<5}{'Nombre' :<20}{'Telefono' :<20}{'Correo'}")
 
         print("-" * 60)
 
         for id, nombre, telefono, correo in matriz:
-            print(f"{id :>4}{nombre :^20}{telefono :^20}{correo :<10}")
+            print(f"{id :<5}{nombre :<20}{telefono :<20}{correo}")
     elif ventas == 1:
         for encabezados in matriz[0].keys():
             print(f"{encabezados :^10}", end=" ")

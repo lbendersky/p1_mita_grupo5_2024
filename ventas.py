@@ -10,29 +10,34 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
             num=int(num)
             if num==1:
                 
-                band=0
-                while band==0:
-                    correo=input("Ingrese el correo del Usuario (nombre@correo.com): ")
-                    if validaciones.vcorreo(correo):
-                        band=1
+                if validaciones.vmatrizvacia(matriz_stock) and validaciones.vmatrizvacia(matriz_clientes):
+                    
+                    band=0
+                    while band==0:
+                        correo=input("Ingrese el correo del Usuario (nombre@correo.com): ")
+                        if validaciones.vcorreo(correo):
+                            band=1
+                            
+                    producto=input("Ingrese el nombre del objeto: ")
+                    
+                    band=0
+                    while band==0:
+                        cantidad=input("Ingrese la cantidad vendida: ")
+                        if validaciones.vnumero(cantidad):
+                            band=1
+                            
+                    band=0
+                    while band==0:
+                        fechas=input("Ingrese la fecha con formato DD/MM/AAAA: ")
+                        if validaciones.vfecha(fechas):
+                            band=1
+                            
+                    x=funciones.crear_ventas(matriz_stock,matriz_clientes,matriz_ventas,producto,correo,cantidad,fechas)
+                    if x==1:
+                        print("El correo o el nombre del producto estan mal escritos o no existen")
                         
-                producto=input("Ingrese el nombre del objeto: ")
-                
-                band=0
-                while band==0:
-                    cantidad=input("Ingrese la cantidad vendida: ")
-                    if validaciones.vnumero(cantidad):
-                        band=1
-                        
-                band=0
-                while band==0:
-                    fechas=input("Ingrese la fecha con formato DD/MM/AAAA: ")
-                    if validaciones.vfecha(fechas):
-                        band=1
-                        
-                x=funciones.crear_ventas(matriz_stock,matriz_clientes,matriz_ventas,producto,correo,cantidad,fechas)
-                if x==1:
-                    print("El correo o el nombre del producto estan mal escritos o no existen")
+                else:
+                    print("La matriz de stock y/o clientes esta vacia, por lo que no se pueden crear ventas")
                                 
             elif num==2:
                 if validaciones.vmatrizvacia(matriz_ventas):
