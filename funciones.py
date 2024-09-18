@@ -145,7 +145,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
             if nombre in nombrelis:
                 idencon=stock[i][0]
                 nombprod=stock[i][1]
-        if idencon==0:
+        else:
             return 1
 
     #Encontrar el id y nombre con la casilla de correo
@@ -157,8 +157,8 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
             if correo in mails:
                 idclienencon=clientes[x][0]
                 nomb=clientes[x][1]
-    if idclienencon==0:
-        return 1
+            else:
+                return 1
     
     elementos = [len(ventas) + 1, idencon, idclienencon, nombprod, nomb, cantidad, fecha]
     ventas.append(dict(zip(encabezados, elementos)))

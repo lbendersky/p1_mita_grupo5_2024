@@ -17,7 +17,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                         correo=input("Ingrese el correo del Usuario (nombre@correo.com): ")
                         if validaciones.vcorreo(correo):
                             band=1
-                            
+       
                     producto=input("Ingrese el nombre del objeto: ")
                     
                     band=0
