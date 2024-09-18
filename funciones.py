@@ -158,7 +158,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
                 idclienencon=clientes[x][0]
                 nomb=clientes[x][1]
         if idclienencon==0:
-            return 1
+                return 1
     
     elementos = [len(ventas) + 1, idencon, idclienencon, nombprod, nomb, cantidad, fecha]
     ventas.append(dict(zip(encabezados, elementos)))
