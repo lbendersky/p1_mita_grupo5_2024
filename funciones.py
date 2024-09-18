@@ -125,12 +125,7 @@ def organizar_ventas(ventas_des):
     #pre: recibe matriz de ventas desorganizada
     #pos: devuelve la matriz organizada por id descendiente
 
-    ventas_r = [[id, id_it, id_per, nombreprod[:6], nombre[:6], cantidad, fecha] for id, id_it, id_per, nombreprod, nombre, cantidad, fecha in ventas_des]
-
-    for i in range(len(ventas_r)):
-        ventas_r[i][1] = ventas_r[i][2]
-
-    ventas_o = sorted(ventas_r, key=lambda x: (-x[0], x[4], x[1]))
+    ventas_o = sorted(ventas_des, key=lambda x: (-x["Id"], x["Cantidad"], x["Id_prod"]))
 
     return ventas_o
 
@@ -140,16 +135,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     #pre: recibe matriz de ventas, nombre del producto, correo del cliente, cantidad del producto y fecha de la venta
     #pos: devuelve la matriz con una nueva fila creada y organizada con seis columnas: id|id del item|id del cliente|nombre del mismo|cantidad vendida|fecha 
  
-    
-
-    #Buscar id mas grande al no organizarlo por id
-    if ventas:
-        grande = max(venta[0] for venta in ventas)
-        
-    else:
-        grande=0
-    nuevoid=grande+1
-    ventas.append([nuevoid])
+    encabezados = ["Id", "Id_prod", "Id_clien", "Nombre producto", "Nombre cliente", "Cantidad", "Fecha"]
 
     idencon=0
     #Encontrar el id con el nombre del producto
@@ -174,43 +160,35 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     if idclienencon==0:
         return 1
     
-    ventas[len(ventas)-1].append(idencon)
-    ventas[len(ventas)-1].append(idclienencon)
-    ventas[len(ventas)-1].append(nombprod)
-    ventas[len(ventas)-1].append(nomb)
-    ventas[len(ventas)-1].append(cantidad)
-    ventas[len(ventas)-1].append(fecha)
+    elementos = [len(ventas) + 1, idencon, idclienencon, nombprod, nomb, cantidad, fecha]
+    ventas.append(dict(zip(encabezados, elementos)))
 
     ventas_org = organizar_ventas(ventas)
+
+
 
     return ventas_org
 
 
 def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):
+
     #pre: Ingresa la matriz de ventas, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
     #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.
-    band=0
-    x=-1
-    while band==0 and x<len(matriz_ventas)-1:
-       x+=1
-       if matriz_ventas[x][0]==pos:
-           band=1
-    if band==0:
-        print("No se encontró el ID")
-        return
-    else:
-        if opcion==1:
-            matriz_ventas[x][3]=datoacambiar
-            return matriz_ventas
-        if opcion==2:
-            matriz_ventas[x][4]=datoacambiar
-            return matriz_ventas
-        if opcion==3:
-            matriz_ventas[x][5]=datoacambiar
-            return matriz_ventas
-        if opcion==4:
-            matriz_ventas[x][6]=datoacambiar
-            return matriz_ventas
+
+    for x in range(len(matriz_ventas)):
+        if matriz_ventas[x]['Id'] == pos:
+            if opcion==1:
+                matriz_ventas[x]['Nombre producto']=datoacambiar
+                return matriz_ventas
+            if opcion==2:
+                matriz_ventas[x]['Nombre cliente']=datoacambiar
+                return matriz_ventas
+            if opcion==3:
+                matriz_ventas[x]['Cantidad']=datoacambiar
+                return matriz_ventas
+            if opcion==4:
+                matriz_ventas[x]['Fecha']=datoacambiar
+                return matriz_ventas
 
 
 #################################################################LEER#################################################################
@@ -238,17 +216,29 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
         for id, nombre, telefono, correo in matriz:
             print(f"{id :>4}{nombre :^20}{telefono :^20}{correo :<10}")
     elif ventas == 1:
-        print(f"{'Id venta' :>4}{'Id producto' :^15}{'Id persona' :^15}{'Nombre producto' :^15}{'Nombre persona' :^15}{'Cantidad' :^15}{'Fecha' :^6}")
+        for encabezados in matriz[0].keys():
+            print(f"{encabezados :^10}", end=" ")
 
+        print("")
         print("-" * 85)
 
-        for id_ven, id_prod, id_per,nombreprod,nombre, cantidad, fecha in matriz:
-            print(f"{id_ven :>4}{id_prod :^15}{id_per :^15}{nombreprod :^15}{nombre :^15}{cantidad :^15}{fecha :^6}")
+        for i in range(len(matriz)):
+            for elementos in matriz[i].values():
+                print(f"{elementos :^12}", end=" ")
+            print("")
     else:
         print("Formato no valido")
         return 
     return 
 
+
+def destruir_ventas(dic_ventas, pos):
+    for i in range(len(dic_ventas)):
+        if dic_ventas[i]['Id'] == pos:
+            dic_ventas[i].clear()
+            dic_ventas.pop(i)
+            return dic_ventas
+        
 
 #####################################################Destruir############################################################################
 

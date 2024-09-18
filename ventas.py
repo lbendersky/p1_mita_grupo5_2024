@@ -4,7 +4,7 @@ import validaciones
 def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
     flag = 0
     while flag==0:
-        num=input("Tenga en cuenta lo siguiente:\n1- Crear \n2- Leer \n3- Actualizar \n4- Borrar archivo \n5- Volver al menu \n\nIngrese lo que desea hacer: ")
+        num=input("\nTenga en cuenta lo siguiente:\n1- Crear \n2- Leer \n3- Actualizar \n4- Borrar archivo \n5- Volver al menu \n\nIngrese lo que desea hacer: ")
 
         if validaciones.vnumero(num):
             num=int(num)
@@ -47,7 +47,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                         pos=input("Ingrese el ID que desea actualizar: ")
                         if validaciones.vnumero(pos):
                             pos=int(pos)
-                            if validaciones.vidmatriz(matriz_ventas,pos):
+                            if validaciones.viddic(matriz_ventas,pos):
                                 band=1
                                 
                     band=0
@@ -99,9 +99,9 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                         pos=input("Ingrese el ID que desea eliminar: ")
                         if validaciones.vnumero(pos):
                             pos=int(pos)
-                            if validaciones.vidmatriz(matriz_clientes,pos):
+                            if validaciones.viddic(matriz_clientes,pos):
                                 band=1
-                    funciones.destruir(matriz_ventas,pos)
+                    funciones.destruir_ventas(matriz_ventas,pos)
                     
             elif num==5:
                 flag = 1
