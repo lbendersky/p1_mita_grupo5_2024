@@ -14,16 +14,17 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                     
                     band=0
                     while band==0:
-                        correo=input("Ingrese el correo del Usuario (nombre@correo.com): ")
+                        correo=input("Ingrese el correo del Usuario (nombre@correo.com): ").lower()
                         if validaciones.vcorreo(correo):
                             band=1
        
-                    producto=input("Ingrese el nombre del objeto: ")
+                    producto=input("Ingrese el nombre del objeto: ").capitalize()
                     
                     band=0
                     while band==0:
                         cantidad=input("Ingrese la cantidad vendida: ")
                         if validaciones.vnumero(cantidad):
+                            cantidad=int(cantidad)
                             band=1
                             
                     band=0

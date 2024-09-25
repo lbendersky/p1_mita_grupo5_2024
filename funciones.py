@@ -25,7 +25,7 @@ def crear_stock(stock, nombre, cantidad):
     stock.append([])
 
     stock[len(stock) - 1].append(len(stock))
-    stock[len(stock) - 1].append(nombre)
+    stock[len(stock) - 1].append(nombre.capitalize())
     stock[len(stock) - 1].append(cantidad)
 
     stock_org = organizar_stock(stock)
@@ -65,8 +65,8 @@ def organizar_clientes(clientes_des):
 
     clientes_r = [[id, nombre[:9], telefono, correo] for id, nombre, telefono, correo in clientes_des]
 
-    """for i in range(len(clientes_r)):
-        clientes_r[i][1] = clientes_r[i][1].title()""" #No hace falta, ya se hace en validaciones
+    for i in range(len(clientes_r)):
+        clientes_r[i][3] = clientes_r[i][3].lower()
 
     clientes_o = sorted(clientes_r, key=lambda x: (-x[0], x[2]))
 

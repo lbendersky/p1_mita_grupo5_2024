@@ -2,11 +2,11 @@ from matriz_stock import stock_menu
 from ventas import ventas_menu
 from cliente import clientes_menu
 import validaciones
-
-matriz_stock = []
+#1,"Zapallo",4
+matriz_stock = [1,"Zapallo",4]
 matriz_ventas=[]
 matriz_clientes= []
-
+#1,"Seb Sol","5491136563081","seba@mail.com"
 def __main__(): 
     
     qmatriz = input("Ingrese la matriz que desea modificar o visualizar: 1 stock, 2 clientes, 3 ventas, 4 frenar el proceso: ")
