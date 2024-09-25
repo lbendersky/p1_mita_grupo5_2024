@@ -83,6 +83,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                             while band==0:
                                 datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
                                 if validaciones.vnumero(datoacambiar):
+                                    datoacambiar = int(datoacambiar)
                                     band+=1
                                     
                         elif opcion==4:
@@ -94,7 +95,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                         else:
                             print("El número ingresado es incorrecto")
                             
-                    matriz_ventas=funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar)
+                    matriz_ventas, matriz_stock = funciones.actualizarventas(matriz_ventas,pos,opcion,datoacambiar,matriz_stock)
                     
             elif num==4: 
                 
@@ -105,9 +106,9 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                         pos=input("Ingrese el ID que desea eliminar: ")
                         if validaciones.vnumero(pos):
                             pos=int(pos)
-                            if validaciones.viddic(matriz_clientes,pos):
+                            if validaciones.viddic(matriz_ventas,pos):
                                 band=1
-                    funciones.destruir_ventas(matriz_ventas,pos)
+                    funciones.destruir_ventas(matriz_ventas,pos,matriz_stock)
                     
             elif num==5:
                 flag = 1

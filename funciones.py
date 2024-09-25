@@ -167,7 +167,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
 
 
 
-    return ventas_org
+    return ventas_org, stock
 
 
 def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):

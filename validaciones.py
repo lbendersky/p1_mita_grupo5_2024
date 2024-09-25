@@ -102,7 +102,7 @@ def vidmatriz(matriz, id):
 
 def viddic(dic, id):
     for i in range(len(dic)):
-        if dic[i][0] == id:
+        if dic[i]['Id'] == id:
             return True
     print("El id no se encuentra en la matriz.")
     return False
