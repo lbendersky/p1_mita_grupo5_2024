@@ -12,7 +12,7 @@ def stock_menu(matriz_stock):
             num=int(num)
             if num == 1:
                 
-                prod = input("Nombre del producto: ")
+                prod = input("Nombre del producto: ").capitalize()
                         
                 band=0   
                 while band==0:

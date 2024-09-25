@@ -25,7 +25,7 @@ def crear_stock(stock, nombre, cantidad):
     stock.append([])
 
     stock[len(stock) - 1].append(len(stock))
-    stock[len(stock) - 1].append(nombre.capitalize())
+    stock[len(stock) - 1].append(nombre)
     stock[len(stock) - 1].append(cantidad)
 
     stock_org = organizar_stock(stock)
@@ -64,9 +64,6 @@ def organizar_clientes(clientes_des):
     #pos: devuelve la matriz organizada por id descendiente
 
     clientes_r = [[id, nombre[:9], telefono, correo] for id, nombre, telefono, correo in clientes_des]
-
-    for i in range(len(clientes_r)):
-        clientes_r[i][3] = clientes_r[i][3].lower()
 
     clientes_o = sorted(clientes_r, key=lambda x: (-x[0], x[2]))
 
@@ -134,33 +131,21 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
 
     #pre: recibe matriz de ventas, nombre del producto, correo del cliente, cantidad del producto y fecha de la venta
     #pos: devuelve la matriz con una nueva fila creada y organizada con seis columnas: id|id del item|id del cliente|nombre del mismo|cantidad vendida|fecha 
- 
-    encabezados = ["Id", "Id_prod", "Id_clien", "Nombre producto", "Nombre cliente", "Cantidad", "Fecha"]
 
-    idencon=0
+    
     #Encontrar el id con el nombre del producto
-    while idencon==0:
-        for i in range(len(stock)):
-            nombrelis=stock[i][1]
-            if nombre in nombrelis:
-                idencon=stock[i][0]
-                nombprod=stock[i][1]
-        if idencon==0:
-            return 1
+    prod_stock = [[id, name, cant] for id, name, cant in stock if name == nombre]
+
+    if prod_stock[0][2] < cantidad:
+        return 1
+    else:
+        stock[(len(stock) - 1) - (prod_stock[0][0] - 1)][2] = prod_stock[0][2] - cantidad
 
     #Encontrar el id y nombre con la casilla de correo
+    cliente = [[id, name, tele, mail] for id, name, tele, mail in clientes if mail == correo]
     
-    idclienencon=0
-    while idclienencon==0:
-        for x in range(len(clientes)):
-            mails=clientes[x][3]
-            if correo in mails:
-                idclienencon=clientes[x][0]
-                nomb=clientes[x][1]
-        if idclienencon==0:
-                return 1
-    
-    elementos = [len(ventas) + 1, idencon, idclienencon, nombprod, nomb, cantidad, fecha]
+    encabezados = ["Id", "Id_prod", "Id_clien", "Nombre producto", "Nombre cliente", "Cantidad", "Fecha"]
+    elementos = [len(ventas) + 1, prod_stock[0][0], cliente[0][0], prod_stock[0][1], cliente[0][1], cantidad, fecha]
     ventas.append(dict(zip(encabezados, elementos)))
 
     ventas_org = organizar_ventas(ventas)
@@ -170,7 +155,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     return ventas_org, stock
 
 
-def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):
+def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
 
     #pre: Ingresa la matriz de ventas, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
     #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.
@@ -179,17 +164,31 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar):
         if matriz_ventas[x]['Id'] == pos:
             if opcion==1:
                 matriz_ventas[x]['Nombre producto']=datoacambiar
-                return matriz_ventas
+                return matriz_ventas, stock
             if opcion==2:
                 matriz_ventas[x]['Nombre cliente']=datoacambiar
-                return matriz_ventas
+                return matriz_ventas, stock
             if opcion==3:
+                if matriz_ventas[x]['Cantidad'] > datoacambiar:
+                    stock[matriz_ventas[x]['Id_prod'] - 1][2] += matriz_ventas[x]['Cantidad'] - datoacambiar
+                elif matriz_ventas[x]['Cantidad'] < datoacambiar:
+                    stock[matriz_ventas[x]['Id_prod'] - 1][2] -= datoacambiar - matriz_ventas[x]['Cantidad']
+
                 matriz_ventas[x]['Cantidad']=datoacambiar
-                return matriz_ventas
+
+                return matriz_ventas, stock
             if opcion==4:
                 matriz_ventas[x]['Fecha']=datoacambiar
-                return matriz_ventas
+                return matriz_ventas, stock
 
+
+def destruir_ventas(dic_ventas, pos, stock):
+    for i in range(len(dic_ventas)):
+        if dic_ventas[i]['Id'] == pos:
+            stock[dic_ventas[i]['Id_prod'] - 1][2] += dic_ventas[i]['Cantidad']
+            dic_ventas.pop(i)
+            return dic_ventas
+        
 
 #################################################################LEER#################################################################
 
@@ -230,14 +229,6 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
         print("Formato no valido")
         return 
     return 
-
-
-def destruir_ventas(dic_ventas, pos):
-    for i in range(len(dic_ventas)):
-        if dic_ventas[i]['Id'] == pos:
-            dic_ventas[i].clear()
-            dic_ventas.pop(i)
-            return dic_ventas
         
 
 #####################################################Destruir############################################################################

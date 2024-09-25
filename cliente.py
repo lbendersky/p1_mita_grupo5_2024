@@ -27,7 +27,7 @@ def clientes_menu(matriz_clientes):
                        
                     band=0
                     while band==0:     
-                        cor= input("Ingrese correo del cliente (nombre@correo.com): ")
+                        cor= input("Ingrese correo del cliente (nombre@correo.com): ").lower()
                         if validaciones.vcorreo(cor):
                             band=1
                 

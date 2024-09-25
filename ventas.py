@@ -68,14 +68,14 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                         if opcion==1:
                             band=0
                             while band==0:
-                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
+                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ").capitalize()
                                 if validaciones.vtexto(datoacambiar):
                                     band+=1
                         elif opcion==2:
                             band=0
                             while band==0:
-                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
-                                if validaciones.vtexto(datoacambiar):
+                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ").title()
+                                if validaciones.vnombre(datoacambiar):
                                     band+=1
                                     
                         elif opcion==3:
