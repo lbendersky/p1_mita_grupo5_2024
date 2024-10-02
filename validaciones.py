@@ -19,7 +19,8 @@ def vtexto(texto):
     else:
         print("Solo se permite ingresar texto")   
         return False
-        
+
+
 def vnombre(nombre):
 
     if vtexto(nombre)==False:
@@ -31,7 +32,8 @@ def vnombre(nombre):
         else:
             print("Ingrese nombre y apellido de forma adecuada")
             return 
-        
+
+
 def vnumero(numero):
     if str(numero).isdigit():
         return True
@@ -50,7 +52,8 @@ def vcorreo(correo):
     else:
         print("Ingrese el correo en el formato adecuado")   
         return 
-     
+
+
 def vfecha(fecha):
     
     # (DD/MM/AAAA)
@@ -92,7 +95,8 @@ def vtelefono(telefono):
     else:
         print("Ingrese el numero de telefono en el formato adecuado.")   
         return 
-    
+
+
 def vidmatriz(matriz, id):
     for fila in matriz:
         if fila[0]==id:
@@ -100,13 +104,15 @@ def vidmatriz(matriz, id):
     print("El id no se encuentra en la matriz.")
     return False
 
+
 def viddic(dic, id):
     for i in range(len(dic)):
         if dic[i]['Id'] == id:
             return True
     print("El id no se encuentra en la matriz.")
     return False
-        
+
+
 def vmatrizvacia(matriz):
     
     if not matriz:
@@ -118,3 +124,17 @@ def vmatrizvacia(matriz):
             return True
     print("La matriz está vacía")
     return False
+
+
+def login(contra, lugar_del_puesto):
+    posibles_usuarios = [
+        {"usuario": "Jefe", "contraseña": "jefazo", "stock": 1, "clientes": 1, "ventas": 1},
+        {"usuario": "Stock", "contraseña": "stock", "stock": 1, "clientes": 0, "ventas": 0},
+        {"usuario": "Cliente", "contraseña": "cliente", "stock": 0, "clientes": 1, "ventas": 0},
+        {"usuario": "Ventas", "contraseña": "ventas", "stock": 0, "clientes": 0, "ventas": 1}
+    ]
+
+    if contra == posibles_usuarios[lugar_del_puesto - 1]["contraseña"]:
+        usuario = posibles_usuarios[lugar_del_puesto - 1]
+
+    return usuario

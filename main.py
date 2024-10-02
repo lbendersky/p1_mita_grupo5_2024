@@ -2,13 +2,19 @@ from matriz_stock import stock_menu
 from ventas import ventas_menu
 from cliente import clientes_menu
 import validaciones
-#1,"Zapallo",4
-matriz_stock = [1,"Zapallo",4]
-matriz_ventas=[]
-matriz_clientes= []
-#1,"Seb Sol","5491136563081","seba@mail.com"
-def __main__(): 
+
+
+def __main__():  
     
+    while True:
+        try:
+                lugar_del_puesto = int(input("Seleccione que usuario ingresar: 1 jefe, 2 area de stock, 3 area de clientes, 4 area de ventas: "))
+                contra = input("Ingrese la contraseña: ")
+                usuario = validaciones.login(contra, lugar_del_puesto)
+                break
+        except:
+            print("Datos no validos")
+
     matriz_stock = []
     matriz_ventas=[]
     matriz_clientes= []
@@ -20,11 +26,11 @@ def __main__():
         if validaciones.vnumero(qmatriz):
         
             qmatriz=int(qmatriz)
-            if qmatriz == 1:
+            if qmatriz == 1 and usuario["stock"] == 1:
                 stock_menu(matriz_stock)
-            elif qmatriz == 2:
+            elif qmatriz == 2 and usuario["clientes"] == 1:
                 clientes_menu(matriz_clientes)
-            elif qmatriz == 3:
+            elif qmatriz == 3 and usuario["ventas"] == 1:
                 ventas_menu(matriz_ventas,matriz_clientes,matriz_stock)
             elif qmatriz == 4:
                 flag = 1

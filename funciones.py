@@ -136,13 +136,16 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     #Encontrar el id con el nombre del producto
     prod_stock = [[id, name, cant] for id, name, cant in stock if name == nombre]
 
-    if prod_stock[0][2] < cantidad:
+    if prod_stock[0][2] < cantidad or len(prod_stock) == 0:
         return 1
     else:
         stock[(len(stock) - 1) - (prod_stock[0][0] - 1)][2] = prod_stock[0][2] - cantidad
 
     #Encontrar el id y nombre con la casilla de correo
     cliente = [[id, name, tele, mail] for id, name, tele, mail in clientes if mail == correo]
+
+    if len(cliente) == 0:
+        return 1
     
     encabezados = ["Id", "Id_prod", "Id_clien", "Nombre producto", "Nombre cliente", "Cantidad", "Fecha"]
     elementos = [len(ventas) + 1, prod_stock[0][0], cliente[0][0], prod_stock[0][1], cliente[0][1], cantidad, fecha]
@@ -183,11 +186,9 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
 
 
 def destruir_ventas(dic_ventas, pos, stock):
-    for i in range(len(dic_ventas)):
-        if dic_ventas[i]['Id'] == pos:
-            stock[dic_ventas[i]['Id_prod'] - 1][2] += dic_ventas[i]['Cantidad']
-            dic_ventas.pop(i)
-            return dic_ventas
+    stock[dic_ventas[len(dic_ventas) - pos]['Id_prod'] - 1][2] += dic_ventas[len(dic_ventas) - pos]['Cantidad']
+    dic_ventas.pop(len(dic_ventas) - pos)
+    return dic_ventas
         
 
 #################################################################LEER#################################################################
