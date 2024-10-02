@@ -19,8 +19,8 @@ def __main__():
     matriz_ventas=[]
     matriz_clientes= []
 
-    flag = 0
-    while flag == 0:
+    while True:
+        
         qmatriz = input("Ingrese la matriz que desea modificar o visualizar: 1 stock, 2 clientes, 3 ventas, 4 frenar el proceso: ")
         
         if validaciones.vnumero(qmatriz):
@@ -33,9 +33,10 @@ def __main__():
             elif qmatriz == 3 and usuario["ventas"] == 1:
                 ventas_menu(matriz_ventas,matriz_clientes,matriz_stock)
             elif qmatriz == 4:
-                flag = 1
+                break
             else:
                 print("Ingrese un numero correcto")
+                continue
 
 
 if __name__ == __main__():
