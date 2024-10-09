@@ -19,11 +19,13 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                             band=1
                         elif correo=="0":
                             flag=1
+                            return
                     
                     
                     producto=input("Ingrese el nombre del objeto o ponga 0 para salir: ").capitalize()
                     if producto=="0":
                         flag=1
+                        return
                     band=0
                     while band==0:
                         cantidad=input("Ingrese la cantidad vendida: ")
@@ -32,7 +34,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                             band=1
                         elif cantidad=="0":
                             flag=1
-                            
+                            return
                     band=0
                     while band==0:
                         fechas=input("Ingrese la fecha con formato DD/MM/AAAA o coloca 0 para salir: ")
@@ -40,6 +42,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                             band=1
                         elif fechas=="0":
                             flag=1
+                            return
                             
                     x=funciones.crear_ventas(matriz_stock,matriz_clientes,matriz_ventas,producto,correo,cantidad,fechas)
                     if x==1:
@@ -65,6 +68,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                                 band=1
                         elif pos=="0":
                             flag=1
+                            return
                                 
                     band=0
                     while band==0:
@@ -74,6 +78,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                             opcion=input("Ingrese una opción o 0 para salir: ")
                             if opcion=="0":
                                 flag=1
+                                return
                             elif validaciones.vnumero(opcion):
                                 opcion=int(opcion)
                                 band=1
@@ -83,6 +88,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                                 datoacambiar=input("Ingrese el dato por el que desea cambiarlo o 0 para salir: ").capitalize()
                                 if datoacambiar=="0":
                                     flag=1
+                                    return
                                 elif validaciones.vtexto(datoacambiar):
                                     band+=1
                             
@@ -92,6 +98,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                                 datoacambiar=input("Ingrese el dato por el que desea cambiarlo o 0 para salir: ").title()
                                 if datoacambiar=="0":
                                     flag=1
+                                    return
                                 elif validaciones.vnombre(datoacambiar):
                                     band+=1
                                     
@@ -101,6 +108,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                                 datoacambiar=input("Ingrese el dato por el que desea cambiarlo o 0 para salir: ")
                                 if datoacambiar=="0":
                                     flag=1
+                                    return
                                 elif validaciones.vnumero(datoacambiar):
                                     datoacambiar = int(datoacambiar)
                                     band+=1
@@ -111,6 +119,7 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                                 datoacambiar=input("Ingrese el dato por el que desea cambiarlo o 0 para salir: ")
                                 if datoacambiar=="0":
                                     flag=1
+                                    return
                                 elif validaciones.vfecha(datoacambiar):
                                     band=1
                         else:
@@ -124,8 +133,11 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                     
                     band=0
                     while band==0:
-                        pos=input("Ingrese el ID que desea eliminar: ")
-                        if validaciones.vnumero(pos):
+                        pos=input("Ingrese el ID que desea eliminar ó ingrese 0 para salir: ")
+                        if pos=="0":
+                            flag=1
+                            return
+                        elif validaciones.vnumero(pos):
                             pos=int(pos)
                             if validaciones.viddic(matriz_ventas,pos):
                                 band=1
