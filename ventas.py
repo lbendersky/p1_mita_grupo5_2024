@@ -14,24 +14,32 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                     
                     band=0
                     while band==0:
-                        correo=input("Ingrese el correo del Usuario (nombre@correo.com): ").lower()
+                        correo=input("Ingrese el correo del Usuario (nombre@correo.com) o ponga 0 para salir: ").lower()
                         if validaciones.vcorreo(correo):
                             band=1
-       
-                    producto=input("Ingrese el nombre del objeto: ").capitalize()
+                        elif correo=="0":
+                            flag=1
                     
+                    
+                    producto=input("Ingrese el nombre del objeto o ponga 0 para salir: ").capitalize()
+                    if producto=="0":
+                        flag=1
                     band=0
                     while band==0:
                         cantidad=input("Ingrese la cantidad vendida: ")
                         if validaciones.vnumero(cantidad):
                             cantidad=int(cantidad)
                             band=1
+                        elif cantidad=="0":
+                            flag=1
                             
                     band=0
                     while band==0:
-                        fechas=input("Ingrese la fecha con formato DD/MM/AAAA: ")
+                        fechas=input("Ingrese la fecha con formato DD/MM/AAAA o coloca 0 para salir: ")
                         if validaciones.vfecha(fechas):
                             band=1
+                        elif fechas=="0":
+                            flag=1
                             
                     x=funciones.crear_ventas(matriz_stock,matriz_clientes,matriz_ventas,producto,correo,cantidad,fechas)
                     if x==1:
@@ -50,47 +58,60 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                     
                     band=0
                     while band==0:
-                        pos=input("Ingrese el ID que desea actualizar: ")
+                        pos=input("Ingrese el ID que desea actualizar o ingrese 0 para salir: ")
                         if validaciones.vnumero(pos):
                             pos=int(pos)
                             if validaciones.viddic(matriz_ventas,pos):
                                 band=1
+                        elif pos=="0":
+                            flag=1
                                 
                     band=0
                     while band==0:
                         print("Tenga en cuenta lo siguiente: \n1- Nombre del Producto\n2- Nombre del comprador \n3- Cantidad vendida \n4- Fecha")
 
                         while band==0:
-                            opcion=input("Ingrese una opción: ")
-                            if validaciones.vnumero(opcion):
+                            opcion=input("Ingrese una opción o 0 para salir: ")
+                            if opcion=="0":
+                                flag=1
+                            elif validaciones.vnumero(opcion):
                                 opcion=int(opcion)
                                 band=1
                         if opcion==1:
                             band=0
                             while band==0:
-                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ").capitalize()
-                                if validaciones.vtexto(datoacambiar):
+                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo o 0 para salir: ").capitalize()
+                                if datoacambiar=="0":
+                                    flag=1
+                                elif validaciones.vtexto(datoacambiar):
                                     band+=1
+                            
                         elif opcion==2:
                             band=0
                             while band==0:
-                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ").title()
-                                if validaciones.vnombre(datoacambiar):
+                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo o 0 para salir: ").title()
+                                if datoacambiar=="0":
+                                    flag=1
+                                elif validaciones.vnombre(datoacambiar):
                                     band+=1
                                     
                         elif opcion==3:
                             band=0
                             while band==0:
-                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
-                                if validaciones.vnumero(datoacambiar):
+                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo o 0 para salir: ")
+                                if datoacambiar=="0":
+                                    flag=1
+                                elif validaciones.vnumero(datoacambiar):
                                     datoacambiar = int(datoacambiar)
                                     band+=1
                                     
                         elif opcion==4:
                             band=0
                             while band==0:
-                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo: ")
-                                if validaciones.vfecha(datoacambiar):
+                                datoacambiar=input("Ingrese el dato por el que desea cambiarlo o 0 para salir: ")
+                                if datoacambiar=="0":
+                                    flag=1
+                                elif validaciones.vfecha(datoacambiar):
                                     band=1
                         else:
                             print("El número ingresado es incorrecto")
