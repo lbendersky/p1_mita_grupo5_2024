@@ -14,21 +14,27 @@ def clientes_menu(matriz_clientes):
                     
                     band=0
                     while band==0:
-                        nom = input("Nombre y apellido del cliente: ")
-                        if validaciones.vnombre(nom):
+                        nom = input("Nombre y apellido del cliente o 0 para salir: ")
+                        if nom=="0":
+                            flag=1
+                        elif validaciones.vnombre(nom):
                             nom=validaciones.vnombre(nom)
                             band=1
                         
                     band=0    
                     while band==0:
-                        tel = (input("Teléfono del cliente (549(Codigo de area)XXXXXXXX): "))
-                        if validaciones.vtelefono(tel):
+                        tel = (input("Teléfono del cliente (549(Codigo de area)XXXXXXXX) ó ingrese 0 para salir: "))
+                        if tel=="0":
+                            flag=1
+                        elif validaciones.vtelefono(tel):
                             band=1
                        
                     band=0
                     while band==0:     
-                        cor= input("Ingrese correo del cliente (nombre@correo.com): ").lower()
-                        if validaciones.vcorreo(cor):
+                        cor= input("Ingrese correo del cliente (nombre@correo.com) ó ingrese 0 para salir: ").lower()
+                        if cor=="0":
+                            flag=1
+                        elif validaciones.vcorreo(cor):
                             band=1
                 
                     crear_clientes(matriz_clientes, nom, tel, cor)
@@ -42,8 +48,10 @@ def clientes_menu(matriz_clientes):
                     if validaciones.vmatrizvacia(matriz_clientes):
                         band=0
                         while band==0:
-                            pos=(input("Ingrese el ID del cliente que desea actualizar: "))
-                            if validaciones.vnumero(pos):
+                            pos=(input("Ingrese el ID del cliente que desea actualizar o ingrese 0 para salir: "))
+                            if pos=="0":
+                                flag=1
+                            elif validaciones.vnumero(pos):
                                 pos=int(pos)
                                 if validaciones.vidmatriz(matriz_clientes, pos):
                                     band=1
@@ -51,11 +59,13 @@ def clientes_menu(matriz_clientes):
                         band=0
                         while band==0: 
                                     
-                            print("Tenga en cuenta lo siguiente: \n1- Nombre y apellido \n2- Telefono \n3- Correo")
+                            print("Tenga en cuenta lo siguiente: \n1- Nombre y apellido \n2- Telefono \n3- Correo\n0- Para salir")
 
                             while band==0:
                                 opciones=input("Ingrese el valor a cambiar: ")
-                                if validaciones.vnumero(opciones) and opciones in ("1","2","3"):
+                                if opciones=="0":
+                                    flag=1
+                                elif validaciones.vnumero(opciones) and opciones in ("1","2","3"):
                                     opciones=int(opciones)
                                     band=1
                                 else:
@@ -65,8 +75,10 @@ def clientes_menu(matriz_clientes):
                                 
                                 band=0
                                 while band==0:
-                                    objeto=input("Nombre y Apellido actualizado: ")
-                                    if validaciones.vnombre(objeto):
+                                    objeto=input("Nombre y Apellido actualizado ó ingrese 0 para salir: ")
+                                    if objeto=="0":
+                                        flag=1
+                                    elif validaciones.vnombre(objeto):
                                         objeto=validaciones.vnombre(objeto)
                                         band=1
                                         
@@ -74,16 +86,20 @@ def clientes_menu(matriz_clientes):
                                 
                                 band=0
                                 while band==0:
-                                    objeto=(input("Teléfono actualizado del cliente: "))
-                                    if validaciones.vtelefono(objeto):
+                                    objeto=(input("Teléfono actualizado del cliente ó ingrese 0 para salir: "))
+                                    if objeto=="0":
+                                        flag=1
+                                    elif validaciones.vtelefono(objeto):
                                         band=1
                                 
                             elif opciones==3:
                                 
                                 band=0
                                 while band==0:
-                                    objeto=input("Mail actualizado del cliente: ")
-                                    if validaciones.vcorreo(objeto):
+                                    objeto=input("Mail actualizado del cliente ó ingrese 0 para salir: ")
+                                    if objeto=="0":
+                                        flag=1
+                                    elif validaciones.vcorreo(objeto):
                                         band=1
 
                             else:
@@ -97,8 +113,10 @@ def clientes_menu(matriz_clientes):
                         
                         band=0
                         while band==0:
-                            pos=(input("Ingrese ID del cliente a eliminar: "))
-                            if validaciones.vnumero(pos):
+                            pos=(input("Ingrese ID del cliente a eliminar ó ingrese 0 para salir: "))
+                            if pos=="0":
+                                flag=1
+                            elif validaciones.vnumero(pos):
                                 pos=int(pos)
                                 if validaciones.vidmatriz(matriz_clientes,pos):
                                     band=1
