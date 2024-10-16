@@ -4,8 +4,9 @@ import validaciones
 def clientes_menu(matriz_clientes):
         flag=0
         while flag==0:
+            print()
             num=input("Tenga en cuenta lo siguiente:\n1- Crear \n2- Leer \n3- Actualizar \n4- Borrar archivo \n5- Volver al menu \n\nIngrese lo que desea hacer: ")
-            
+            print()
             if validaciones.vnumero(num):
                 
                 num=int(num)

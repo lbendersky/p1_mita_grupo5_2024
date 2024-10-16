@@ -35,12 +35,20 @@ def vnombre(nombre):
 
 
 def vnumero(numero):
-    if str(numero).isdigit():
+    
+    """ if str(numero).isdigit():
         return True
     else:
         print("Solo se permite ingresar números.")
+        return False """
+    #Implemento try y except
+    try:
+        int(numero)
+    except ValueError:
+        print("Solo se permite ingresar números.")
         return False
-
+    else:
+        return True
     
 def vcorreo(correo):
     
