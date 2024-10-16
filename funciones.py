@@ -188,6 +188,15 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
 def destruir_ventas(dic_ventas, pos, stock):
     stock[dic_ventas[len(dic_ventas) - pos]['Id_prod'] - 1][2] += dic_ventas[len(dic_ventas) - pos]['Cantidad']
     dic_ventas.pop(len(dic_ventas) - pos)
+
+    try:
+        file = open(r"proyecto\p1_mita_grupo5_2024\archivos_csv\ventas.txt", "w")
+    except IOError:
+        print("No se pudo abrir el archivo")
+    else:
+        file.writelines(f"{ayd};{ayd_prod};{ayd_cli};{nomb_prod};{nomb_cli};{canti};{fecha}\n" for ayd, ayd_prod, ayd_cli, nomb_prod, nomb_cli, canti, fecha in dic_ventas)
+        file.close()
+
     return dic_ventas
         
 
