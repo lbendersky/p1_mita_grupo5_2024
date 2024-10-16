@@ -4,7 +4,6 @@ import validaciones
 def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
     flag = 0
     while flag==0:
-        print()
         num=input("\nTenga en cuenta lo siguiente:\n1- Crear \n2- Leer \n3- Actualizar \n4- Borrar archivo \n5- Volver al menu \n\nIngrese lo que desea hacer: ")
         print()
         if validaciones.vnumero(num):
@@ -47,7 +46,11 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                             
                     x=funciones.crear_ventas(matriz_stock,matriz_clientes,matriz_ventas,producto,correo,cantidad,fechas)
                     if x==1:
+                        print()
                         print("El correo o el nombre del producto estan mal escritos o no existen")
+                    elif x==2:
+                        print()
+                        print("La cantidad ingresada es mayor a el stock del producto")
                         
                 else:
                     print("La matriz de stock y/o clientes esta vacia, por lo que no se pueden crear ventas")

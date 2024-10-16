@@ -137,7 +137,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     prod_stock = [[id, name, cant] for id, name, cant in stock if name == nombre]
 
     if prod_stock[0][2] < cantidad or len(prod_stock) == 0:
-        return 1
+        return 2
     else:
         stock[(len(stock) - 1) - (prod_stock[0][0] - 1)][2] = prod_stock[0][2] - cantidad
 
