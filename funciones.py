@@ -30,8 +30,13 @@ def crear_stock(stock, nombre, cantidad):
 
     stock_org = organizar_stock(stock)
 
-    return stock_org
-
+    try:
+        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\productos.txt","a",encoding="UTF-8") as archivo_stock:
+            archivo_stock.write(f"{len(stock)};{nombre};{cantidad}")
+    except OSError:
+        print("Ha sucedido un error con el archivo")
+    finally:  
+        return stock_org
 
 def actualizarstock(stock, pos, opciones, objeto):
     #pre: Ingresa la matriz de stock, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
@@ -84,7 +89,13 @@ def crear_clientes(clientes, nombre, telefono, correo):
 
     clientes_org = organizar_clientes(clientes)
 
-    return clientes_org
+    try:
+        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\clientes.txt","a",encoding="UTF-8") as archivo_cliente:
+            archivo_cliente.write(f"{len(clientes)};{nombre};{telefono};{correo}\n")
+    except OSError:
+        print("Ha sucedido un error con el archivo")
+    finally:  
+        return clientes_org
         
 
 def actualizarcliente(matriz_clientes,pos,opciones,objeto):
