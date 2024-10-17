@@ -132,8 +132,8 @@ def login(contra, lugar_del_puesto):
         {"usuario": "Stock", "contraseña": "stock", "stock": 1, "clientes": 0, "ventas": 0},
         {"usuario": "Cliente", "contraseña": "cliente", "stock": 0, "clientes": 1, "ventas": 0},
         {"usuario": "Ventas", "contraseña": "ventas", "stock": 0, "clientes": 0, "ventas": 1}
-    ]
-
+        ]
+    
     if contra == posibles_usuarios[lugar_del_puesto - 1]["contraseña"]:
         usuario = posibles_usuarios[lugar_del_puesto - 1]
 
