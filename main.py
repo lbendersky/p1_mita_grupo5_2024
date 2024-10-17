@@ -31,7 +31,7 @@ def __main__():
 
     while True:
         
-        qmatriz = input("Ingrese la matriz que desea modificar o visualizar: 1 stock, 2 clientes, 3 ventas, 4 frenar el proceso: ")
+        qmatriz = int(input("Ingrese la matriz que desea modificar o visualizar: 1 stock, 2 clientes, 3 ventas, 4 frenar el proceso: "))
         
         if validaciones.vnumero(qmatriz):
         

@@ -4,8 +4,9 @@ import validaciones
 def clientes_menu(matriz_clientes):
         flag=0
         while flag==0:
+            print()
             num=input("Tenga en cuenta lo siguiente:\n1- Crear \n2- Leer \n3- Actualizar \n4- Borrar archivo \n5- Volver al menu \n\nIngrese lo que desea hacer: ")
-            
+            print()
             if validaciones.vnumero(num):
                 
                 num=int(num)
@@ -132,6 +133,13 @@ def clientes_menu(matriz_clientes):
                         
                         destruir(matriz_clientes, pos)
                         
+                        try:
+                            file = open(r"proyecto\p1_mita_grupo5_2024\archivos_csv\clientes.txt", "w")
+                        except:
+                            print("No se pudo abrir el archivo")
+                        else:
+                            file.writelines(f"{ayd};{nomb};{tele};{corr}\n" for ayd, nomb, tele, corr in matriz_clientes)
+                            file.close()
                 elif num == 5:
                     flag=1
                     return

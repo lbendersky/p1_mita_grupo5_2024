@@ -30,8 +30,13 @@ def crear_stock(stock, nombre, cantidad):
 
     stock_org = organizar_stock(stock)
 
-    return stock_org
-
+    try:
+        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\productos.txt","a",encoding="UTF-8") as archivo_stock:
+            archivo_stock.write(f"{len(stock)};{nombre};{cantidad}")
+    except OSError:
+        print("Ha sucedido un error con el archivo")
+    finally:  
+        return stock_org
 
 def actualizarstock(stock, pos, opciones, objeto):
     #pre: Ingresa la matriz de stock, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
@@ -84,7 +89,13 @@ def crear_clientes(clientes, nombre, telefono, correo):
 
     clientes_org = organizar_clientes(clientes)
 
-    return clientes_org
+    try:
+        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\clientes.txt","a",encoding="UTF-8") as archivo_cliente:
+            archivo_cliente.write(f"{len(clientes)};{nombre};{telefono};{correo}\n")
+    except OSError:
+        print("Ha sucedido un error con el archivo")
+    finally:  
+        return clientes_org
         
 
 def actualizarcliente(matriz_clientes,pos,opciones,objeto):
@@ -137,7 +148,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     prod_stock = [[id, name, cant] for id, name, cant in stock if name == nombre]
 
     if prod_stock[0][2] < cantidad or len(prod_stock) == 0:
-        return 1
+        return 2
     else:
         stock[(len(stock) - 1) - (prod_stock[0][0] - 1)][2] = prod_stock[0][2] - cantidad
 
@@ -188,6 +199,15 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
 def destruir_ventas(dic_ventas, pos, stock):
     stock[dic_ventas[len(dic_ventas) - pos]['Id_prod'] - 1][2] += dic_ventas[len(dic_ventas) - pos]['Cantidad']
     dic_ventas.pop(len(dic_ventas) - pos)
+
+    try:
+        file = open(r"proyecto\p1_mita_grupo5_2024\archivos_csv\ventas.txt", "w")
+    except IOError:
+        print("No se pudo abrir el archivo")
+    else:
+        file.writelines(f"{ayd};{ayd_prod};{ayd_cli};{nomb_prod};{nomb_cli};{canti};{fecha}\n" for ayd, ayd_prod, ayd_cli, nomb_prod, nomb_cli, canti, fecha in dic_ventas)
+        file.close()
+
     return dic_ventas
         
 
