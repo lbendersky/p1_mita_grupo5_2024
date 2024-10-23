@@ -215,7 +215,6 @@ def destruir_ventas(dic_ventas, pos, stock):
 
 #################################################################LEER#################################################################
 
-
 def leer(matriz, stock=0, clientes=0, ventas=0):
 
     #pre: Ingresa la matriz y a cual pertenece (ej, stock=1)
@@ -224,29 +223,31 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
     if stock == 1:
         matriz = organizar_stock(matriz)
         
-        print(f"{'Id' :<5}{'Nombre' :<30}{'Cantidad'}")
+        print(f"| {'Id' :<4}| {'Nombre' :<24}| {'Cantidad'}")
 
         print("-" * 45)
 
         for id, nombre, cantidad in matriz:
-            print(f"{id :<5}{nombre :<30}{cantidad}")
-    elif clientes == 1:
-        print(f"{'Id' :<5}{'Nombre' :<20}{'Telefono' :<20}{'Correo'}")
+            print(f"| {id :<4}| {nombre :<24}| {cantidad}")
 
-        print("-" * 60)
+    elif clientes == 1:
+        print(f"| {'Id' :<5}| {'Nombre' :<20}| {'Telefono' :<20}| {'Correo'}")
+
+        print("-" * 75)
 
         for id, nombre, telefono, correo in matriz:
-            print(f"{id :<5}{nombre :<20}{telefono :<20}{correo}")
+            print(f"| {id :<5}| {nombre :<20}| {telefono :<20}| {correo}")
+
     elif ventas == 1:
         for encabezados in matriz[0].keys():
-            print(f"{encabezados :^10}", end=" ")
+            print(f"|{encabezados :^15}", end=" ")
 
         print("")
-        print("-" * 85)
+        print("-" * 117)
 
         for i in range(len(matriz)):
             for elementos in matriz[i].values():
-                print(f"{elementos :^12}", end=" ")
+                print(f"|{elementos :^15}", end=" ")
             print("")
     else:
         print("Formato no valido")
