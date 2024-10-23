@@ -79,9 +79,7 @@ def crear_clientes(clientes, nombre, telefono, correo):
 
     #pre: recibe matriz de clientes, nombre de la persona, telefono y correo
     #pos: devuelve la matriz con una nueva fila creada y organizada con cuatro columnas: id|nombre|telefono|correo
-
     clientes.append([])
-
     clientes[len(clientes) - 1].append(len(clientes))
     clientes[len(clientes) - 1].append(nombre)
     clientes[len(clientes) - 1].append(telefono)
@@ -164,9 +162,13 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
 
     ventas_org = organizar_ventas(ventas)
 
-
-
-    return ventas_org, stock
+    try:
+        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\ventas.txt","a",encoding="UTF-8") as archivo_ventas:
+            archivo_ventas.write(f"{len(ventas)};{prod_stock[0][0]};{cliente[0][0]};{prod_stock[0][1]};{cliente[0][1]};{cantidad}{fecha}")
+    except OSError:
+        print("Ha sucedido un error inesperado.")
+    finally:
+        return ventas_org, stock
 
 
 def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):

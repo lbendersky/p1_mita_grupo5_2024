@@ -2,7 +2,7 @@ from matriz_stock import stock_menu
 from ventas import ventas_menu
 from cliente import clientes_menu
 import validaciones
-
+import sys
 
 def __main__():  
     
@@ -18,6 +18,45 @@ def __main__():
     matriz_stock = []
     matriz_ventas=[]
     matriz_clientes= []
+
+    try:
+        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\clientes.txt","r",encoding="UTF-8") as archivo_cliente:
+            for linea in archivo_cliente:
+                linea = linea.strip()
+                if linea=="":
+                    break
+                idcliente,nombrecliente,numerocliente,correocliente = linea.split(";")
+                partes= linea.split(";")
+                if len(partes)!=4:
+                    break
+                matriz_clientes.append([])
+
+                matriz_clientes[len(matriz_clientes)-1].append(idcliente)
+                matriz_clientes[len(matriz_clientes)-1].append(nombrecliente)
+                matriz_clientes[len(matriz_clientes)-1].append(numerocliente)
+                matriz_clientes[len(matriz_clientes)-1].append(correocliente)
+
+    except:
+        print("Ha sucedido un error inesperado")
+
+    try:
+        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\productos.txt","r",encoding="UTF-8") as archivo_producto:
+            for linea in archivo_producto:
+                linea = linea.strip()
+                if linea=="":
+                    break
+                idproducto,nombreproducto,cantidad=linea.split(";")
+                partes=linea.split(";")
+                if len(partes)!=3:
+                    break
+                matriz_stock.append([])
+
+                matriz_stock[len(matriz_stock)-1].append(idproducto)
+                matriz_stock[len(matriz_stock)-1].append(nombreproducto)
+                matriz_stock[len(matriz_stock)-1].append(cantidad)
+    
+    except:
+        print("Ha ocurrido un error inesperado.")
 
     while True:
         
