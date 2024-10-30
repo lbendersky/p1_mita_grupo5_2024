@@ -1,14 +1,16 @@
 import re
 from datetime import datetime
 
-#Funciones de validacion:
-#Texto (vtexto)
-#Nombre y apellido (vnombre) (Capitalizarlo)
-#Numero (vnumero)
-#Correo (vcorreo)
-#Fecha (vfecha)
-#Telefono (vtelefono)
-#Si el id que ingreso esta en cada matriz (vidmatriz)
+"""
+Funciones de validacion:
+Texto (vtexto)
+Nombre y apellido (vnombre) (Capitalizarlo)
+Numero (vnumero)
+Correo (vcorreo)
+Fecha (vfecha)
+Telefono (vtelefono)
+Si el id que ingreso esta en cada matriz (vidmatriz)
+"""
 
 def vtexto(texto):
     
@@ -41,7 +43,7 @@ def vnumero(numero):
     else:
         print("Solo se permite ingresar números.")
         return False """
-    #Implemento try y except
+    """Implemento try y except"""
     try:
         int(numero)
     except ValueError:
@@ -52,7 +54,7 @@ def vnumero(numero):
     
 def vcorreo(correo):
     
-    #"Ingresar correo (formato nombre@correo.com): "
+    """Ingresar correo (formato nombre@correo.com): """
     patron= r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
     
     if re.match(patron,correo):
@@ -64,7 +66,7 @@ def vcorreo(correo):
 
 def vfecha(fecha):
     
-    # (DD/MM/AAAA)
+    """ (DD/MM/AAAA)"""
     patron = r"^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4}$"
     
     if not re.match(patron, fecha):
@@ -95,7 +97,7 @@ def vfecha(fecha):
     
 def vtelefono(telefono):
     
-    #Formato: (549(Numero de hasta 3 digitos)xxxxxxxx)
+    """Formato: (549(Numero de hasta 3 digitos)xxxxxxxx)"""
     patron= r"^549\d{1,3}\d{8}$"
     
     if re.match(patron,telefono):

@@ -4,8 +4,8 @@ import validaciones
 
 def organizar_stock(stock_des):
 
-    #pre: recibe matriz de stock desorganizada
-    #pos: devuelve la matriz organizada por id descendiente
+    """pre: recibe matriz de stock desorganizada"""
+    """pos: devuelve la matriz organizada por id descendiente"""
 
     stock_r = [[id, nombre, cantidad] for id, nombre, cantidad in stock_des]
 
@@ -19,8 +19,8 @@ def organizar_stock(stock_des):
 
 def crear_stock(stock, nombre, cantidad):
 
-    #pre: recibe matriz de stock, nombre del producto y cantidad del mismo
-    #pos: devuelve la matriz con una nueva fila creada y organizada y tres columnas: id|nombre|cantidad
+    """pre: recibe matriz de stock, nombre del producto y cantidad del mismo"""
+    """pos: devuelve la matriz con una nueva fila creada y organizada y tres columnas: id|nombre|cantidad"""
 
     stock.append([])
 
@@ -39,8 +39,8 @@ def crear_stock(stock, nombre, cantidad):
         return stock_org
 
 def actualizarstock(stock, pos, opciones, objeto):
-    #pre: Ingresa la matriz de stock, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
-    #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.
+    """pre: Ingresa la matriz de stock, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará."""
+    """Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados."""
     band=0
     x=-1
     while band==0 and x<len(stock)-1:
@@ -65,8 +65,8 @@ def actualizarstock(stock, pos, opciones, objeto):
         
 def organizar_clientes(clientes_des):
 
-    #pre: recibe matriz de clientes desorganizada
-    #pos: devuelve la matriz organizada por id descendiente
+    """pre: recibe matriz de clientes desorganizada"""
+    """pos: devuelve la matriz organizada por id descendiente"""
 
     clientes_r = [[id, nombre[:9], telefono, correo] for id, nombre, telefono, correo in clientes_des]
 
@@ -77,8 +77,8 @@ def organizar_clientes(clientes_des):
 
 def crear_clientes(clientes, nombre, telefono, correo):
 
-    #pre: recibe matriz de clientes, nombre de la persona, telefono y correo
-    #pos: devuelve la matriz con una nueva fila creada y organizada con cuatro columnas: id|nombre|telefono|correo
+    """pre: recibe matriz de clientes, nombre de la persona, telefono y correo"""
+    """pos: devuelve la matriz con una nueva fila creada y organizada con cuatro columnas: id|nombre|telefono|correo"""
     clientes.append([])
     clientes[len(clientes) - 1].append(len(clientes))
     clientes[len(clientes) - 1].append(nombre)
@@ -97,8 +97,8 @@ def crear_clientes(clientes, nombre, telefono, correo):
         
 
 def actualizarcliente(matriz_clientes,pos,opciones,objeto):
-    #pre: recibe la matriz cliente, el id del cliente, opcion del parametro a cambiar y objeto es por lo que lo va a cambiar
-    #pos: devuelve la matriz con el valor especificado cambiado
+    """pre: recibe la matriz cliente, el id del cliente, opcion del parametro a cambiar y objeto es por lo que lo va a cambiar"""
+    """pos: devuelve la matriz con el valor especificado cambiado"""
 
     band=0
     x=-1
@@ -128,8 +128,8 @@ def actualizarcliente(matriz_clientes,pos,opciones,objeto):
 
 def organizar_ventas(ventas_des):
 
-    #pre: recibe matriz de ventas desorganizada
-    #pos: devuelve la matriz organizada por id descendiente
+    """pre: recibe matriz de ventas desorganizada"""
+    """pos: devuelve la matriz organizada por id descendiente"""
 
     ventas_o = sorted(ventas_des, key=lambda x: (-x["Id"], x["Cantidad"], x["Id_prod"]))
 
@@ -138,11 +138,11 @@ def organizar_ventas(ventas_des):
 
 def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
 
-    #pre: recibe matriz de ventas, nombre del producto, correo del cliente, cantidad del producto y fecha de la venta
-    #pos: devuelve la matriz con una nueva fila creada y organizada con seis columnas: id|id del item|id del cliente|nombre del mismo|cantidad vendida|fecha 
+    """pre: recibe matriz de ventas, nombre del producto, correo del cliente, cantidad del producto y fecha de la venta"""
+    """pos: devuelve la matriz con una nueva fila creada y organizada con seis columnas: id|id del item|id del cliente|nombre del mismo|cantidad vendida|fecha """
 
     
-    #Encontrar el id con el nombre del producto
+    """Encontrar el id con el nombre del producto"""
     prod_stock = [[id, name, cant] for id, name, cant in stock if name == nombre]
 
     if prod_stock[0][2] < cantidad or len(prod_stock) == 0:
@@ -150,7 +150,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     else:
         stock[(len(stock) - 1) - (prod_stock[0][0] - 1)][2] = prod_stock[0][2] - cantidad
 
-    #Encontrar el id y nombre con la casilla de correo
+    """Encontrar el id y nombre con la casilla de correo"""
     cliente = [[id, name, tele, mail] for id, name, tele, mail in clientes if mail == correo]
 
     if len(cliente) == 0:
@@ -173,8 +173,8 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
 
 def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
 
-    #pre: Ingresa la matriz de ventas, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará.
-    #Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados.
+    """pre: Ingresa la matriz de ventas, la posición (ID), la opción elegida (Que se quiere actualizar) y el dato que se cambiará."""
+    """Pos: Se devuelven los datos cambiados en las posiciones y lugares solicitados."""
 
     for x in range(len(matriz_ventas)):
         if matriz_ventas[x]['Id'] == pos:
@@ -217,8 +217,8 @@ def destruir_ventas(dic_ventas, pos, stock):
 
 def leer(matriz, stock=0, clientes=0, ventas=0):
 
-    #pre: Ingresa la matriz y a cual pertenece (ej, stock=1)
-    #pos: Regresa 1 si mostro el resultado y 0 si no hay ningun parametro en uno
+    """pre: Ingresa la matriz y a cual pertenece (ej, stock=1)"""
+    """pos: Regresa 1 si mostro el resultado y 0 si no hay ningun parametro en uno"""
 
     if stock == 1:
         matriz = organizar_stock(matriz)
@@ -259,8 +259,8 @@ def leer(matriz, stock=0, clientes=0, ventas=0):
 
 
 def destruir(a, pos):
-    # pre: Entra la matriz deseada y el ID a buscar
-    # pos: Se devuelve la matriz con el ID deseado borrado si se encuentra.
+    """pre: Entra la matriz deseada y el ID a buscar"""
+    """pos: Se devuelve la matriz con el ID deseado borrado si se encuentra"""
     for x in range(len(a)):
         if a[x][0] == pos:
             a.pop(x)

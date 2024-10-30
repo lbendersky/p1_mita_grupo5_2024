@@ -12,7 +12,7 @@ def __main__():
                 if lugar_del_puesto == 0:
                     print("cerrando programa...")
                     return
-                elif lugar_del_puesto<5 and lugar_del_puesto>0:
+                elif 0<lugar_del_puesto<5:
                     contra = input("Ingrese la contraseña o ingrese 0 para regresar: ")
                     if contra == "0":
                         continue
