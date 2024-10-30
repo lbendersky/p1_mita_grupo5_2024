@@ -88,7 +88,7 @@ def crear_clientes(clientes, nombre, telefono, correo):
     clientes_org = organizar_clientes(clientes)
 
     try:
-        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\clientes.txt","a",encoding="UTF-8") as archivo_cliente:
+        with open(r"p1_mita_grupo5_2024\archivos_csv\clientes.txt","a",encoding="UTF-8") as archivo_cliente:
             archivo_cliente.write(f"{len(clientes)};{nombre};{telefono};{correo}\n")
     except OSError:
         print("Ha sucedido un error con el archivo")
@@ -163,7 +163,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     ventas_org = organizar_ventas(ventas)
 
     try:
-        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\ventas.txt","a",encoding="UTF-8") as archivo_ventas:
+        with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.txt","a",encoding="UTF-8") as archivo_ventas:
             archivo_ventas.write(f"{len(ventas)};{prod_stock[0][0]};{cliente[0][0]};{prod_stock[0][1]};{cliente[0][1]};{cantidad}{fecha}")
     except OSError:
         print("Ha sucedido un error inesperado.")
