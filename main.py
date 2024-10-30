@@ -30,7 +30,7 @@ def __main__():
     matriz_clientes= []
 
     try:
-        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\clientes.txt","r",encoding="UTF-8") as archivo_cliente:
+        with open(r"p1_mita_grupo5_2024\archivos_csv\clientes.txt","r",encoding="UTF-8") as archivo_cliente:
             for linea in archivo_cliente:
                 linea = linea.strip()
                 if linea=="":
@@ -41,7 +41,7 @@ def __main__():
                     break
                 matriz_clientes.append([])
 
-                matriz_clientes[len(matriz_clientes)-1].append(idcliente)
+                matriz_clientes[len(matriz_clientes)-1].append(int(idcliente))
                 matriz_clientes[len(matriz_clientes)-1].append(nombrecliente)
                 matriz_clientes[len(matriz_clientes)-1].append(numerocliente)
                 matriz_clientes[len(matriz_clientes)-1].append(correocliente)
@@ -50,7 +50,7 @@ def __main__():
         print("Ha sucedido un error inesperado")
 
     try:
-        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\productos.txt","r",encoding="UTF-8") as archivo_producto:
+        with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt","r",encoding="UTF-8") as archivo_producto:
             for linea in archivo_producto:
                 linea = linea.strip()
                 if linea=="":
@@ -61,7 +61,7 @@ def __main__():
                     break
                 matriz_stock.append([])
 
-                matriz_stock[len(matriz_stock)-1].append(idproducto)
+                matriz_stock[len(matriz_stock)-1].append(int(idproducto))
                 matriz_stock[len(matriz_stock)-1].append(nombreproducto)
                 matriz_stock[len(matriz_stock)-1].append(cantidad)
     
