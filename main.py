@@ -23,7 +23,7 @@ def __main__():
                     continue
                 
         except:
-            print("Dato no valido.", sys.exc_info())
+            print("Dato no valido.")
 
     matriz_stock = []
     matriz_ventas=[]
