@@ -63,7 +63,7 @@ def __main__():
 
                 matriz_stock[len(matriz_stock)-1].append(int(idproducto))
                 matriz_stock[len(matriz_stock)-1].append(nombreproducto)
-                matriz_stock[len(matriz_stock)-1].append(cantidad)
+                matriz_stock[len(matriz_stock)-1].append(int(cantidad))
     
     except:
         print("Ha ocurrido un error inesperado.")

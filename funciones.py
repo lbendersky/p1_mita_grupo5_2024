@@ -31,8 +31,8 @@ def crear_stock(stock, nombre, cantidad):
     stock_org = organizar_stock(stock)
 
     try:
-        with open(r"C:\Users\retro\Python VSC\TrabajoGrupal\archivos_csv\productos.txt","a",encoding="UTF-8") as archivo_stock:
-            archivo_stock.write(f"{len(stock)};{nombre};{cantidad}")
+        with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt","a",encoding="UTF-8") as archivo_stock:
+            archivo_stock.write(f"{len(stock)};{nombre};{cantidad}\n")
     except OSError:
         print("Ha sucedido un error con el archivo")
     finally:  
@@ -164,7 +164,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
 
     try:
         with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.txt","a",encoding="UTF-8") as archivo_ventas:
-            archivo_ventas.write(f"{len(ventas)};{prod_stock[0][0]};{cliente[0][0]};{prod_stock[0][1]};{cliente[0][1]};{cantidad}{fecha}")
+            archivo_ventas.write(f"{len(ventas)};{prod_stock[0][0]};{cliente[0][0]};{prod_stock[0][1]};{cliente[0][1]};{cantidad}{fecha}\n")
     except OSError:
         print("Ha sucedido un error inesperado.")
     finally:
@@ -203,7 +203,7 @@ def destruir_ventas(dic_ventas, pos, stock):
     dic_ventas.pop(len(dic_ventas) - pos)
 
     try:
-        file = open(r"proyecto\p1_mita_grupo5_2024\archivos_csv\ventas.txt", "w")
+        file = open(r"p1_mita_grupo5_2024\archivos_csv\ventas.txt", "w")
     except IOError:
         print("No se pudo abrir el archivo")
     else:

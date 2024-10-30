@@ -29,12 +29,15 @@ def ventas_menu(matriz_ventas,matriz_clientes,matriz_stock):
                     band=0
                     while band==0:
                         cantidad=input("Ingrese la cantidad vendida: ")
-                        if validaciones.vnumero(cantidad):
+                        if validaciones.vnumero(str(cantidad)):
                             cantidad=int(cantidad)
-                            band=1
-                        elif cantidad=="0":
-                            flag=1
-                            return
+                            if cantidad==0:
+                                print("No se permite ingresar 0")
+                            elif cantidad<0:
+                                print("No se permite ingresar numeros negativos")
+                            else:
+                                band=1
+                            
                     band=0
                     while band==0:
                         fechas=input("Ingrese la fecha con formato DD/MM/AAAA o coloca 0 para salir: ")
