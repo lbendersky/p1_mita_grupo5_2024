@@ -46,8 +46,8 @@ def __main__():
                 matriz_clientes[len(matriz_clientes)-1].append(numerocliente)
                 matriz_clientes[len(matriz_clientes)-1].append(correocliente)
 
-    except:
-        print("Ha sucedido un error inesperado")
+    except FileNotFoundError:
+        print("No se encontro clientes.txt")
 
     try:
         with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt","r",encoding="UTF-8") as archivo_producto:
@@ -66,8 +66,8 @@ def __main__():
                 matriz_stock[len(matriz_stock)-1].append(int(cantidad))
     
     except:
-        print("Ha ocurrido un error inesperado.")
-
+        print("No se encontro productos.txt")
+    print()
     while True:
         
         qmatriz = int(input("Ingrese la matriz que desea modificar o visualizar: 1 stock, 2 clientes, 3 ventas, 4 frenar el proceso: "))

@@ -52,12 +52,27 @@ def actualizarstock(stock, pos, opciones, objeto):
         print("No se encontró el ID")
         return
     else:
+        
+        with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt","r",encoding="UTF-8") as archivo:
+            lineas=archivo.readlines()
+        
+        id,nombre,cantidad=lineas[pos-1].split(";")
+        
         if opciones==1:
             stock[x][1]=objeto
-            return stock
+            lineas[pos-1] = f"{id};{objeto};{cantidad}"
+            
         elif opciones==2:
             stock[x][2]=objeto
-            return stock
+            lineas[pos-1] = f"{id};{nombre};{objeto}\n"
+
+        
+        with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt", "w",encoding="UTF-8") as archivo:
+                archivo.writelines(lineas)
+                
+        return stock
+    
+    
         
         
 ###########################################################CLIENTES###########################################################

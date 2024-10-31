@@ -58,6 +58,7 @@ def stock_menu(matriz_stock):
                             while band==0:
                                 objeto = input("Ingrese nombre del producto: ")
                                 if validaciones.vtexto(objeto):
+                                    objeto.capitalize()
                                     band=1
                                     
                         elif opciones==2:
