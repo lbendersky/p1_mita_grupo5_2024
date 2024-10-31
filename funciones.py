@@ -60,15 +60,15 @@ def actualizarstock(stock, pos, opciones, objeto):
         
         if opciones==1:
             stock[x][1]=objeto
-            lineas[pos-1] = f"{id};{objeto};{cantidad}"
+            lineas[pos-1] = (f"{id};{objeto};{cantidad}")
             
         elif opciones==2:
             stock[x][2]=objeto
-            lineas[pos-1] = f"{id};{nombre};{objeto}\n"
+            lineas[pos-1] = (f"{id};{nombre};{objeto}\n")
 
         
         with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt", "w",encoding="UTF-8") as archivo:
-                archivo.writelines(lineas)
+            archivo.writelines(lineas)
                 
         return stock
     
@@ -124,18 +124,27 @@ def actualizarcliente(matriz_clientes,pos,opciones,objeto):
     if band==0:
         print("No se encontró el ID")
     else:
+        
+        with open(r"p1_mita_grupo5_2024\archivos_csv\clientes.txt","r",encoding="UTF-8") as archivo:
+            lineas=archivo.readlines()
+            
+        id,nombre,telefono,correo=lineas[pos-1].split(";")
+        
         if opciones==1:
             matriz_clientes[x][1]=objeto
-            return matriz_clientes
+            lineas[pos-1] = (f"{id};{objeto};{telefono};{correo}")
         elif opciones==2:
             matriz_clientes[x][2]=objeto
-            return matriz_clientes
+            lineas[pos-1] = (f"{id};{nombre};{objeto};{correo}")
         elif opciones==3:
             matriz_clientes[x][3]=objeto
-            return matriz_clientes
-        else:
-            print("El número ingresado es incorrecto")
-            return 
+            lineas[pos-1] = (f"{id};{nombre};{telefono};{objeto}\n")
+            
+        with open(r"p1_mita_grupo5_2024\archivos_csv\clientes.txt", "w",encoding="UTF-8") as archivo:
+            archivo.writelines(lineas)
+        
+        return matriz_clientes
+
 
 
 ##########################################################VENTAS##########################################################
