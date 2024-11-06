@@ -33,8 +33,10 @@ def crear_stock(stock, nombre, cantidad):
     try:
         with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt","a",encoding="UTF-8") as archivo_stock:
             archivo_stock.write(f"{len(stock)};{nombre};{cantidad}\n")
+    except FileNotFoundError:
+        print("El archivo 'productos.txt' no fue encontrado")
     except OSError:
-        print("Ha sucedido un error con el archivo")
+        print("Ha sucedido un error con el archivo 'producto.txt'")
     finally:  
         return stock_org
 
@@ -53,24 +55,33 @@ def actualizarstock(stock, pos, opciones, objeto):
         return
     else:
         
-        with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt","r",encoding="UTF-8") as archivo:
-            lineas=archivo.readlines()
-        
-        id,nombre,cantidad=lineas[pos-1].split(";")
-        
-        if opciones==1:
-            stock[x][1]=objeto
-            lineas[pos-1] = (f"{id};{objeto};{cantidad}")
+        try:
+            with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt","r",encoding="UTF-8") as archivo:
+                lineas=archivo.readlines()
             
-        elif opciones==2:
-            stock[x][2]=objeto
-            lineas[pos-1] = (f"{id};{nombre};{objeto}\n")
-
-        
-        with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt", "w",encoding="UTF-8") as archivo:
-            archivo.writelines(lineas)
+            id,nombre,cantidad=lineas[pos-1].split(";")
+            
+            if opciones==1:
+                stock[x][1]=objeto
+                lineas[pos-1] = (f"{id};{objeto};{cantidad}")
                 
-        return stock
+            elif opciones==2:
+                stock[x][2]=objeto
+                lineas[pos-1] = (f"{id};{nombre};{objeto}\n")
+
+            
+            with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt", "w",encoding="UTF-8") as archivo:
+                archivo.writelines(lineas)
+                
+            return stock
+        
+        except FileNotFoundError:
+            print("El archivo 'productos.txt' no fue encontrado")
+            return
+        except OSError:
+            print("Ha sucedido un error con el archivo 'producto.txt'")
+            return
+            
     
     
         
@@ -105,10 +116,10 @@ def crear_clientes(clientes, nombre, telefono, correo):
     try:
         with open(r"p1_mita_grupo5_2024\archivos_csv\clientes.txt","a",encoding="UTF-8") as archivo_cliente:
             archivo_cliente.write(f"{len(clientes)};{nombre};{telefono};{correo}\n")
+    except FileNotFoundError:
+        print("El archivo 'clientes.txt' no fue encontrado")
     except OSError:
-        print("Ha sucedido un error con el archivo")
-    finally:  
-        return clientes_org
+        print("Ha sucedido un error con el archivo 'clientes.txt'")
         
 
 def actualizarcliente(matriz_clientes,pos,opciones,objeto):
@@ -125,25 +136,32 @@ def actualizarcliente(matriz_clientes,pos,opciones,objeto):
         print("No se encontró el ID")
     else:
         
-        with open(r"p1_mita_grupo5_2024\archivos_csv\clientes.txt","r",encoding="UTF-8") as archivo:
-            lineas=archivo.readlines()
+        try:
             
-        id,nombre,telefono,correo=lineas[pos-1].split(";")
-        
-        if opciones==1:
-            matriz_clientes[x][1]=objeto
-            lineas[pos-1] = (f"{id};{objeto};{telefono};{correo}")
-        elif opciones==2:
-            matriz_clientes[x][2]=objeto
-            lineas[pos-1] = (f"{id};{nombre};{objeto};{correo}")
-        elif opciones==3:
-            matriz_clientes[x][3]=objeto
-            lineas[pos-1] = (f"{id};{nombre};{telefono};{objeto}\n")
+            with open(r"p1_mita_grupo5_2024\archivos_csv\clientes.txt","r",encoding="UTF-8") as archivo:
+                lineas=archivo.readlines()
+                
+            id,nombre,telefono,correo=lineas[pos-1].split(";")
             
-        with open(r"p1_mita_grupo5_2024\archivos_csv\clientes.txt", "w",encoding="UTF-8") as archivo:
-            archivo.writelines(lineas)
+            if opciones==1:
+                matriz_clientes[x][1]=objeto
+                lineas[pos-1] = (f"{id};{objeto};{telefono};{correo}")
+            elif opciones==2:
+                matriz_clientes[x][2]=objeto
+                lineas[pos-1] = (f"{id};{nombre};{objeto};{correo}")
+            elif opciones==3:
+                matriz_clientes[x][3]=objeto
+                lineas[pos-1] = (f"{id};{nombre};{telefono};{objeto}\n")
+                
+            with open(r"p1_mita_grupo5_2024\archivos_csv\clientes.txt", "w",encoding="UTF-8") as archivo:
+                archivo.writelines(lineas)
+            
+            return matriz_clientes
         
-        return matriz_clientes
+        except FileNotFoundError:
+            print("El archivo 'clientes.txt' no fue encontrado")
+        except OSError:
+            print("Ha sucedido un error con el archivo 'clientes.txt'")
 
 
 
@@ -172,8 +190,8 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     if prod_stock[0][2] < cantidad or len(prod_stock) == 0:
         return 2
     else:
-        stock[(len(stock) - 1) - (prod_stock[0][0] - 1)][2] = prod_stock[0][2] - cantidad
-
+        actualizarstock(stock, prod_stock[0][0], 2, prod_stock[0][2]-cantidad)
+        
     """Encontrar el id y nombre con la casilla de correo"""
     cliente = [[id, name, tele, mail] for id, name, tele, mail in clientes if mail == correo]
 
