@@ -2,7 +2,6 @@ from matriz_stock import stock_menu
 from ventas import ventas_menu
 from cliente import clientes_menu
 import validaciones
-import sys
 
 def __main__():  
     intentos=0
@@ -13,7 +12,7 @@ def __main__():
                     return
                 lugar_del_puesto =int(input("Seleccione que usuario ingresar: 0 cerrar programa, 1 jefe, 2 area de stock, 3 area de clientes, 4 area de ventas: "))
                 if lugar_del_puesto == 0:
-                    print("cerrando programa...")
+                    print("Cerrando programa...")
                     return
                 elif 0<lugar_del_puesto<5:
                     contra = input("Ingrese la contraseña o ingrese 0 para regresar: ")
