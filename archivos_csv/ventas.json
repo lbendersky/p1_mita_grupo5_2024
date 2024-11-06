@@ -1,0 +1,11 @@
+[
+    {
+        "Id": 1,
+        "Id_prod": 3,
+        "Id_clien": 2,
+        "Nombre producto": "Manzana",
+        "Nombre cliente": "Seb Sol",
+        "Cantidad": 2,
+        "Fecha": "20/10/2024"
+    }
+]
