@@ -2,6 +2,7 @@ from matriz_stock import stock_menu
 from ventas import ventas_menu
 from cliente import clientes_menu
 import validaciones
+import json
 
 def __main__():  
     intentos=0
@@ -52,7 +53,10 @@ def __main__():
                 matriz_clientes[len(matriz_clientes)-1].append(correocliente)
 
     except FileNotFoundError:
-        print("No se encontro clientes.txt")
+        print("El archivo 'clientes.txt' no fue encontrado")
+    except OSError:
+        print("Ha sucedido un error con el archivo 'clientes.txt'")
+
 
     try:
         with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt","r",encoding="UTF-8") as archivo_producto:
@@ -70,8 +74,20 @@ def __main__():
                 matriz_stock[len(matriz_stock)-1].append(nombreproducto)
                 matriz_stock[len(matriz_stock)-1].append(int(cantidad))
     
-    except:
-        print("No se encontro productos.txt")
+    except FileNotFoundError:
+        print("El archivo 'productos.txt' no fue encontrado")
+    except OSError:
+        print("Ha sucedido un error con el archivo 'productos.txt'")
+       
+        
+    try:
+        with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","r",encoding="UTF-8") as archivo_ventas:
+            matriz_ventas=json.load(archivo_ventas)
+    except FileNotFoundError:
+        print("El archivo 'ventas.json' no fue encontrado")
+    except OSError:
+        print("Ha sucedido un error con el archivo 'ventas.json'")
+            
     print()
     while True:
         
