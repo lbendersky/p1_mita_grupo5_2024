@@ -205,7 +205,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     ventas_org = organizar_ventas(ventas)
 
     try:
-        with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","a",encoding="UTF-8") as json_ventas:
+        with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
             json.dump(ventas_org, json_ventas)
     except OSError:
         print("Ha sucedido un error inesperado.")
@@ -224,7 +224,7 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
                 matriz_ventas[x]['Nombre producto']=datoacambiar
 
                 try:
-                    with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","a",encoding="UTF-8") as json_ventas:
+                    with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
                         json.dump(matriz_ventas, json_ventas)
                 except OSError:
                     print("Ha sucedido un error inesperado.")
@@ -235,7 +235,7 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
                 matriz_ventas[x]['Nombre cliente']=datoacambiar
 
                 try:
-                    with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","a",encoding="UTF-8") as json_ventas:
+                    with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
                         json.dump(matriz_ventas, json_ventas)
                 except OSError:
                     print("Ha sucedido un error inesperado.")
@@ -251,7 +251,7 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
                 matriz_ventas[x]['Cantidad']=datoacambiar
 
                 try:
-                    with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","a",encoding="UTF-8") as json_ventas:
+                    with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
                         json.dump(matriz_ventas, json_ventas)
                 except OSError:
                     print("Ha sucedido un error inesperado.")
@@ -262,7 +262,7 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
                 matriz_ventas[x]['Fecha']=datoacambiar
 
                 try:
-                    with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","a",encoding="UTF-8") as json_ventas:
+                    with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
                         json.dump(matriz_ventas, json_ventas)
                 except OSError:
                     print("Ha sucedido un error inesperado.")
@@ -275,14 +275,12 @@ def destruir_ventas(dic_ventas, pos, stock):
     dic_ventas.pop(len(dic_ventas) - pos)
 
     try:
-        file = open(r"p1_mita_grupo5_2024\archivos_csv\ventas.txt", "w")
-    except IOError:
-        print("No se pudo abrir el archivo")
-    else:
-        file.writelines(f"{ayd};{ayd_prod};{ayd_cli};{nomb_prod};{nomb_cli};{canti};{fecha}\n" for ayd, ayd_prod, ayd_cli, nomb_prod, nomb_cli, canti, fecha in dic_ventas)
-        file.close()
-
-    return dic_ventas
+        with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
+            json.dump(dic_ventas, json_ventas)
+    except OSError:
+        print("Ha sucedido un error inesperado.")
+    finally:
+        return dic_ventas, stock
         
 
 #################################################################LEER#################################################################

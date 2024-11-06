@@ -1,10 +1,19 @@
 [
     {
-        "Id": 1,
+        "Id": 2,
         "Id_prod": 3,
-        "Id_clien": 2,
+        "Id_clien": 1,
         "Nombre producto": "Manzana",
-        "Nombre cliente": "Seb Sol",
+        "Nombre cliente": "Lucas Bender",
+        "Cantidad": 1,
+        "Fecha": "20/10/2024"
+    },
+    {
+        "Id": 1,
+        "Id_prod": 1,
+        "Id_clien": 1,
+        "Nombre producto": "Zapallo",
+        "Nombre cliente": "Lucas Bender",
         "Cantidad": 2,
         "Fecha": "20/10/2024"
     }
