@@ -5,9 +5,12 @@ import validaciones
 import sys
 
 def __main__():  
-    
+    intentos=0
     while True:
         try:
+                if intentos==3:
+                    print("El acceso al archivo ha sido denegado por la cantidad de errores que ha cometido")
+                    return
                 lugar_del_puesto =int(input("Seleccione que usuario ingresar: 0 cerrar programa, 1 jefe, 2 area de stock, 3 area de clientes, 4 area de ventas: "))
                 if lugar_del_puesto == 0:
                     print("cerrando programa...")
@@ -18,11 +21,14 @@ def __main__():
                         continue
                     usuario = validaciones.login(contra, lugar_del_puesto)
                     break
+                
                 else:
                     print("Por favor ingrese un valor valido.")
+                    intentos+=1 
                     continue
                 
         except:
+            intentos+=1 
             print("Dato no valido.")
 
     matriz_stock = []
