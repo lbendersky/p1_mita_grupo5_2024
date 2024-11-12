@@ -1,7 +1,3 @@
-1;Apple;21
-2;Android;3222
-3;Coto;203
-4;Apple2;202
-5;Apple3;2
-6;Ppp;1
-7;20202l;2
+1;Zapallo;0
+2;Patata;2
+3;Manzana;2

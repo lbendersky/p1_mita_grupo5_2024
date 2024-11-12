@@ -2,7 +2,7 @@ from matriz_stock import stock_menu
 from ventas import ventas_menu
 from cliente import clientes_menu
 import validaciones
-import sys
+import json
 
 def __main__():  
     intentos=0
@@ -13,7 +13,7 @@ def __main__():
                     return
                 lugar_del_puesto =int(input("Seleccione que usuario ingresar: 0 cerrar programa, 1 jefe, 2 area de stock, 3 area de clientes, 4 area de ventas: "))
                 if lugar_del_puesto == 0:
-                    print("cerrando programa...")
+                    print("Cerrando programa...")
                     return
                 elif 0<lugar_del_puesto<5:
                     contra = input("Ingrese la contraseña o ingrese 0 para regresar: ")
@@ -53,7 +53,10 @@ def __main__():
                 matriz_clientes[len(matriz_clientes)-1].append(correocliente)
 
     except FileNotFoundError:
-        print("No se encontro clientes.txt")
+        print("El archivo 'clientes.txt' no fue encontrado")
+    except OSError:
+        print("Ha sucedido un error con el archivo 'clientes.txt'")
+
 
     try:
         with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt","r",encoding="UTF-8") as archivo_producto:
@@ -71,8 +74,20 @@ def __main__():
                 matriz_stock[len(matriz_stock)-1].append(nombreproducto)
                 matriz_stock[len(matriz_stock)-1].append(int(cantidad))
     
-    except:
-        print("No se encontro productos.txt")
+    except FileNotFoundError:
+        print("El archivo 'productos.txt' no fue encontrado")
+    except OSError:
+        print("Ha sucedido un error con el archivo 'productos.txt'")
+       
+        
+    try:
+        with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","r",encoding="UTF-8") as archivo_ventas:
+            matriz_ventas=json.load(archivo_ventas)
+    except FileNotFoundError:
+        print("El archivo 'ventas.json' no fue encontrado")
+    except OSError:
+        print("Ha sucedido un error con el archivo 'ventas.json'")
+            
     print()
     while True:
         
