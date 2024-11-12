@@ -26,7 +26,9 @@ def stock_menu(matriz_stock):
                 
             elif num == 2:
                 if validaciones.vmatrizvacia(matriz_stock):
-                    leer(matriz_stock, stock=1)
+                    print(f"| {'Id' :<4}| {'Nombre' :<24}| {'Cantidad'}")
+                    print("-" * 45)
+                    leer(matriz_stock,f=0,stock=1)
             elif num == 3:
                 
                 if validaciones.vmatrizvacia(matriz_stock):

@@ -239,26 +239,21 @@ def destruir_ventas(dic_ventas, pos, stock):
 
 #################################################################LEER#################################################################
 
-def leer(matriz, stock=0, clientes=0, ventas=0):
-
-    """pre: Ingresa la matriz y a cual pertenece (ej, stock=1)"""
-    """pos: Regresa 1 si mostro el resultado y 0 si no hay ningun parametro en uno"""
+def leer(matriz,f=0, stock=0, clientes=0, ventas=0,):
 
     if stock == 1:
-        matriz = organizar_stock(matriz)
-        
-        print(f"| {'Id' :<4}| {'Nombre' :<24}| {'Cantidad'}")
-
-        print("-" * 45)
-
-        for id, nombre, cantidad in matriz:
+        if f>=len(matriz):
+            return
+        else:
+           
+            fila = matriz[f]
+            id, nombre, cantidad = fila
             print(f"| {id :<4}| {nombre :<24}| {cantidad}")
-
+            leer(matriz, f + 1, stock=1) 
+                
     elif clientes == 1:
         print(f"| {'Id' :<5}| {'Nombre' :<20}| {'Telefono' :<20}| {'Correo'}")
-
         print("-" * 75)
-
         for id, nombre, telefono, correo in matriz:
             print(f"| {id :<5}| {nombre :<20}| {telefono :<20}| {correo}")
 
