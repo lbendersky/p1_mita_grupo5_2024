@@ -1,3 +1,2 @@
-1;Zapallo;0
-2;Patata;2
-3;Manzana;2
+1;Zapallo;1
+2;Patata;1

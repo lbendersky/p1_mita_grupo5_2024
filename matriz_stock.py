@@ -87,15 +87,7 @@ def stock_menu(matriz_stock):
                             if validaciones.vidmatriz(matriz_stock,pos):
                                 band=1
 
-                    destruir(matriz_stock, pos)
-
-                    try:
-                        file = open(r"proyecto\p1_mita_grupo5_2024\archivos_csv\productos.txt", "w")
-                    except:
-                        print("No se pudo abrir el archivo")
-                    else: 
-                        file.writelines(f"{ayd};{nomb};{canti}\n" for ayd, nomb, canti in matriz_stock)
-                        file.close()
+                    destruir(matriz_stock, pos,2)
 
             elif num == 5:
                 flag = 1

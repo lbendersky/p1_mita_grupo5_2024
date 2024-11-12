@@ -66,8 +66,18 @@ def actualizarstock(stock, pos, opciones, objeto):
                 lineas[pos-1] = (f"{id};{objeto};{cantidad}")
                 
             elif opciones==2:
-                stock[x][2]=objeto
-                lineas[pos-1] = (f"{id};{nombre};{objeto}\n")
+                
+                #stock[x][2]=objeto
+                #lineas[pos-1] = (f"{id};{nombre};{objeto}\n")
+                
+                if objeto==0:
+                    destruir(stock,pos,2)
+                    print()
+                    print("El producto fue eliminado ya que su cantidad es 0")
+                    return stock
+                else:
+                    stock[x][2]=objeto
+                    lineas[pos-1] = (f"{id};{nombre};{objeto}\n")
 
             
             with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt", "w",encoding="UTF-8") as archivo:
@@ -206,7 +216,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
 
     try:
         with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
-            json.dump(ventas_org, json_ventas)
+            json.dump(ventas_org, json_ventas,indent=4)
     except OSError:
         print("Ha sucedido un error inesperado.")
     finally:
@@ -271,7 +281,7 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
 
 
 def destruir_ventas(dic_ventas, pos, stock):
-    stock[dic_ventas[len(dic_ventas) - pos]['Id_prod'] - 1][2] += dic_ventas[len(dic_ventas) - pos]['Cantidad']
+    stock[dic_ventas[len(dic_ventas) - pos]['Id_prod']-1][2] += dic_ventas[len(dic_ventas) - pos]['Cantidad']
     dic_ventas.pop(len(dic_ventas) - pos)
 
     try:
@@ -323,11 +333,39 @@ def leer(matriz,f=0, stock=0, clientes=0, ventas=0,):
 #####################################################Destruir############################################################################
 
 
-def destruir(a, pos):
+def destruir(a, pos,opcion):
     """pre: Entra la matriz deseada y el ID a buscar"""
     """pos: Se devuelve la matriz con el ID deseado borrado si se encuentra"""
+           
     for x in range(len(a)):
         if a[x][0] == pos:
             a.pop(x)
-            return a
+        
+    if opcion==1:
+        
+        try:
+            open(r"p1_mita_grupo5_2024\archivos_csv\clientes.txt", "w",encoding="UTF-8")
+        except FileNotFoundError:
+            print("El archivo 'clientes.txt' no existe")
+        except OSError:
+            print("Ha sucedido un error con el archivo 'clientes.txt'")
+        else:
+            file.writelines(f"{ayd};{nomb};{tele};{corr}\n" for ayd, nomb, tele, corr in a)
+        file.close()
+        return a
+    
+    elif opcion==2:
+        
+        try:
+            file = open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt", "w",encoding="UTF-8")
+        except FileNotFoundError:
+            print("El archivo 'productos.txt' no existe")
+        except OSError:
+            print("Ha sucedido un error con el archivo 'productos.txt'")
+        else: 
+            file.writelines(f"{ayd};{nomb};{canti}\n" for ayd, nomb, canti in a)
+        file.close()
+        return a
+
+        
     return False

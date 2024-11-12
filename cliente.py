@@ -131,15 +131,8 @@ def clientes_menu(matriz_clientes):
                                 if validaciones.vidmatriz(matriz_clientes,pos):
                                     band=1
                         
-                        destruir(matriz_clientes, pos)
+                        destruir(matriz_clientes, pos,1)
                         
-                        try:
-                            file = open(r"proyecto\p1_mita_grupo5_2024\archivos_csv\clientes.txt", "w")
-                        except:
-                            print("No se pudo abrir el archivo")
-                        else:
-                            file.writelines(f"{ayd};{nomb};{tele};{corr}\n" for ayd, nomb, tele, corr in matriz_clientes)
-                            file.close()
                 elif num == 5:
                     flag=1
                     return
