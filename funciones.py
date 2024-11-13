@@ -130,6 +130,8 @@ def crear_clientes(clientes, nombre, telefono, correo):
         print("El archivo 'clientes.txt' no fue encontrado")
     except OSError:
         print("Ha sucedido un error con el archivo 'clientes.txt'")
+    else:
+        return clientes_org
         
 
 def actualizarcliente(matriz_clientes,pos,opciones,objeto):
@@ -208,7 +210,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     if len(cliente) == 0:
         return 1
     
-    encabezados = ["Id", "Id_prod", "Id_clien", "Nombre producto", "Nombre cliente", "Cantidad", "Fecha"]
+    encabezados = ("Id", "Id_prod", "Id_clien", "Nombre producto", "Nombre cliente", "Cantidad", "Fecha")
     elementos = [len(ventas) + 1, prod_stock[0][0], cliente[0][0], prod_stock[0][1], cliente[0][1], cantidad, fecha]
     ventas.append(dict(zip(encabezados, elementos)))
 
