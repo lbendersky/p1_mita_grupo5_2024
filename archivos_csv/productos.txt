@@ -1,4 +1,4 @@
 1;Zapallo;2
-2;Patata;3
-3;Banana;2
+3;Banana;4
 4;Manzana;5
+5;Kiwi;3

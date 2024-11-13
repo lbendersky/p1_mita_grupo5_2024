@@ -304,6 +304,7 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
 
 def destruir_ventas(dic_ventas, pos, stock):
     
+    a=0
     cantventas= dic_ventas[len(dic_ventas) - pos]['Cantidad']
     idventas= dic_ventas[len(dic_ventas) - pos]['Id_prod'] 
     nombreventas= dic_ventas[len(dic_ventas) - pos]['Nombre producto']
@@ -311,8 +312,9 @@ def destruir_ventas(dic_ventas, pos, stock):
     for x in range(len(stock)):
         if stock[x][0] == idventas:
             stock[x][2] += cantventas
+            a=1
     
-    if x==(len(stock)-1):
+    if a==0:
         stock=crear_stock(stock,nombreventas,cantventas,idventas)  
     else:
         actualizarstock(stock,stock[x][0],2,stock[x][2])
