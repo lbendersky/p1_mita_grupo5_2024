@@ -22,14 +22,18 @@ def crear_stock(stock, nombre, cantidad,idventas=0):
     """pre: recibe matriz de stock, nombre del producto y cantidad del mismo"""
     """pos: devuelve la matriz con una nueva fila creada y organizada y tres columnas: id|nombre|cantidad"""
 
-    if idventas>0:
+    if len(stock)==0:
         stock.append([])
-        stock[len(stock) - 1].append(idventas)
+        stock[len(stock) - 1].append(len(stock))
     else:
-        id = [fila[0] for fila in stock]
-        mayor = max(id)
-        stock.append([])
-        stock[len(stock) - 1].append(mayor+1)
+        if idventas>0:
+            stock.append([])
+            stock[len(stock) - 1].append(idventas)
+        else:
+            id = [fila[0] for fila in stock]
+            mayor = max(id)
+            stock.append([])
+            stock[len(stock) - 1].append(mayor+1)
     
     stock[len(stock) - 1].append(nombre)
     stock[len(stock) - 1].append(cantidad)
