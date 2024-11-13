@@ -17,14 +17,20 @@ def organizar_stock(stock_des):
     return stock_o
 
 
-def crear_stock(stock, nombre, cantidad):
+def crear_stock(stock, nombre, cantidad,idventas=0):
 
     """pre: recibe matriz de stock, nombre del producto y cantidad del mismo"""
     """pos: devuelve la matriz con una nueva fila creada y organizada y tres columnas: id|nombre|cantidad"""
 
-    stock.append([])
-
-    stock[len(stock) - 1].append(len(stock))
+    if idventas>0:
+        stock.append([])
+        stock[len(stock) - 1].append(idventas)
+    else:
+        id = [fila[0] for fila in stock]
+        mayor = max(id)
+        stock.append([])
+        stock[len(stock) - 1].append(mayor+1)
+    
     stock[len(stock) - 1].append(nombre)
     stock[len(stock) - 1].append(cantidad)
 
@@ -58,39 +64,46 @@ def actualizarstock(stock, pos, opciones, objeto):
         try:
             with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt","r",encoding="UTF-8") as archivo:
                 lineas=archivo.readlines()
-            
-            id,nombre,cantidad=lineas[pos-1].split(";")
-            
-            if opciones==1:
-                stock[x][1]=objeto
-                lineas[pos-1] = (f"{id};{objeto};{cantidad}")
-                
-            elif opciones==2:
-                
-                #stock[x][2]=objeto
-                #lineas[pos-1] = (f"{id};{nombre};{objeto}\n")
-                
-                if objeto==0:
-                    destruir(stock,pos,2)
-                    print()
-                    print("El producto fue eliminado ya que su cantidad es 0")
-                    return stock
-                else:
-                    stock[x][2]=objeto
-                    lineas[pos-1] = (f"{id};{nombre};{objeto}\n")
-
-            
-            with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt", "w",encoding="UTF-8") as archivo:
-                archivo.writelines(lineas)
-                
-            return stock
-        
         except FileNotFoundError:
             print("El archivo 'productos.txt' no fue encontrado")
             return
         except OSError:
-            print("Ha sucedido un error con el archivo 'producto.txt'")
+            print("Ha sucedido un error con el archivo 'productos.txt'")
             return
+        
+        id,nombre,cantidad=lineas[pos-1].split(";")
+        
+        if opciones==1:
+            stock[x][1]=objeto
+            lineas[pos-1] = (f"{id};{objeto};{cantidad}")
+            
+        elif opciones==2:
+            
+            #stock[x][2]=objeto
+            #lineas[pos-1] = (f"{id};{nombre};{objeto}\n")
+            
+            if objeto==0:
+                stock=destruir(stock,pos,2)
+                print()
+                print("El producto fue eliminado ya que su cantidad es 0")
+                return stock
+            else:
+                stock[x][2]=objeto
+                lineas[pos-1] = (f"{id};{nombre};{objeto}\n")
+
+        try: 
+            with open(r"p1_mita_grupo5_2024\archivos_csv\productos.txt", "w",encoding="UTF-8") as archivo:
+                archivo.writelines(lineas)
+        except FileNotFoundError:
+            print("El archivo 'productos.txt' no fue encontrado")
+            return
+        except OSError:
+            print("Ha sucedido un error con el archivo 'productos.txt'")
+            return 
+        
+        return stock
+        
+        
             
     
     
@@ -130,7 +143,8 @@ def crear_clientes(clientes, nombre, telefono, correo):
         print("El archivo 'clientes.txt' no fue encontrado")
     except OSError:
         print("Ha sucedido un error con el archivo 'clientes.txt'")
-        
+    else:
+        return clientes_org    
 
 def actualizarcliente(matriz_clientes,pos,opciones,objeto):
     """pre: recibe la matriz cliente, el id del cliente, opcion del parametro a cambiar y objeto es por lo que lo va a cambiar"""
@@ -208,7 +222,7 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     if len(cliente) == 0:
         return 1
     
-    encabezados = ["Id", "Id_prod", "Id_clien", "Nombre producto", "Nombre cliente", "Cantidad", "Fecha"]
+    encabezados = ("Id", "Id_prod", "Id_clien", "Nombre producto", "Nombre cliente", "Cantidad", "Fecha")
     elementos = [len(ventas) + 1, prod_stock[0][0], cliente[0][0], prod_stock[0][1], cliente[0][1], cantidad, fecha]
     ventas.append(dict(zip(encabezados, elementos)))
 
@@ -217,8 +231,10 @@ def crear_ventas(stock, clientes, ventas, nombre, correo, cantidad, fecha):
     try:
         with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
             json.dump(ventas_org, json_ventas,indent=4)
+    except FileNotFoundError:
+        print("El archivo 'ventas.json' no fue encontrado")
     except OSError:
-        print("Ha sucedido un error inesperado.")
+        print("Ha sucedido un error con el archivo 'ventas.json'")
     finally:
         return ventas_org, stock
 
@@ -247,8 +263,10 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
                 try:
                     with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
                         json.dump(matriz_ventas, json_ventas)
+                except FileNotFoundError:
+                    print("El archivo 'ventas.json' no fue encontrado")
                 except OSError:
-                    print("Ha sucedido un error inesperado.")
+                    print("Ha sucedido un error con el archivo 'ventas.json'")
                 finally:
                     return matriz_ventas, stock
                 
@@ -263,8 +281,10 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
                 try:
                     with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
                         json.dump(matriz_ventas, json_ventas)
+                except FileNotFoundError:
+                    print("El archivo 'ventas.json' no fue encontrado")
                 except OSError:
-                    print("Ha sucedido un error inesperado.")
+                    print("Ha sucedido un error con el archivo 'ventas.json'")
                 finally:
                     return matriz_ventas, stock
                 
@@ -274,22 +294,40 @@ def actualizarventas(matriz_ventas,pos,opcion,datoacambiar,stock):
                 try:
                     with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
                         json.dump(matriz_ventas, json_ventas)
+                except FileNotFoundError:
+                    print("El archivo 'ventas.json' no fue encontrado")
                 except OSError:
-                    print("Ha sucedido un error inesperado.")
+                    print("Ha sucedido un error con el archivo 'ventas.json'")
                 finally:
                     return matriz_ventas, stock
 
 
 def destruir_ventas(dic_ventas, pos, stock):
-    stock[dic_ventas[len(dic_ventas) - pos]['Id_prod']-1][2] += dic_ventas[len(dic_ventas) - pos]['Cantidad']
+    
+    cantventas= dic_ventas[len(dic_ventas) - pos]['Cantidad']
+    idventas= dic_ventas[len(dic_ventas) - pos]['Id_prod'] 
+    nombreventas= dic_ventas[len(dic_ventas) - pos]['Nombre producto']
+    
+    for x in range(len(stock)):
+        if stock[x][0] == idventas:
+            stock[x][2] += cantventas
+    
+    if x==(len(stock)-1):
+        stock=crear_stock(stock,nombreventas,cantventas,idventas)  
+    else:
+        actualizarstock(stock,stock[x][0],2,stock[x][2])
+    
     dic_ventas.pop(len(dic_ventas) - pos)
-
+    
     try:
         with open(r"p1_mita_grupo5_2024\archivos_csv\ventas.json","w",encoding="UTF-8") as json_ventas:
-            json.dump(dic_ventas, json_ventas)
+            json.dump(dic_ventas, json_ventas,indent=4)  
+    except FileNotFoundError:
+        print("El archivo 'ventas.json' no fue encontrado")
     except OSError:
-        print("Ha sucedido un error inesperado.")
+        print("Ha sucedido un error con el archivo 'ventas.json'")
     finally:
+        
         return dic_ventas, stock
         
 
@@ -340,7 +378,8 @@ def destruir(a, pos,opcion):
     for x in range(len(a)):
         if a[x][0] == pos:
             a.pop(x)
-        
+            break
+            
     if opcion==1:
         
         try:
